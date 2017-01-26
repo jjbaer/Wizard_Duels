@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13AEB11E1E3A8BBF00B92C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */; };
 		13EB79571E2817D800FE673B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EB79561E2817D800FE673B /* Assets.xcassets */; };
 		13EB795E1E2817D800FE673B /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 13EB795D1E2817D800FE673B /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		13EB79631E2817D800FE673B /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EB79621E2817D800FE673B /* Messages.framework */; };
@@ -41,6 +42,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		13AEB11F1E3A8C2500B92C65 /* MessagesExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessagesExtension.entitlements; sourceTree = "<group>"; };
 		13EB79531E2817D800FE673B /* Wizard_Duels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wizard_Duels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EB79561E2817D800FE673B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13EB79581E2817D800FE673B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,11 +107,13 @@
 		13EB79641E2817D800FE673B /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
+				13AEB11F1E3A8C2500B92C65 /* MessagesExtension.entitlements */,
 				13EB79651E2817D800FE673B /* MessagesViewController.swift */,
 				13EB79671E2817D800FE673B /* MainInterface.storyboard */,
 				13EB796A1E2817D800FE673B /* Assets.xcassets */,
 				13EB796C1E2817D800FE673B /* Info.plist */,
 				13F229D81E3932E700FE7FEE /* CanvasView.swift */,
+				13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */,
 			);
 			path = MessagesExtension;
 			sourceTree = "<group>";
@@ -169,6 +174,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 33745JBHT4;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -216,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13AEB11E1E3A8BBF00B92C65 /* AppDelegate.swift in Sources */,
 				13F229D91E3932E700FE7FEE /* CanvasView.swift in Sources */,
 				13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */,
 			);
@@ -340,6 +351,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_ENTITLEMENTS = MessagesExtension/MessagesExtension.entitlements;
 				DEVELOPMENT_TEAM = 33745JBHT4;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -354,6 +366,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_ENTITLEMENTS = MessagesExtension/MessagesExtension.entitlements;
 				DEVELOPMENT_TEAM = 33745JBHT4;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
