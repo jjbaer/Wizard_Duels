@@ -13,6 +13,7 @@
 		13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EB79651E2817D800FE673B /* MessagesViewController.swift */; };
 		13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13EB79671E2817D800FE673B /* MainInterface.storyboard */; };
 		13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EB796A1E2817D800FE673B /* Assets.xcassets */; };
+		13F229D91E3932E700FE7FEE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F229D81E3932E700FE7FEE /* CanvasView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		13EB79681E2817D800FE673B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		13EB796A1E2817D800FE673B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13EB796C1E2817D800FE673B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13F229D81E3932E700FE7FEE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				13EB79671E2817D800FE673B /* MainInterface.storyboard */,
 				13EB796A1E2817D800FE673B /* Assets.xcassets */,
 				13EB796C1E2817D800FE673B /* Info.plist */,
+				13F229D81E3932E700FE7FEE /* CanvasView.swift */,
 			);
 			path = MessagesExtension;
 			sourceTree = "<group>";
@@ -159,10 +162,12 @@
 				TargetAttributes = {
 					13EB79521E2817D800FE673B = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 33745JBHT4;
 						ProvisioningStyle = Automatic;
 					};
 					13EB795C1E2817D800FE673B = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 33745JBHT4;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -211,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13F229D91E3932E700FE7FEE /* CanvasView.swift in Sources */,
 				13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				DEVELOPMENT_TEAM = 33745JBHT4;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.jjbaer.Wizard-Duels.MessagesExtension";
@@ -347,6 +354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				DEVELOPMENT_TEAM = 33745JBHT4;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.jjbaer.Wizard-Duels.MessagesExtension";
@@ -361,6 +369,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 33745JBHT4;
 				INFOPLIST_FILE = Wizard_Duels/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.jjbaer.Wizard-Duels";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -373,6 +382,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 33745JBHT4;
 				INFOPLIST_FILE = Wizard_Duels/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.jjbaer.Wizard-Duels";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,6 +409,7 @@
 				13EB79711E2817D800FE673B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		13EB79731E2817D800FE673B /* Build configuration list for PBXNativeTarget "Wizard_Duels" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +418,7 @@
 				13EB79751E2817D800FE673B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

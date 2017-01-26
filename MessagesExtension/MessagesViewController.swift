@@ -10,25 +10,28 @@ import UIKit
 import Messages
 
 class MessagesViewController: MSMessagesAppViewController {
+
     
-    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var canvasView: CanvasView!
     
-    @IBAction func didPressCreate(_ sender: Any) {
-        if let image = createImageForMessage(), let conversation = activeConversation {
-            let layout = MSMessageTemplateLayout()
-            layout.image = image
-            layout.caption = "Stepper Value"
-            
-            let message = MSMessage()
-            message.layout = layout
-            message.url = URL(string: "emptyURL")
-            
-            conversation.insert(message, completionHandler: { (error: Error?) in
-                print(error ?? "I dunno")
-            })
-        }
     
-    }
+    
+//    @IBAction func didPressCreate(_ sender: Any) {
+//        if let image = createImageForMessage(), let conversation = activeConversation {
+//            let layout = MSMessageTemplateLayout()
+//            layout.image = image
+//            layout.caption = "Stepper Value"
+//
+//            let message = MSMessage()
+//            message.layout = layout
+//            message.url = URL(string: "emptyURL")
+//
+//            conversation.insert(message, completionHandler: { (error: Error?) in
+//                print(error ?? "I dunno")
+//            })
+//        }
+//
+//    }
     
     func createImageForMessage() -> UIImage? {
         let background = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
@@ -38,7 +41,7 @@ class MessagesViewController: MSMessagesAppViewController {
         label.font = UIFont.systemFont(ofSize: 56.0)
         label.backgroundColor = UIColor.red
         label.textColor = UIColor.white
-        label.text = "\(Int(stepper.value))"
+        label.text = "Yo"
         label.textAlignment = .center
         label.layer.cornerRadius = label.frame.size.width/2.0
         label.clipsToBounds = true
@@ -60,6 +63,7 @@ class MessagesViewController: MSMessagesAppViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        canvasView.clearCanvas(animated:false)
     }
     
     override func didReceiveMemoryWarning() {
