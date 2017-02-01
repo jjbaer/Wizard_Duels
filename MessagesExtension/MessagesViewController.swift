@@ -14,6 +14,32 @@ class MessagesViewController: MSMessagesAppViewController {
     var lastPoint = CGPoint.zero
     var swiped = false
     var color = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+
+    @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+        print(" Handle long press...")
+    }
+    
+    @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        print(" Handle tap...")
+    }
+    
+    @IBAction func rotate(_ sender: UIRotationGestureRecognizer) {
+        print(" Handle rotate...")
+    }
+    
+    @IBAction func pinch(_ sender: UIPinchGestureRecognizer) {
+        print(" Handle pinch...")
+    }
+    
+    @IBAction func swipeDown(_ sender: UISwipeGestureRecognizer) {
+        print(" Handle swipe down...")
+        color = UIColor(red: 0, green: 1, blue: 0, alpha: 1).cgColor
+    }
+    
+    @IBAction func swipeUp(_ sender: UISwipeGestureRecognizer) {
+        print(" Handle swipe up...")
+        color = UIColor(red: 0, green: 0, blue: 1, alpha: 1).cgColor
+    }
     
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe right...")

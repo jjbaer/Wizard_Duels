@@ -28,6 +28,12 @@
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="lkY-JI-JyS" appends="YES" id="lTm-At-K9G"/>
                                     <outletCollection property="gestureRecognizers" destination="iiR-X5-fne" appends="YES" id="0Sj-y8-f6D"/>
+                                    <outletCollection property="gestureRecognizers" destination="rR5-yH-unK" appends="YES" id="4ex-Gb-Hdg"/>
+                                    <outletCollection property="gestureRecognizers" destination="3UG-dF-grb" appends="YES" id="5WL-BX-sWp"/>
+                                    <outletCollection property="gestureRecognizers" destination="uzx-Lq-OmS" appends="YES" id="Xql-VV-iJi"/>
+                                    <outletCollection property="gestureRecognizers" destination="R0x-0o-4OB" appends="YES" id="5xO-sc-jei"/>
+                                    <outletCollection property="gestureRecognizers" destination="t0s-8a-Tb0" appends="YES" id="ncq-xR-nO7"/>
+                                    <outletCollection property="gestureRecognizers" destination="Hyu-au-Oze" appends="YES" id="XSh-VA-9gQ"/>
                                 </connections>
                             </imageView>
                         </subviews>
@@ -51,6 +57,36 @@
                         <action selector="swipeRight:" destination="ObA-dk-sSI" id="9gC-X7-xz1"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="rR5-yH-unK">
+                    <connections>
+                        <action selector="swipeUp:" destination="ObA-dk-sSI" id="FBz-bV-xRk"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="3UG-dF-grb">
+                    <connections>
+                        <action selector="swipeDown:" destination="ObA-dk-sSI" id="U8q-A4-Ato"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <pinchGestureRecognizer id="uzx-Lq-OmS">
+                    <connections>
+                        <action selector="pinch:" destination="ObA-dk-sSI" id="zfD-km-lTs"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <rotationGestureRecognizer id="R0x-0o-4OB">
+                    <connections>
+                        <action selector="rotate:" destination="ObA-dk-sSI" id="cYr-X4-9Qr"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <tapGestureRecognizer id="t0s-8a-Tb0">
+                    <connections>
+                        <action selector="tap:" destination="ObA-dk-sSI" id="YWr-dq-Fze"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Hyu-au-Oze">
+                    <connections>
+                        <action selector="longPress:" destination="ObA-dk-sSI" id="h7Y-hA-fI8"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="33.600000000000001" y="37.781109445277366"/>
         </scene>
