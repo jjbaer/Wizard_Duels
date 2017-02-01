@@ -2,7 +2,7 @@
 //  MessagesViewController.swift
 //  MessagesExtension
 //
-//  Created by Jenna on 1/12/17.
+//  Created by Jenna and Roslyn on 1/12/17.
 //  Copyright © 2017 Jenna. All rights reserved.
 //
 
@@ -10,26 +10,46 @@ import UIKit
 import Messages
 
 class MessagesViewController: MSMessagesAppViewController {
-
+    @IBOutlet weak var canvas: UIImageView!
+    var lastPoint = CGPoint.zero
+    var swiped = false
     
-    @IBOutlet weak var canvasView: CanvasView!
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            lastPoint = touch.location(in: canvas)
+        }
+    }
     
-//    @IBAction func didPressCreate(_ sender: Any) {
-//        if let image = createImageForMessage(), let conversation = activeConversation {
-//            let layout = MSMessageTemplateLayout()
-//            layout.image = image
-//            layout.caption = "Stepper Value"
-//
-//            let message = MSMessage()
-//            message.layout = layout
-//            message.url = URL(string: "emptyURL")
-//
-//            conversation.insert(message, completionHandler: { (error: Error?) in
-//                print(error ?? "I dunno")
-//            })
-//        }
-//
-//    }
+    func drawLines(fromPoint: CGPoint, toPoint: CGPoint) {
+        UIGraphicsBeginImageContext(canvas.frame.size)
+        canvas.image?.draw(in: CGRect(x: 0.0, y: 0.0, width: canvas.frame.width, height: canvas.frame.height))
+        let context = UIGraphicsGetCurrentContext()
+        
+        context?.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
+        context?.addLine(to: CGPoint(x: toPoint.x, y: toPoint.y))
+        context?.setBlendMode(CGBlendMode.normal)
+        context?.setLineCap(CGLineCap.round)
+        context?.setLineWidth(5)
+        context?.setStrokeColor(UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor)
+        context?.strokePath()
+        canvas.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        swiped = true
+        if let touch = touches.first {
+            let currentPoint = touch.location(in: canvas)
+            drawLines(fromPoint: lastPoint, toPoint: currentPoint)
+            lastPoint = currentPoint
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !swiped {
+            drawLines(fromPoint: lastPoint, toPoint: lastPoint)
+        }
+    }
     
     func createImageForMessage() -> UIImage? {
         let background = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
@@ -60,9 +80,6 @@ class MessagesViewController: MSMessagesAppViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        canvasView.clearCanvas(animated:false)
-        
     }
     
     override func didReceiveMemoryWarning() {

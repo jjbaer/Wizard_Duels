@@ -14,7 +14,6 @@
 		13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EB79651E2817D800FE673B /* MessagesViewController.swift */; };
 		13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13EB79671E2817D800FE673B /* MainInterface.storyboard */; };
 		13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EB796A1E2817D800FE673B /* Assets.xcassets */; };
-		13F229D91E3932E700FE7FEE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F229D81E3932E700FE7FEE /* CanvasView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +52,6 @@
 		13EB79681E2817D800FE673B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		13EB796A1E2817D800FE673B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13EB796C1E2817D800FE673B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		13F229D81E3932E700FE7FEE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +110,6 @@
 				13EB79671E2817D800FE673B /* MainInterface.storyboard */,
 				13EB796A1E2817D800FE673B /* Assets.xcassets */,
 				13EB796C1E2817D800FE673B /* Info.plist */,
-				13F229D81E3932E700FE7FEE /* CanvasView.swift */,
 				13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */,
 			);
 			path = MessagesExtension;
@@ -227,7 +224,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13AEB11E1E3A8BBF00B92C65 /* AppDelegate.swift in Sources */,
-				13F229D91E3932E700FE7FEE /* CanvasView.swift in Sources */,
 				13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
