@@ -13,11 +13,20 @@ class MessagesViewController: MSMessagesAppViewController {
     @IBOutlet weak var canvas: UIImageView!
     var lastPoint = CGPoint.zero
     var swiped = false
+    var color = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            lastPoint = touch.location(in: canvas)
-        }
+    @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
+        print(" Handle swipe right...")
+        color = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+    }
+    
+    @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
+        print(" Handle swipe left...")
+        color = UIColor(red: 1, green: 0, blue: 0, alpha: 1).cgColor
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     func drawLines(fromPoint: CGPoint, toPoint: CGPoint) {
@@ -76,10 +85,6 @@ class MessagesViewController: MSMessagesAppViewController {
         background.removeFromSuperview()
         
         return image
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     override func didReceiveMemoryWarning() {
