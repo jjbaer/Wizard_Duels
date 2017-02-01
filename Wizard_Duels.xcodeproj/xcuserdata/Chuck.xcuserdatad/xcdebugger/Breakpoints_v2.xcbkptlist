@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MessagesExtension/MessagesViewController.swift"
+            timestampString = "507598148.007266"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                  <ActionContent
+                     consoleCommand = "print(&quot;here&quot;)">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MessagesExtension/CanvasView.swift"
+            timestampString = "507597991.700799"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "CanvasView"
+            landmarkType = "3">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                  <ActionContent
+                     consoleCommand = "initializing canvasView">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.CanvasView.init (image : Swift.Optional&lt;__ObjC.UIImage&gt;) -&gt; MessagesExtension.CanvasView"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Chuck/Documents/Wizard_Duels/Wizard_Duels/MessagesExtension/CanvasView.swift"
+                  timestampString = "507598207.904508"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.CanvasView.init (image : Swift.Optional&lt;__ObjC.UIImage&gt;, highlightedImage : Swift.Optional&lt;__ObjC.UIImage&gt;) -&gt; MessagesExtension.CanvasView"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Chuck/Documents/Wizard_Duels/Wizard_Duels/MessagesExtension/CanvasView.swift"
+                  timestampString = "507598207.907408"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "39">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.CanvasView.init (frame : __C.CGRect) -&gt; MessagesExtension.CanvasView"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Chuck/Documents/Wizard_Duels/Wizard_Duels/MessagesExtension/CanvasView.swift"
+                  timestampString = "507598207.911282"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "70">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MessagesExtension/MessagesViewController.swift"
+            timestampString = "507598042.632341"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "MessagesViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.MessagesViewController.canvasView.getter : weak Swift.ImplicitlyUnwrappedOptional&lt;MessagesExtension.CanvasView&gt;"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Chuck/Documents/Wizard_Duels/Wizard_Duels/MessagesExtension/MessagesViewController.swift"
+                  timestampString = "507598207.920837"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.MessagesViewController.canvasView.setter : weak Swift.ImplicitlyUnwrappedOptional&lt;MessagesExtension.CanvasView&gt;"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Chuck/Documents/Wizard_Duels/Wizard_Duels/MessagesExtension/MessagesViewController.swift"
+                  timestampString = "507598207.923638"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "42">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.MessagesViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; MessagesExtension.MessagesViewController"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Chuck/Documents/Wizard_Duels/Wizard_Duels/MessagesExtension/MessagesViewController.swift"
+                  timestampString = "507598207.926575"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "70">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.MessagesViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;MessagesExtension.MessagesViewController&gt;"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Chuck/Documents/Wizard_Duels/Wizard_Duels/MessagesExtension/MessagesViewController.swift"
+                  timestampString = "507598207.931608"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

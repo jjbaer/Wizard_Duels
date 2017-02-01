@@ -14,8 +14,6 @@ class MessagesViewController: MSMessagesAppViewController {
     
     @IBOutlet weak var canvasView: CanvasView!
     
-    
-    
 //    @IBAction func didPressCreate(_ sender: Any) {
 //        if let image = createImageForMessage(), let conversation = activeConversation {
 //            let layout = MSMessageTemplateLayout()
@@ -64,6 +62,7 @@ class MessagesViewController: MSMessagesAppViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         canvasView.clearCanvas(animated:false)
+        
     }
     
     override func didReceiveMemoryWarning() {

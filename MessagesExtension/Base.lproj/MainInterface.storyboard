@@ -26,6 +26,9 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9SM-pb-E5K" customClass="CanvasView" customModule="MessagesExtension" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="279" height="199"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" image="YES" updatesFrequently="YES"/>
+                                        </accessibility>
                                     </imageView>
                                 </subviews>
                                 <constraints>
