@@ -29,7 +29,7 @@ class CanvasView: UIImageView {
         context?.setBlendMode(CGBlendMode.normal)
         context?.setLineCap(CGLineCap.round)
         context?.setLineWidth(5)
-        context?.setStrokeColor(UIColor(red: 0, green: 0, blue: 0, alpha: 1))
+        //context?.setStrokeColor(UIColor(red: 0, green: 0, blue: 0, alpha: 1))
 
     }
     
