@@ -14,41 +14,66 @@ class MessagesViewController: MSMessagesAppViewController {
     var lastPoint = CGPoint.zero
     var swiped = false
     var color = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+    var gesture = "nothing yet"
 
+    @IBAction func didPressSend(_ sender: Any) {
+        if let image = createImageForMessage(), let conversation = activeConversation {
+            let layout = MSMessageTemplateLayout()
+            layout.image = image
+            layout.caption = "Let's Duel"
+            
+            let message = MSMessage()
+            message.layout = layout
+            message.url = URL(string: "emptyURL")
+            
+            conversation.insert(message, completionHandler: { (error: Error?) in
+                print(error ?? "not an error")
+            })
+        }
+    }
+    
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
         print(" Handle long press...")
+        gesture = "long press"
     }
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
         print(" Handle tap...")
+        gesture = "tap"
     }
     
     @IBAction func rotate(_ sender: UIRotationGestureRecognizer) {
         print(" Handle rotate...")
+        gesture = "rotate"
     }
     
     @IBAction func pinch(_ sender: UIPinchGestureRecognizer) {
         print(" Handle pinch...")
+        gesture = "pinch"
     }
     
     @IBAction func swipeDown(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe down...")
         color = UIColor(red: 0, green: 1, blue: 0, alpha: 1).cgColor
+        gesture = "down"
     }
     
     @IBAction func swipeUp(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe up...")
         color = UIColor(red: 0, green: 0, blue: 1, alpha: 1).cgColor
+        gesture = "up"
     }
     
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe right...")
         color = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        gesture = "right"
     }
     
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe left...")
         color = UIColor(red: 1, green: 0, blue: 0, alpha: 1).cgColor
+        gesture = "left"
     }
     
     override func viewDidLoad() {
@@ -100,7 +125,7 @@ class MessagesViewController: MSMessagesAppViewController {
         label.font = UIFont.systemFont(ofSize: 56.0)
         label.backgroundColor = UIColor.red
         label.textColor = UIColor.white
-        label.text = "Yo"
+        label.text = "\(gesture)"
         label.textAlignment = .center
         label.layer.cornerRadius = label.frame.size.width/2.0
         label.clipsToBounds = true
