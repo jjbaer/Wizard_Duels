@@ -14,6 +14,7 @@
 		13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EB79651E2817D800FE673B /* MessagesViewController.swift */; };
 		13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13EB79671E2817D800FE673B /* MainInterface.storyboard */; };
 		13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EB796A1E2817D800FE673B /* Assets.xcassets */; };
+		20CDE0BD1E47CE3200E0A9E2 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		13EB79681E2817D800FE673B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		13EB796A1E2817D800FE673B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13EB796C1E2817D800FE673B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				13AEB11F1E3A8C2500B92C65 /* MessagesExtension.entitlements */,
 				13EB79651E2817D800FE673B /* MessagesViewController.swift */,
+				20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */,
 				13EB79671E2817D800FE673B /* MainInterface.storyboard */,
 				13EB796A1E2817D800FE673B /* Assets.xcassets */,
 				13EB796C1E2817D800FE673B /* Info.plist */,
@@ -164,12 +167,12 @@
 				TargetAttributes = {
 					13EB79521E2817D800FE673B = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 33745JBHT4;
+						DevelopmentTeam = 82VDS5T3G4;
 						ProvisioningStyle = Automatic;
 					};
 					13EB795C1E2817D800FE673B = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 33745JBHT4;
+						DevelopmentTeam = 82VDS5T3G4;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20CDE0BD1E47CE3200E0A9E2 /* Shaders.metal in Sources */,
 				13AEB11E1E3A8BBF00B92C65 /* AppDelegate.swift in Sources */,
 				13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */,
 			);
@@ -348,10 +352,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_ENTITLEMENTS = MessagesExtension/MessagesExtension.entitlements;
-				DEVELOPMENT_TEAM = 33745JBHT4;
+				DEVELOPMENT_TEAM = 82VDS5T3G4;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.jjbaer.Wizard-Duels.MessagesExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = "Wizard-Duels.MessagesExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -363,10 +367,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_ENTITLEMENTS = MessagesExtension/MessagesExtension.entitlements;
-				DEVELOPMENT_TEAM = 33745JBHT4;
+				DEVELOPMENT_TEAM = 82VDS5T3G4;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.jjbaer.Wizard-Duels.MessagesExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = "Wizard-Duels.MessagesExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -378,9 +382,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 33745JBHT4;
+				DEVELOPMENT_TEAM = 82VDS5T3G4;
 				INFOPLIST_FILE = Wizard_Duels/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.jjbaer.Wizard-Duels";
+				PRODUCT_BUNDLE_IDENTIFIER = "Wizard-Duels";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -391,9 +395,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 33745JBHT4;
+				DEVELOPMENT_TEAM = 82VDS5T3G4;
 				INFOPLIST_FILE = Wizard_Duels/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.jjbaer.Wizard-Duels";
+				PRODUCT_BUNDLE_IDENTIFIER = "Wizard-Duels";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
