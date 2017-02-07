@@ -100,7 +100,7 @@ class MessagesViewController: MSMessagesAppViewController {
         metalLayer.pixelFormat = .bgra8Unorm
         metalLayer.framebufferOnly = true
         metalLayer.frame = view.layer.frame
-        view.layer.addSublayer(metalLayer)
+        view.layer.insertSublayer(metalLayer, below: canvas.layer)
         
         let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
         vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
