@@ -15,6 +15,11 @@
 		13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13EB79671E2817D800FE673B /* MainInterface.storyboard */; };
 		13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EB796A1E2817D800FE673B /* Assets.xcassets */; };
 		20CDE0BD1E47CE3200E0A9E2 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */; };
+		20FDC2451E4CF79500B03F34 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2441E4CF79500B03F34 /* Vertex.swift */; };
+		20FDC2471E4CF7EC00B03F34 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2461E4CF7EC00B03F34 /* Node.swift */; };
+		20FDC2491E4CFB1600B03F34 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2481E4CFB1600B03F34 /* Cube.swift */; };
+		20FDC24B1E4CFB8800B03F34 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC24A1E4CFB8800B03F34 /* Triangle.swift */; };
+		20FDC2511E4D00AB00B03F34 /* Matrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2501E4D00AB00B03F34 /* Matrix4.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +59,13 @@
 		13EB796A1E2817D800FE673B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13EB796C1E2817D800FE673B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		20FDC2441E4CF79500B03F34 /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		20FDC2461E4CF7EC00B03F34 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		20FDC2481E4CFB1600B03F34 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
+		20FDC24A1E4CFB8800B03F34 /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		20FDC24F1E4CFE6C00B03F34 /* Matrix4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
+		20FDC2501E4D00AB00B03F34 /* Matrix4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix4.m; sourceTree = "<group>"; };
+		20FDC2521E4D00BA00B03F34 /* MessagesExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MessagesExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +119,8 @@
 		13EB79641E2817D800FE673B /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
+				20FDC2501E4D00AB00B03F34 /* Matrix4.m */,
+				20FDC2521E4D00BA00B03F34 /* MessagesExtension-Bridging-Header.h */,
 				13AEB11F1E3A8C2500B92C65 /* MessagesExtension.entitlements */,
 				13EB79651E2817D800FE673B /* MessagesViewController.swift */,
 				20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */,
@@ -114,6 +128,11 @@
 				13EB796A1E2817D800FE673B /* Assets.xcassets */,
 				13EB796C1E2817D800FE673B /* Info.plist */,
 				13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */,
+				20FDC2441E4CF79500B03F34 /* Vertex.swift */,
+				20FDC2461E4CF7EC00B03F34 /* Node.swift */,
+				20FDC2481E4CFB1600B03F34 /* Cube.swift */,
+				20FDC24A1E4CFB8800B03F34 /* Triangle.swift */,
+				20FDC24F1E4CFE6C00B03F34 /* Matrix4.h */,
 			);
 			path = MessagesExtension;
 			sourceTree = "<group>";
@@ -173,6 +192,7 @@
 					13EB795C1E2817D800FE673B = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 82VDS5T3G4;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -227,7 +247,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				20CDE0BD1E47CE3200E0A9E2 /* Shaders.metal in Sources */,
+				20FDC2471E4CF7EC00B03F34 /* Node.swift in Sources */,
+				20FDC2491E4CFB1600B03F34 /* Cube.swift in Sources */,
+				20FDC2451E4CF79500B03F34 /* Vertex.swift in Sources */,
 				13AEB11E1E3A8BBF00B92C65 /* AppDelegate.swift in Sources */,
+				20FDC2511E4D00AB00B03F34 /* Matrix4.m in Sources */,
+				20FDC24B1E4CFB8800B03F34 /* Triangle.swift in Sources */,
 				13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +376,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MessagesExtension/MessagesExtension.entitlements;
 				DEVELOPMENT_TEAM = 82VDS5T3G4;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
@@ -358,6 +384,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Wizard-Duels.MessagesExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MessagesExtension/MessagesExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -366,6 +394,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MessagesExtension/MessagesExtension.entitlements;
 				DEVELOPMENT_TEAM = 82VDS5T3G4;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
@@ -373,6 +402,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Wizard-Duels.MessagesExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MessagesExtension/MessagesExtension-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

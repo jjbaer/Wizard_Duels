@@ -17,19 +17,18 @@ class MessagesViewController: MSMessagesAppViewController {
     var swiped = false
     var color = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
     var gesture = "nothing yet"
+    //device for metal to be run on
     var device: MTLDevice! = nil
     var metalLayer: CAMetalLayer! = nil
-    //metal triangle
-    let vertexData:[Float] = [
-        0.0, 1.0, 0.0,
-        -1.0, -1.0, 0.0,
-        1.0, -1.0, 0.0]
-    var vertexBuffer: MTLBuffer! = nil
+    //metal object to draw
+    var objectToDraw: Cube!
+    var projectionMatrix: Matrix4!
     //rendering pipeline for shaders
     var pipelineState: MTLRenderPipelineState! = nil
     var commandQueue: MTLCommandQueue! = nil
-    
     var timer: CADisplayLink! = nil
+    //keep track of time to rotate cube
+    var lastFrameTimestamp: CFTimeInterval = 0.0
 
     @IBAction func didPressSend(_ sender: Any) {
         if let image = createImageForMessage(), let conversation = activeConversation {
@@ -95,15 +94,18 @@ class MessagesViewController: MSMessagesAppViewController {
         super.viewDidLoad()
         device = MTLCreateSystemDefaultDevice()
         
+        projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degrees(toRad: 85.0), aspectRatio:
+            Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
+        
         metalLayer = CAMetalLayer()
         metalLayer.device = device
         metalLayer.pixelFormat = .bgra8Unorm
         metalLayer.framebufferOnly = true
         metalLayer.frame = view.layer.frame
+        //this puts the metal layer underneath the canvas layer so strokes can be viewed over the metal drawing.
         view.layer.insertSublayer(metalLayer, below: canvas.layer)
         
-        let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
-        vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
+        objectToDraw = Cube(device: device)
 
         let defaultLibrary = device.newDefaultLibrary()
         let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
@@ -127,7 +129,7 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     //metal render function
-    func render() {
+    /*func render() {
         let drawable = metalLayer.nextDrawable()!
         
         let renderPassDescriptor = MTLRenderPassDescriptor()
@@ -146,10 +148,32 @@ class MessagesViewController: MSMessagesAppViewController {
         
         commandBuffer.present(drawable)
         commandBuffer.commit()
+    }*/
+    
+    func render() {
+        var drawable = metalLayer.nextDrawable()
+        let worldModelMatrix = Matrix4()
+        worldModelMatrix?.translate(0.0, y: 0.0, z: -7.0)
+        worldModelMatrix?.rotateAroundX(Matrix4.degrees(toRad: 25), y: 0.0, z: 0.0)
+        objectToDraw.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
+    }
+    
+    //update cube as it moves with time
+    func newFrame(displayLink: CADisplayLink){
+        
+        if lastFrameTimestamp == 0.0 {
+            lastFrameTimestamp = displayLink.timestamp
+        }
+        
+        let elapsed:CFTimeInterval = displayLink.timestamp - lastFrameTimestamp
+        lastFrameTimestamp = displayLink.timestamp
+        
+        gameloop(timeSinceLastUpdate: elapsed)
     }
     
     //metal function
-    func gameloop() {
+    func gameloop(timeSinceLastUpdate timeInterval: CFTimeInterval) {
+        objectToDraw.updateWithDelta(delta: timeInterval)
         autoreleasepool {
             self.render()
         }
