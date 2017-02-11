@@ -50,28 +50,32 @@ class MessagesViewController: MSMessagesAppViewController {
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
         print(" Handle long press...")
         gesture = "long press"
+        objectToDraw.makeMedium()
     }
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
         print(" Handle tap...")
         gesture = "tap"
+        objectToDraw.makeBig()
     }
     
     @IBAction func rotate(_ sender: UIRotationGestureRecognizer) {
         print(" Handle rotate...")
         gesture = "rotate"
+        objectToDraw.makeSmall()
     }
     
     @IBAction func pinch(_ sender: UIPinchGestureRecognizer) {
         print(" Handle pinch...")
         gesture = "pinch"
+        objectToDraw.makeSmall()
     }
     
     @IBAction func swipeDown(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe down...")
         color = UIColor(red: 0, green: 1, blue: 0, alpha: 1).cgColor
         gesture = "down"
-        objectToDraw.makeSmall()
+        objectToDraw.makeEarth()
     }
     
     @IBAction func swipeUp(_ sender: UISwipeGestureRecognizer) {
@@ -79,21 +83,20 @@ class MessagesViewController: MSMessagesAppViewController {
         color = UIColor(red: 0, green: 0, blue: 1, alpha: 1).cgColor
         gesture = "up"
         objectToDraw.makeIce()
-        objectToDraw.makeBig()
     }
     
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe right...")
         color = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
         gesture = "right"
-        objectToDraw.makeMedium()
+        objectToDraw.makeLightening()
     }
     
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe left...")
         color = UIColor(red: 1, green: 0, blue: 0, alpha: 1).cgColor
         gesture = "left"
-        objectToDraw.makeMedium()
+        objectToDraw.makeFire()
     }
     
     override func viewDidLoad() {

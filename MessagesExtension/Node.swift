@@ -44,6 +44,15 @@ class Node {
         vertexCount = vertices.count
     }
     
+    func update(vertices: Array<Vertex>) {
+        var vertexData = Array<Float>()
+        for vertex in vertices {
+            vertexData += vertex.floatBuffer()
+        }
+        let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
+        vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
+    }
+    
     func render(commandQueue: MTLCommandQueue, pipelineState: MTLRenderPipelineState, drawable: CAMetalDrawable, parentModelViewMatrix: Matrix4, projectionMatrix: Matrix4, clearColor: MTLClearColor?) {
         
         let renderPassDescriptor = MTLRenderPassDescriptor()
