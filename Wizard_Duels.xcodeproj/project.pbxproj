@@ -14,6 +14,7 @@
 		13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EB79651E2817D800FE673B /* MessagesViewController.swift */; };
 		13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13EB79671E2817D800FE673B /* MainInterface.storyboard */; };
 		13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EB796A1E2817D800FE673B /* Assets.xcassets */; };
+		204F3C8C1E4E87EF004CF1B8 /* touchRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204F3C8B1E4E87EF004CF1B8 /* touchRecognizer.swift */; };
 		20CDE0BD1E47CE3200E0A9E2 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */; };
 		20FDC2451E4CF79500B03F34 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2441E4CF79500B03F34 /* Vertex.swift */; };
 		20FDC2471E4CF7EC00B03F34 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2461E4CF7EC00B03F34 /* Node.swift */; };
@@ -58,6 +59,7 @@
 		13EB79681E2817D800FE673B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		13EB796A1E2817D800FE673B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13EB796C1E2817D800FE673B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		204F3C8B1E4E87EF004CF1B8 /* touchRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = touchRecognizer.swift; sourceTree = "<group>"; };
 		20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		20FDC2441E4CF79500B03F34 /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		20FDC2461E4CF7EC00B03F34 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				20FDC2481E4CFB1600B03F34 /* Cube.swift */,
 				20FDC24A1E4CFB8800B03F34 /* Triangle.swift */,
 				20FDC24F1E4CFE6C00B03F34 /* Matrix4.h */,
+				204F3C8B1E4E87EF004CF1B8 /* touchRecognizer.swift */,
 			);
 			path = MessagesExtension;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20CDE0BD1E47CE3200E0A9E2 /* Shaders.metal in Sources */,
+				204F3C8C1E4E87EF004CF1B8 /* touchRecognizer.swift in Sources */,
 				20FDC2471E4CF7EC00B03F34 /* Node.swift in Sources */,
 				20FDC2491E4CFB1600B03F34 /* Cube.swift in Sources */,
 				20FDC2451E4CF79500B03F34 /* Vertex.swift in Sources */,

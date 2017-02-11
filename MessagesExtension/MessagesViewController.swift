@@ -29,6 +29,7 @@ class MessagesViewController: MSMessagesAppViewController {
     var timer: CADisplayLink! = nil
     //keep track of time to rotate cube
     var lastFrameTimestamp: CFTimeInterval = 0.0
+    //var touchGesture: TouchRecognizer!
 
     @IBAction func didPressSend(_ sender: Any) {
         if let image = createImageForMessage(), let conversation = activeConversation {
@@ -70,28 +71,34 @@ class MessagesViewController: MSMessagesAppViewController {
         print(" Handle swipe down...")
         color = UIColor(red: 0, green: 1, blue: 0, alpha: 1).cgColor
         gesture = "down"
+        objectToDraw.makeSmall()
     }
     
     @IBAction func swipeUp(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe up...")
         color = UIColor(red: 0, green: 0, blue: 1, alpha: 1).cgColor
         gesture = "up"
+        objectToDraw.makeIce()
+        objectToDraw.makeBig()
     }
     
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe right...")
         color = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
         gesture = "right"
+        objectToDraw.makeMedium()
     }
     
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe left...")
         color = UIColor(red: 1, green: 0, blue: 0, alpha: 1).cgColor
         gesture = "left"
+        objectToDraw.makeMedium()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //touchGesture = TouchRecognizer()
         device = MTLCreateSystemDefaultDevice()
         
         projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degrees(toRad: 85.0), aspectRatio:
@@ -128,30 +135,9 @@ class MessagesViewController: MSMessagesAppViewController {
         timer.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     }
     
-    //metal render function
-    /*func render() {
-        let drawable = metalLayer.nextDrawable()!
-        
-        let renderPassDescriptor = MTLRenderPassDescriptor()
-        renderPassDescriptor.colorAttachments[0].texture = drawable.texture
-        renderPassDescriptor.colorAttachments[0].loadAction = .clear
-        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 104.0/255.0, blue: 5.0/255.0, alpha: 1.0)
-        
-        let commandBuffer = commandQueue.makeCommandBuffer()
-        
-        let renderEncoderOpt = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
-        
-        renderEncoderOpt.setRenderPipelineState(pipelineState)
-        renderEncoderOpt.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
-        renderEncoderOpt.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3, instanceCount: 1)
-        renderEncoderOpt.endEncoding()
-        
-        commandBuffer.present(drawable)
-        commandBuffer.commit()
-    }*/
-    
+    //renders metal image
     func render() {
-        var drawable = metalLayer.nextDrawable()
+        let drawable = metalLayer.nextDrawable()
         let worldModelMatrix = Matrix4()
         worldModelMatrix?.translate(0.0, y: 0.0, z: -7.0)
         worldModelMatrix?.rotateAroundX(Matrix4.degrees(toRad: 25), y: 0.0, z: 0.0)
@@ -171,8 +157,8 @@ class MessagesViewController: MSMessagesAppViewController {
         gameloop(timeSinceLastUpdate: elapsed)
     }
     
-    //metal function
     func gameloop(timeSinceLastUpdate timeInterval: CFTimeInterval) {
+        //this translates the cube over time
         objectToDraw.updateWithDelta(delta: timeInterval)
         autoreleasepool {
             self.render()
@@ -189,7 +175,7 @@ class MessagesViewController: MSMessagesAppViewController {
         context?.setBlendMode(CGBlendMode.normal)
         context?.setLineCap(CGLineCap.round)
         context?.setLineWidth(5)
-        context?.setStrokeColor(color)
+        context?.setStrokeColor(color) //touchGesture.getColor()!)
         context?.strokePath()
         canvas.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -224,7 +210,7 @@ class MessagesViewController: MSMessagesAppViewController {
         label.font = UIFont.systemFont(ofSize: 56.0)
         label.backgroundColor = UIColor.red
         label.textColor = UIColor.white
-        label.text = "\(gesture)"
+        label.text = "\(gesture)" //touchGesture.getGesture()
         label.textAlignment = .center
         label.layer.cornerRadius = label.frame.size.width/2.0
         label.clipsToBounds = true
