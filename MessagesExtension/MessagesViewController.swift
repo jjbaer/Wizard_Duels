@@ -22,6 +22,8 @@ class MessagesViewController: MSMessagesAppViewController {
     var metalLayer: CAMetalLayer! = nil
     //metal object to draw
     var objectToDraw: Cube!
+    var object2: Cube!
+    var floor: Plane!
     var projectionMatrix: Matrix4!
     //rendering pipeline for shaders
     var pipelineState: MTLRenderPipelineState! = nil
@@ -116,6 +118,8 @@ class MessagesViewController: MSMessagesAppViewController {
         view.layer.insertSublayer(metalLayer, below: canvas.layer)
         
         objectToDraw = Cube(device: device)
+        object2 = Cube(device: device)
+        floor = Plane(device: device)
 
         let defaultLibrary = device.newDefaultLibrary()
         let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
@@ -140,11 +144,30 @@ class MessagesViewController: MSMessagesAppViewController {
     
     //renders metal image
     func render() {
+        var drawable = metalLayer.nextDrawable()
+        let worldModelMatrix = Matrix4()
+        worldModelMatrix?.translate(0.0, y: 0.0, z: -7.0)
+        worldModelMatrix?.rotateAroundX(Matrix4.degrees(toRad: 25), y: 0.0, z: 0.0)
+
+        //draw the cube object
+        objectToDraw.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
+        
+        object2.positionX = 1.0
+        //object2.transRight()
+        
+        //draw the cube object
+        drawable = metalLayer.nextDrawable()
+        object2.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
+    }
+    
+    func renderfloor() {
         let drawable = metalLayer.nextDrawable()
         let worldModelMatrix = Matrix4()
         worldModelMatrix?.translate(0.0, y: 0.0, z: -7.0)
         worldModelMatrix?.rotateAroundX(Matrix4.degrees(toRad: 25), y: 0.0, z: 0.0)
-        objectToDraw.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
+        
+        //draw the floor surface
+        floor.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
     }
     
     //update cube as it moves with time
@@ -160,10 +183,13 @@ class MessagesViewController: MSMessagesAppViewController {
         gameloop(timeSinceLastUpdate: elapsed)
     }
     
+    //this is what updates the object in the scene and alters its colors and shape
     func gameloop(timeSinceLastUpdate timeInterval: CFTimeInterval) {
         //this translates the cube over time
         objectToDraw.updateWithDelta(delta: timeInterval)
+        object2.updateWithDelta(delta: timeInterval)
         autoreleasepool {
+            //renderfloor()
             self.render()
         }
     }

@@ -57,8 +57,10 @@ class Node {
         
         let renderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
+        //this clears the backround with each frame so that it renders properly instead of drawing over old frames
         renderPassDescriptor.colorAttachments[0].loadAction = .clear
-        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 104.0/255.0, blue: 5.0/255.0, alpha: 1.0)
+        //this is the background color
+        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 104.0/255.0, blue: 105.0/255.0, alpha: 1.0)
         
         let commandBuffer = commandQueue.makeCommandBuffer()
         

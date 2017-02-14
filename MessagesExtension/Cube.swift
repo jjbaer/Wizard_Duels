@@ -102,6 +102,7 @@ class Cube: Node {
         update(vertices: verticesArray)
     }
     
+    //this makes the cube green
     func makeEarth() {
         A = Vertex(x: -1.0, y:   1.0, z:   1.0, r:  0.4, g:  1.0, b:  0.4, a:  1.0)
         B = Vertex(x: -1.0, y:  -1.0, z:   1.0, r:  0.0, g:  1.0, b:  0.7, a:  1.0)
@@ -112,7 +113,7 @@ class Cube: Node {
         R = Vertex(x:  1.0, y:   1.0, z:  -1.0, r:  0.0, g:  1.0, b:  0.5, a:  1.0)
         S = Vertex(x: -1.0, y:  -1.0, z:  -1.0, r:  0.0, g:  1.0, b:  0.5, a:  1.0)
         T = Vertex(x:  1.0, y:  -1.0, z:  -1.0, r:  0.0, g:  1.0, b:  0.4, a:  1.0)
-        
+     
         let verticesArray:Array<Vertex> = [
             A, B, C, A, C, D,   //front
             R, T, S, Q, R, S,   //back
@@ -125,6 +126,7 @@ class Cube: Node {
         update(vertices: verticesArray)
     }
     
+    //this makes the cube yellow
     func makeLightening() {
         A = Vertex(x: -1.0, y:   1.0, z:   1.0, r:  1.0, g:  0.8, b:  0.0, a:  1.0)
         B = Vertex(x: -1.0, y:  -1.0, z:   1.0, r:  0.8, g:  1.0, b:  0.1, a:  1.0)
@@ -161,5 +163,28 @@ class Cube: Node {
     //make the cube its original size
     func makeMedium() {
         size = 1.0
+    }
+    
+    //this moves the cube to the right side of screen
+    func transRight() {
+       /* A.x = 1.0
+        B.x = 1.0
+        C.x = 3.0
+        D.x = 3.0
+        Q.x = 1.0
+        R.x = 3.0
+        S.x = 1.0
+        T.x = 3.0
+        
+        let verticesArray:Array<Vertex> = [
+            A, B, C, A, C, D,   //front
+            R, T, S, Q, R, S,   //back
+            Q, S, B, Q, B, A,   //left
+            D, C, T, D, T, R,   //right
+            Q, A, D, Q, D, R,   //top
+            B, S, T, B, T, C    //bottom
+        ]
+        
+        update(vertices: verticesArray)*/
     }
 }
