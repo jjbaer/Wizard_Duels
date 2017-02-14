@@ -9,6 +9,7 @@
 import Foundation
 import Metal
 import QuartzCore
+import simd
 
 class Node {
     
@@ -53,7 +54,7 @@ class Node {
         vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
     }
     
-    func render(commandQueue: MTLCommandQueue, pipelineState: MTLRenderPipelineState, drawable: CAMetalDrawable, parentModelViewMatrix: Matrix4, projectionMatrix: Matrix4, clearColor: MTLClearColor?) {
+    func render(commandQueue: MTLCommandQueue, pipelineState: MTLRenderPipelineState, drawable: CAMetalDrawable, parentModelViewMatrix: float4x4, projectionMatrix: float4x4, clearColor: MTLClearColor?) {
         
         let renderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
@@ -72,10 +73,10 @@ class Node {
         
         let nodeModelMatrix = self.modelMatrix()
         nodeModelMatrix.multiplyLeft(parentModelViewMatrix)
-        uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * Matrix4.numberOfElements() * 2, options: [])
+        uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * float4x4.numberOfElements() * 2, options: [])
         let bufferPointer = uniformBuffer?.contents()
-        memcpy(bufferPointer!, nodeModelMatrix.raw(), MemoryLayout<Float>.size * Matrix4.numberOfElements())
-        memcpy(bufferPointer! + MemoryLayout<Float>.size * Matrix4.numberOfElements(), projectionMatrix.raw(), MemoryLayout<Float>.size * Matrix4.numberOfElements())
+        memcpy(bufferPointer!, nodeModelMatrix.raw(), MemoryLayout<Float>.size * float4x4.numberOfElements())
+        memcpy(bufferPointer! + MemoryLayout<Float>.size * float4x4.numberOfElements(), projectionMatrix.raw(), MemoryLayout<Float>.size * float4x4.numberOfElements())
         renderEncoderOpt.setVertexBuffer(self.uniformBuffer, offset: 0, at: 1)
         
         renderEncoderOpt.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexCount, instanceCount: vertexCount / 3)
@@ -85,8 +86,8 @@ class Node {
         commandBuffer.commit()
     }
     
-    func modelMatrix() -> Matrix4 {
-        let matrix = Matrix4()
+    func modelMatrix() -> float4x4 {
+        let matrix = float4x4()
         matrix?.translate(positionX, y: positionY, z: positionZ)
         matrix?.rotateAroundX(rotationX, y: rotationY, z: rotationZ)
         matrix?.scale(scale, y: scale, z: scale)

@@ -10,6 +10,7 @@ import UIKit
 import Messages
 import Metal
 import QuartzCore
+import simd
 
 class MessagesViewController: MSMessagesAppViewController {
     @IBOutlet weak var canvas: UIImageView!
@@ -24,7 +25,7 @@ class MessagesViewController: MSMessagesAppViewController {
     var objectToDraw: Cube!
     var object2: Cube!
     var floor: Plane!
-    var projectionMatrix: Matrix4!
+    var projectionMatrix: float4x4!
     //rendering pipeline for shaders
     var pipelineState: MTLRenderPipelineState! = nil
     var commandQueue: MTLCommandQueue! = nil
@@ -106,7 +107,7 @@ class MessagesViewController: MSMessagesAppViewController {
         //touchGesture = TouchRecognizer()
         device = MTLCreateSystemDefaultDevice()
         
-        projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degrees(toRad: 85.0), aspectRatio:
+        projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85.0), aspectRatio:
             Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
         
         metalLayer = CAMetalLayer()
@@ -145,9 +146,9 @@ class MessagesViewController: MSMessagesAppViewController {
     //renders metal image
     func render() {
         var drawable = metalLayer.nextDrawable()
-        let worldModelMatrix = Matrix4()
+        let worldModelMatrix = float4x4()
         worldModelMatrix?.translate(0.0, y: 0.0, z: -7.0)
-        worldModelMatrix?.rotateAroundX(Matrix4.degrees(toRad: 25), y: 0.0, z: 0.0)
+        worldModelMatrix?.rotateAroundX(float4x4.degrees(toRad: 25), y: 0.0, z: 0.0)
 
         //draw the cube object
         objectToDraw.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
@@ -162,9 +163,9 @@ class MessagesViewController: MSMessagesAppViewController {
     
     func renderfloor() {
         let drawable = metalLayer.nextDrawable()
-        let worldModelMatrix = Matrix4()
+        let worldModelMatrix = float4x4()
         worldModelMatrix?.translate(0.0, y: 0.0, z: -7.0)
-        worldModelMatrix?.rotateAroundX(Matrix4.degrees(toRad: 25), y: 0.0, z: 0.0)
+        worldModelMatrix?.rotateAroundX(float4x4.degrees(toRad: 25), y: 0.0, z: 0.0)
         
         //draw the floor surface
         floor.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
