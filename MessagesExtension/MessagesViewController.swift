@@ -13,10 +13,10 @@ import QuartzCore
 import simd
 
 class MessagesViewController: MSMessagesAppViewController {
-    @IBOutlet weak var canvas: UIImageView!
-    var lastPoint = CGPoint.zero
-    var swiped = false
-    var color = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+    //the canvas is the top layer that does all the drawing
+    @IBOutlet weak var canvas: Canvas!
+
+    //the string sent in the message
     var gesture = "nothing yet"
     //device for metal to be run on
     var device: MTLDevice! = nil
@@ -76,28 +76,28 @@ class MessagesViewController: MSMessagesAppViewController {
     
     @IBAction func swipeDown(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe down...")
-        color = UIColor(red: 0, green: 1, blue: 0, alpha: 1).cgColor
+        canvas.setColor(newColor: UIColor(red: 0, green: 1, blue: 0, alpha: 1))
         gesture = "down"
         objectToDraw.makeEarth()
     }
     
     @IBAction func swipeUp(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe up...")
-        color = UIColor(red: 0, green: 0, blue: 1, alpha: 1).cgColor
+        canvas.setColor(newColor: UIColor(red: 0, green: 0, blue: 1, alpha: 1))
         gesture = "up"
         objectToDraw.makeIce()
     }
     
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe right...")
-        color = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        canvas.setColor(newColor: UIColor(red: 0, green: 0, blue: 0, alpha: 1))
         gesture = "right"
         objectToDraw.makeLightening()
     }
     
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
         print(" Handle swipe left...")
-        color = UIColor(red: 1, green: 0, blue: 0, alpha: 1).cgColor
+        canvas.setColor(newColor: UIColor(red: 1, green: 0, blue: 0, alpha: 1))
         gesture = "left"
         objectToDraw.makeFire()
     }
@@ -192,43 +192,6 @@ class MessagesViewController: MSMessagesAppViewController {
         autoreleasepool {
             //renderfloor()
             self.render()
-        }
-    }
-    
-    func drawLines(fromPoint: CGPoint, toPoint: CGPoint) {
-        UIGraphicsBeginImageContext(canvas.frame.size)
-        canvas.image?.draw(in: CGRect(x: 0.0, y: 0.0, width: canvas.frame.width, height: canvas.frame.height))
-        let context = UIGraphicsGetCurrentContext()
-        
-        context?.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
-        context?.addLine(to: CGPoint(x: toPoint.x, y: toPoint.y))
-        context?.setBlendMode(CGBlendMode.normal)
-        context?.setLineCap(CGLineCap.round)
-        context?.setLineWidth(5)
-        context?.setStrokeColor(color) //touchGesture.getColor()!)
-        context?.strokePath()
-        canvas.image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            lastPoint = touch.location(in: canvas)
-        }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        swiped = true
-        if let touch = touches.first {
-            let currentPoint = touch.location(in: canvas)
-            drawLines(fromPoint: lastPoint, toPoint: currentPoint)
-            lastPoint = currentPoint
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !swiped {
-            drawLines(fromPoint: lastPoint, toPoint: lastPoint)
         }
     }
     

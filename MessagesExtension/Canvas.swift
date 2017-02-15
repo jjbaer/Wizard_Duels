@@ -49,4 +49,8 @@ class Canvas: UIImageView {
             drawLines(fromPoint: lastPoint, toPoint: lastPoint)
         }
     }
+    
+    func setColor(newColor: UIColor) {
+        color = newColor.cgColor
+    }
 }
