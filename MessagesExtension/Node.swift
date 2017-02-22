@@ -32,6 +32,8 @@ class Node {
     var texture: MTLTexture
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(device: self.device)
     
+    var bufferProvider: BufferProvider
+    
     init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture) {
         
         var vertexData = Array<Float>()
@@ -46,6 +48,7 @@ class Node {
         self.device = device
         vertexCount = vertices.count
         self.texture = texture
+        self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3, sizeOfUniformsBuffer: MemoryLayout<Float>.size * Matrix4.numberOfElements() * 2)
     }
     
     func update(vertices: Array<Vertex>) {
@@ -58,36 +61,29 @@ class Node {
     }
     
     func render(commandQueue: MTLCommandQueue, pipelineState: MTLRenderPipelineState, drawable: CAMetalDrawable, parentModelViewMatrix: Matrix4, projectionMatrix: Matrix4, clearColor: MTLClearColor?) {
-        
         let renderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
-        //this clears the backround with each frame so that it renders properly instead of drawing over old frames
         renderPassDescriptor.colorAttachments[0].loadAction = .clear
-        //this is the background color
-        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 104.0/255.0, blue: 105.0/255.0, alpha: 1.0)
+        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 104.0/255.0, blue: 5.0/255.0, alpha: 1.0)
+        renderPassDescriptor.colorAttachments[0].storeAction = .store
         
         let commandBuffer = commandQueue.makeCommandBuffer()
         
-        let renderEncoderOpt = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
+        let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
+        //For now cull mode is used instead of depth buffer
+        renderEncoder.setCullMode(MTLCullMode.front)
         
-        renderEncoderOpt.setCullMode(MTLCullMode.front)
-        renderEncoderOpt.setRenderPipelineState(pipelineState)
-        renderEncoderOpt.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
-        renderEncoderOpt.setFragmentTexture(texture, at: 0)
-        if let samplerState = samplerState{
-            renderEncoderOpt.setFragmentSamplerState(samplerState, at: 0)
-        }
+        renderEncoder.setRenderPipelineState(pipelineState)
+        renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
         
         let nodeModelMatrix = self.modelMatrix()
         nodeModelMatrix.multiplyLeft(parentModelViewMatrix)
-        uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * Matrix4.numberOfElements() * 2, options: [])
-        let bufferPointer = uniformBuffer?.contents()
-        memcpy(bufferPointer!, nodeModelMatrix.raw(), MemoryLayout<Float>.size * Matrix4.numberOfElements())
-        memcpy(bufferPointer! + MemoryLayout<Float>.size * Matrix4.numberOfElements(), projectionMatrix.raw(), MemoryLayout<Float>.size * Matrix4.numberOfElements())
-        renderEncoderOpt.setVertexBuffer(self.uniformBuffer, offset: 0, at: 1)
         
-        renderEncoderOpt.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexCount, instanceCount: vertexCount / 3)
-        renderEncoderOpt.endEncoding()
+        let uniformBuffer = bufferProvider.nextUniformsBuffer(projectionMatrix, modelViewMatrix: nodeModelMatrix)
+        
+        renderEncoder.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexCount)
+        renderEncoder.endEncoding()
         
         commandBuffer.present(drawable)
         commandBuffer.commit()

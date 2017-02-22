@@ -19,7 +19,7 @@ protocol MessagesViewControllerDelegate : class{
 
 class MessagesViewController: MSMessagesAppViewController {
     //the canvas is the top layer that does all the drawing
-    @IBOutlet weak var canvas: Canvas!
+    //@IBOutlet weak var canvas: Canvas!
 
     //the string sent in the message
     var gesture = "nothing yet"
@@ -62,16 +62,18 @@ class MessagesViewController: MSMessagesAppViewController {
         //touchGesture = TouchRecognizer()
         device = MTLCreateSystemDefaultDevice()
         
-        projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degrees(toRad: 85.0), aspectRatio:
-            Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
+        //projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degrees(toRad: 85.0), aspectRatio:
+            //Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
         
         metalLayer = CAMetalLayer()
         metalLayer.device = device
         metalLayer.pixelFormat = .bgra8Unorm
         metalLayer.framebufferOnly = true
-        metalLayer.frame = view.layer.frame
+        //metalLayer.frame = view.layer.frame
         //this puts the metal layer underneath the canvas layer so strokes can be viewed over the metal drawing.
-        view.layer.insertSublayer(metalLayer, below: canvas.layer)
+        view.layer.addSublayer(metalLayer)
+        //view.layer.insertSublayer(metalLayer, below: canvas.layer)
+        
 //        
 //        object2 = Cube(device: device)
 //        floor = Plane(device: device)
@@ -93,8 +95,8 @@ class MessagesViewController: MSMessagesAppViewController {
         
         commandQueue = device.makeCommandQueue()
         
-        timer = CADisplayLink(target: self, selector: #selector(MessagesViewController.gameloop))
-        timer.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        //timer = CADisplayLink(target: self, selector: #selector(MessagesViewController.gameloop))
+        //timer.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     }
     
     //renders metal image
@@ -223,5 +225,19 @@ class MessagesViewController: MSMessagesAppViewController {
     
         // Use this method to finalize any behaviors associated with the change in presentation style.
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let window = view.window {
+            let scale = window.screen.nativeScale
+            let layerSize = view.bounds.size
+            //2
+            view.contentScaleFactor = scale
+            metalLayer.frame = CGRect(x: 0, y: 0, width: layerSize.width, height: layerSize.height)
+            metalLayer.drawableSize = CGSize(width: layerSize.width * scale, height: layerSize.height * scale)
+            
+            projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degrees(toRad: 85.0), aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
+        }    
+    }
 }

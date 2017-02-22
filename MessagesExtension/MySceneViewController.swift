@@ -25,7 +25,7 @@ class MySceneViewController: MessagesViewController,MessagesViewControllerDelega
         self.messagesViewControllerDelegate = self
     }
     
-    @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+  /*  @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
         print(" Handle long press...")
         gesture = "long press"
         objectToDraw.makeMedium()
@@ -76,7 +76,7 @@ class MySceneViewController: MessagesViewController,MessagesViewControllerDelega
         gesture = "left"
 //        objectToDraw.makeFire()
     }
-    
+    */
     //MARK: - MessagesViewControllerDelegate
     func renderObjects(_ drawable:CAMetalDrawable) {
         

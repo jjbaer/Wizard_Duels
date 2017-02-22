@@ -57,7 +57,8 @@ class MetalTexture: NSObject {
             context!.scaleBy(x: 1.0, y: -1.0)
         }
         
-        context?.draw(context as! CGImage, in: bounds, byTiling: (image != nil))
+        context?.draw(image!, in: bounds)
+        //context?.draw(context as! CGImage, in: bounds, byTiling: (image != nil))
         
         let texDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: MTLPixelFormat.rgba8Unorm, width: Int(width), height: Int(height), mipmapped: isMipmaped)
         target = texDescriptor.textureType
