@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		13AEB11E1E3A8BBF00B92C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */; };
+		13AEB1231E56208A00B92C65 /* MySceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEB1221E56208A00B92C65 /* MySceneViewController.swift */; };
+		13AEB1251E5627C300B92C65 /* MetalTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEB1241E5627C300B92C65 /* MetalTexture.swift */; };
+		13AEB1271E562C9700B92C65 /* salvagable in Resources */ = {isa = PBXBuildFile; fileRef = 13AEB1261E562C9700B92C65 /* salvagable */; };
+		13AEB12A1E562F2100B92C65 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = 13AEB1291E562F2100B92C65 /* cube.png */; };
 		13EB79571E2817D800FE673B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EB79561E2817D800FE673B /* Assets.xcassets */; };
 		13EB795E1E2817D800FE673B /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 13EB795D1E2817D800FE673B /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		13EB79631E2817D800FE673B /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EB79621E2817D800FE673B /* Messages.framework */; };
@@ -52,6 +56,10 @@
 /* Begin PBXFileReference section */
 		13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13AEB11F1E3A8C2500B92C65 /* MessagesExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessagesExtension.entitlements; sourceTree = "<group>"; };
+		13AEB1221E56208A00B92C65 /* MySceneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySceneViewController.swift; sourceTree = "<group>"; };
+		13AEB1241E5627C300B92C65 /* MetalTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalTexture.swift; sourceTree = "<group>"; };
+		13AEB1261E562C9700B92C65 /* salvagable */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = salvagable; sourceTree = "<group>"; };
+		13AEB1291E562F2100B92C65 /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cube.png; path = ../../../../Downloads/cube.png; sourceTree = "<group>"; };
 		13EB79531E2817D800FE673B /* Wizard_Duels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wizard_Duels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EB79561E2817D800FE673B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13EB79581E2817D800FE673B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13AEB1281E562CED00B92C65 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				13AEB1291E562F2100B92C65 /* cube.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		13EB794C1E2817D800FE673B = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +141,7 @@
 		13EB79641E2817D800FE673B /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
+				13AEB1281E562CED00B92C65 /* Images */,
 				206C69EC1E54E8DE00EBB232 /* Canvas.swift */,
 				13AEB11F1E3A8C2500B92C65 /* MessagesExtension.entitlements */,
 				206C69EE1E54E8EB00EBB232 /* Matrix4.h */,
@@ -142,6 +159,9 @@
 				20FDC24A1E4CFB8800B03F34 /* Triangle.swift */,
 				204F3C8B1E4E87EF004CF1B8 /* touchRecognizer.swift */,
 				201B61381E52337800690B15 /* Plane.swift */,
+				13AEB1221E56208A00B92C65 /* MySceneViewController.swift */,
+				13AEB1241E5627C300B92C65 /* MetalTexture.swift */,
+				13AEB1261E562C9700B92C65 /* salvagable */,
 			);
 			path = MessagesExtension;
 			sourceTree = "<group>";
@@ -195,12 +215,12 @@
 				TargetAttributes = {
 					13EB79521E2817D800FE673B = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 82VDS5T3G4;
+						DevelopmentTeam = VEWQQ6SJFR;
 						ProvisioningStyle = Automatic;
 					};
 					13EB795C1E2817D800FE673B = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 82VDS5T3G4;
+						DevelopmentTeam = VEWQQ6SJFR;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -243,7 +263,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13AEB1271E562C9700B92C65 /* salvagable in Resources */,
 				13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */,
+				13AEB12A1E562F2100B92C65 /* cube.png in Resources */,
 				13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,8 +278,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				20CDE0BD1E47CE3200E0A9E2 /* Shaders.metal in Sources */,
+				13AEB1231E56208A00B92C65 /* MySceneViewController.swift in Sources */,
 				204F3C8C1E4E87EF004CF1B8 /* touchRecognizer.swift in Sources */,
 				201B61391E52337800690B15 /* Plane.swift in Sources */,
+				13AEB1251E5627C300B92C65 /* MetalTexture.swift in Sources */,
 				206C69ED1E54E8DE00EBB232 /* Canvas.swift in Sources */,
 				20FDC2471E4CF7EC00B03F34 /* Node.swift in Sources */,
 				20FDC2491E4CFB1600B03F34 /* Cube.swift in Sources */,
@@ -390,15 +414,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MessagesExtension/MessagesExtension.entitlements;
-				DEVELOPMENT_TEAM = 82VDS5T3G4;
+				DEVELOPMENT_TEAM = VEWQQ6SJFR;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Wizard-Duels.MessagesExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = WizardDuels2.MessageExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MessagesExtension/MessagesExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -408,14 +434,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MessagesExtension/MessagesExtension.entitlements;
-				DEVELOPMENT_TEAM = 82VDS5T3G4;
+				DEVELOPMENT_TEAM = VEWQQ6SJFR;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Wizard-Duels.MessagesExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = WizardDuels2.MessageExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MessagesExtension/MessagesExtension-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -424,9 +452,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 82VDS5T3G4;
+				DEVELOPMENT_TEAM = VEWQQ6SJFR;
 				INFOPLIST_FILE = Wizard_Duels/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = "Wizard-Duels";
+				PRODUCT_BUNDLE_IDENTIFIER = WizardDuels2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -437,9 +465,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 82VDS5T3G4;
+				DEVELOPMENT_TEAM = VEWQQ6SJFR;
 				INFOPLIST_FILE = Wizard_Duels/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = "Wizard-Duels";
+				PRODUCT_BUNDLE_IDENTIFIER = WizardDuels2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

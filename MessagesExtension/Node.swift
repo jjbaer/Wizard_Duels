@@ -29,8 +29,10 @@ class Node {
     var rotationY: Float = 0.0
     var rotationZ: Float = 0.0
     var scale: Float = 1.0
+    var texture: MTLTexture
+    lazy var samplerState: MTLSamplerState? = Node.defaultSampler(device: self.device)
     
-    init(name: String, vertices: Array<Vertex>, device: MTLDevice) {
+    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture) {
         
         var vertexData = Array<Float>()
         for vertex in vertices {
@@ -43,6 +45,7 @@ class Node {
         self.name = name
         self.device = device
         vertexCount = vertices.count
+        self.texture = texture
     }
     
     func update(vertices: Array<Vertex>) {
@@ -70,6 +73,10 @@ class Node {
         renderEncoderOpt.setCullMode(MTLCullMode.front)
         renderEncoderOpt.setRenderPipelineState(pipelineState)
         renderEncoderOpt.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
+        renderEncoderOpt.setFragmentTexture(texture, at: 0)
+        if let samplerState = samplerState{
+            renderEncoderOpt.setFragmentSamplerState(samplerState, at: 0)
+        }
         
         let nodeModelMatrix = self.modelMatrix()
         nodeModelMatrix.multiplyLeft(parentModelViewMatrix)
@@ -96,6 +103,30 @@ class Node {
     
     func updateWithDelta(delta: CFTimeInterval) {
         time += delta
+    }
+    
+    class func defaultSampler(device: MTLDevice) -> MTLSamplerState
+    {
+        let pSamplerDescriptor:MTLSamplerDescriptor? = MTLSamplerDescriptor();
+        
+        if let sampler = pSamplerDescriptor
+        {
+            sampler.minFilter             = MTLSamplerMinMagFilter.nearest
+            sampler.magFilter             = MTLSamplerMinMagFilter.nearest
+            sampler.mipFilter             = MTLSamplerMipFilter.nearest
+            sampler.maxAnisotropy         = 1
+            sampler.sAddressMode          = MTLSamplerAddressMode.clampToEdge
+            sampler.tAddressMode          = MTLSamplerAddressMode.clampToEdge
+            sampler.rAddressMode          = MTLSamplerAddressMode.clampToEdge
+            sampler.normalizedCoordinates = true
+            sampler.lodMinClamp           = 0
+            sampler.lodMaxClamp           = FLT_MAX
+        }
+        else
+        {
+            print(">> ERROR: Failed creating a sampler descriptor!")
+        }
+        return device.makeSamplerState(descriptor: pSamplerDescriptor!)
     }
     
 }

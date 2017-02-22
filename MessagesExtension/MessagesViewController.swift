@@ -12,6 +12,11 @@ import Metal
 import QuartzCore
 import simd
 
+protocol MessagesViewControllerDelegate : class{
+    func updateLogic(_ timeSinceLastUpdate:CFTimeInterval)
+    func renderObjects(_ drawable:CAMetalDrawable)
+}
+
 class MessagesViewController: MSMessagesAppViewController {
     //the canvas is the top layer that does all the drawing
     @IBOutlet weak var canvas: Canvas!
@@ -22,9 +27,8 @@ class MessagesViewController: MSMessagesAppViewController {
     var device: MTLDevice! = nil
     var metalLayer: CAMetalLayer! = nil
     //metal object to draw
-    var objectToDraw: Cube!
     var object2: Cube!
-    var floor: Plane!
+//    var floor: Plane!
     var projectionMatrix: Matrix4!
     //rendering pipeline for shaders
     var pipelineState: MTLRenderPipelineState! = nil
@@ -33,6 +37,7 @@ class MessagesViewController: MSMessagesAppViewController {
     //keep track of time to rotate cube
     var lastFrameTimestamp: CFTimeInterval = 0.0
     //var touchGesture: TouchRecognizer!
+    weak var messagesViewControllerDelegate:MessagesViewControllerDelegate?
 
     @IBAction func didPressSend(_ sender: Any) {
         if let image = createImageForMessage(), let conversation = activeConversation {
@@ -50,57 +55,7 @@ class MessagesViewController: MSMessagesAppViewController {
         }
     }
     
-    @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
-        print(" Handle long press...")
-        gesture = "long press"
-        objectToDraw.makeMedium()
-    }
-    
-    @IBAction func tap(_ sender: UITapGestureRecognizer) {
-        print(" Handle tap...")
-        gesture = "tap"
-        objectToDraw.makeBig()
-    }
-    
-    @IBAction func rotate(_ sender: UIRotationGestureRecognizer) {
-        print(" Handle rotate...")
-        gesture = "rotate"
-        objectToDraw.makeSmall()
-    }
-    
-    @IBAction func pinch(_ sender: UIPinchGestureRecognizer) {
-        print(" Handle pinch...")
-        gesture = "pinch"
-        objectToDraw.makeSmall()
-    }
-    
-    @IBAction func swipeDown(_ sender: UISwipeGestureRecognizer) {
-        print(" Handle swipe down...")
-        canvas.setColor(newColor: UIColor(red: 0, green: 1, blue: 0, alpha: 1))
-        gesture = "down"
-        objectToDraw.makeEarth()
-    }
-    
-    @IBAction func swipeUp(_ sender: UISwipeGestureRecognizer) {
-        print(" Handle swipe up...")
-        canvas.setColor(newColor: UIColor(red: 0, green: 0, blue: 1, alpha: 1))
-        gesture = "up"
-        objectToDraw.makeIce()
-    }
-    
-    @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
-        print(" Handle swipe right...")
-        canvas.setColor(newColor: UIColor(red: 0, green: 0, blue: 0, alpha: 1))
-        gesture = "right"
-        objectToDraw.makeLightening()
-    }
-    
-    @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
-        print(" Handle swipe left...")
-        canvas.setColor(newColor: UIColor(red: 1, green: 0, blue: 0, alpha: 1))
-        gesture = "left"
-        objectToDraw.makeFire()
-    }
+// put it back here
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,10 +72,9 @@ class MessagesViewController: MSMessagesAppViewController {
         metalLayer.frame = view.layer.frame
         //this puts the metal layer underneath the canvas layer so strokes can be viewed over the metal drawing.
         view.layer.insertSublayer(metalLayer, below: canvas.layer)
-        
-        objectToDraw = Cube(device: device)
-        object2 = Cube(device: device)
-        floor = Plane(device: device)
+//        
+//        object2 = Cube(device: device)
+//        floor = Plane(device: device)
 
         let defaultLibrary = device.newDefaultLibrary()
         let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
@@ -144,14 +98,14 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     //renders metal image
-    func render() {
+    func renderOld() {
         var drawable = metalLayer.nextDrawable()
         let worldModelMatrix = Matrix4()
         worldModelMatrix?.translate(0.0, y: 0.0, z: -7.0)
         worldModelMatrix?.rotateAroundX(Matrix4.degrees(toRad: 25), y: 0.0, z: 0.0)
 
         //draw the cube object
-        objectToDraw.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
+        //objectToDraw.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
         
         object2.positionX = 1.0
         //object2.transRight()
@@ -161,14 +115,10 @@ class MessagesViewController: MSMessagesAppViewController {
         object2.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
     }
     
-    func renderfloor() {
-        let drawable = metalLayer.nextDrawable()
-        let worldModelMatrix = Matrix4()
-        worldModelMatrix?.translate(0.0, y: 0.0, z: -7.0)
-        worldModelMatrix?.rotateAroundX(Matrix4.degrees(toRad: 25), y: 0.0, z: 0.0)
-        
-        //draw the floor surface
-        floor.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
+    func render() {
+        if let drawable = metalLayer.nextDrawable(){
+            self.messagesViewControllerDelegate?.renderObjects(drawable)
+        }
     }
     
     //update cube as it moves with time
@@ -185,12 +135,11 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     //this is what updates the object in the scene and alters its colors and shape
-    func gameloop(timeSinceLastUpdate timeInterval: CFTimeInterval) {
-        //this translates the cube over time
-        objectToDraw.updateWithDelta(delta: timeInterval)
-        object2.updateWithDelta(delta: timeInterval)
+    func gameloop(timeSinceLastUpdate: CFTimeInterval) {
+        
+        self.messagesViewControllerDelegate?.updateLogic(timeSinceLastUpdate)
+        
         autoreleasepool {
-            //renderfloor()
             self.render()
         }
     }
