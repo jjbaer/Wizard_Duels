@@ -1,8 +1,8 @@
 //
 //  Node.swift
-//  Wizard_Duels
+//  Duel
 //
-//  Created by Roslyn Patrick-Sunnes on 2/9/17.
+//  Created by Jenna on 2/23/17.
 //  Copyright © 2017 Jenna. All rights reserved.
 //
 
@@ -13,75 +13,79 @@ import simd
 
 class Node {
     
+    var time:CFTimeInterval = 0.0
+    
     let name: String
+    let light = Light(color: (1.0,1.0,1.0), ambientIntensity: 0.1, direction: (0.0, 0.0, 1.0), diffuseIntensity: 0.8, shininess: 10, specularIntensity: 2)
+    
     var vertexCount: Int
     var vertexBuffer: MTLBuffer
-    var uniformBuffer: MTLBuffer?
     var device: MTLDevice
     
-    var time: CFTimeInterval = 0.0
+    var positionX:Float = 0.0
+    var positionY:Float = 0.0
+    var positionZ:Float = 0.0
     
-    var positionX: Float = 0.0
-    var positionY: Float = 0.0
-    var positionZ: Float = 0.0
-    
-    var rotationX: Float = 0.0
-    var rotationY: Float = 0.0
-    var rotationZ: Float = 0.0
-    var scale: Float = 1.0
-    var texture: MTLTexture
-    lazy var samplerState: MTLSamplerState? = Node.defaultSampler(device: self.device)
+    var rotationX:Float = 0.0
+    var rotationY:Float = 0.0
+    var rotationZ:Float = 0.0
+    var scale:Float     = 1.0
     
     var bufferProvider: BufferProvider
+    var texture: MTLTexture
+    lazy var samplerState: MTLSamplerState? = Node.defaultSampler(self.device)
     
     init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture) {
         
         var vertexData = Array<Float>()
-        for vertex in vertices {
+        for vertex in vertices{
             vertexData += vertex.floatBuffer()
         }
         
-        let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
-        vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
+        let dataSize = vertexData.count * MemoryLayout<Float>.size
+        vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: MTLResourceOptions())
         
         self.name = name
         self.device = device
         vertexCount = vertices.count
         self.texture = texture
-        self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3, sizeOfUniformsBuffer: MemoryLayout<Float>.size * Matrix4.numberOfElements() * 2)
+        
+        self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3)
     }
     
-    func update(vertices: Array<Vertex>) {
-        var vertexData = Array<Float>()
-        for vertex in vertices {
-            vertexData += vertex.floatBuffer()
-        }
-        let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
-        vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
-    }
-    
-    func render(commandQueue: MTLCommandQueue, pipelineState: MTLRenderPipelineState, drawable: CAMetalDrawable, parentModelViewMatrix: Matrix4, projectionMatrix: Matrix4, clearColor: MTLClearColor?) {
+    func render(_ commandQueue: MTLCommandQueue, pipelineState: MTLRenderPipelineState, drawable: CAMetalDrawable, parentModelViewMatrix: float4x4, projectionMatrix: float4x4, clearColor: MTLClearColor?) {
+        
+        let _ = bufferProvider.avaliableResourcesSemaphore.wait(timeout: DispatchTime.distantFuture)
+        
         let renderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
         renderPassDescriptor.colorAttachments[0].loadAction = .clear
-        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 104.0/255.0, blue: 5.0/255.0, alpha: 1.0)
+        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
         renderPassDescriptor.colorAttachments[0].storeAction = .store
         
         let commandBuffer = commandQueue.makeCommandBuffer()
+        commandBuffer.addCompletedHandler { (commandBuffer) -> Void in
+            self.bufferProvider.avaliableResourcesSemaphore.signal()
+        }
         
         let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
-        //For now cull mode is used instead of depth buffer
         renderEncoder.setCullMode(MTLCullMode.front)
         
         renderEncoder.setRenderPipelineState(pipelineState)
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
+        renderEncoder.setFragmentTexture(texture, at: 0)
         
-        let nodeModelMatrix = self.modelMatrix()
+        if let samplerState = samplerState {
+            renderEncoder.setFragmentSamplerState(samplerState, at: 0)
+        }
+        
+        var nodeModelMatrix = self.modelMatrix()
         nodeModelMatrix.multiplyLeft(parentModelViewMatrix)
         
-        let uniformBuffer = bufferProvider.nextUniformsBuffer(projectionMatrix, modelViewMatrix: nodeModelMatrix)
+        let uniformBuffer = bufferProvider.nextUniformsBuffer(projectionMatrix, modelViewMatrix: nodeModelMatrix, light: light)
         
         renderEncoder.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
+        renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, at: 1)
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexCount)
         renderEncoder.endEncoding()
         
@@ -89,24 +93,22 @@ class Node {
         commandBuffer.commit()
     }
     
-    func modelMatrix() -> Matrix4 {
-        let matrix = Matrix4()
-        matrix?.translate(positionX, y: positionY, z: positionZ)
-        matrix?.rotateAroundX(rotationX, y: rotationY, z: rotationZ)
-        matrix?.scale(scale, y: scale, z: scale)
-        return matrix!
+    func modelMatrix() -> float4x4 {
+        var matrix = float4x4()
+        matrix.translate(positionX, y: positionY, z: positionZ)
+        matrix.rotateAroundX(rotationX, y: rotationY, z: rotationZ)
+        matrix.scale(scale, y: scale, z: scale)
+        return matrix
     }
     
-    func updateWithDelta(delta: CFTimeInterval) {
+    func updateWithDelta(_ delta: CFTimeInterval) {
         time += delta
     }
     
-    class func defaultSampler(device: MTLDevice) -> MTLSamplerState
-    {
+    class func defaultSampler(_ device: MTLDevice) -> MTLSamplerState {
         let pSamplerDescriptor:MTLSamplerDescriptor? = MTLSamplerDescriptor();
         
-        if let sampler = pSamplerDescriptor
-        {
+        if let sampler = pSamplerDescriptor {
             sampler.minFilter             = MTLSamplerMinMagFilter.nearest
             sampler.magFilter             = MTLSamplerMinMagFilter.nearest
             sampler.mipFilter             = MTLSamplerMipFilter.nearest
@@ -118,11 +120,19 @@ class Node {
             sampler.lodMinClamp           = 0
             sampler.lodMaxClamp           = FLT_MAX
         }
-        else
-        {
+        else {
             print(">> ERROR: Failed creating a sampler descriptor!")
         }
         return device.makeSamplerState(descriptor: pSamplerDescriptor!)
     }
     
+    func update(vertices: Array<Vertex>) {
+        vertexCount = vertices.count
+        var vertexData = Array<Float>()
+        for vertex in vertices {
+            vertexData += vertex.floatBuffer()
+        }
+        let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
+        vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
+    }
 }

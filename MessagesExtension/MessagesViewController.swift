@@ -2,44 +2,28 @@
 //  MessagesViewController.swift
 //  MessagesExtension
 //
-//  Created by Jenna and Roslyn on 1/12/17.
+//  Created by Jenna on 2/23/17.
 //  Copyright © 2017 Jenna. All rights reserved.
-//
 
 import UIKit
-import Messages
-import Metal
+import MetalKit
 import QuartzCore
 import simd
+import Messages
 
-protocol MessagesViewControllerDelegate : class{
+protocol MessagesViewControllerDelegate : class {
     func updateLogic(_ timeSinceLastUpdate:CFTimeInterval)
     func renderObjects(_ drawable:CAMetalDrawable)
 }
 
 class MessagesViewController: MSMessagesAppViewController {
-    //the canvas is the top layer that does all the drawing
-    //@IBOutlet weak var canvas: Canvas!
-
-    //the string sent in the message
-    var gesture = "nothing yet"
-    //device for metal to be run on
     var device: MTLDevice! = nil
-    var metalLayer: CAMetalLayer! = nil
-    //metal object to draw
-    var object2: Cube!
-//    var floor: Plane!
-    var projectionMatrix: Matrix4!
-    //rendering pipeline for shaders
     var pipelineState: MTLRenderPipelineState! = nil
     var commandQueue: MTLCommandQueue! = nil
-    var timer: CADisplayLink! = nil
-    //keep track of time to rotate cube
-    var lastFrameTimestamp: CFTimeInterval = 0.0
-    //var touchGesture: TouchRecognizer!
-    weak var messagesViewControllerDelegate:MessagesViewControllerDelegate?
-
-    @IBAction func didPressSend(_ sender: Any) {
+    var projectionMatrix: float4x4!
+    var textureLoader: MTKTextureLoader! = nil
+    
+    @IBAction func didPressSend(_ sender: UIButton) {
         if let image = createImageForMessage(), let conversation = activeConversation {
             let layout = MSMessageTemplateLayout()
             layout.image = image
@@ -55,94 +39,66 @@ class MessagesViewController: MSMessagesAppViewController {
         }
     }
     
-// put it back here
+    @IBOutlet var mtk_view: MTKView! {
+        didSet {
+            mtk_view.delegate = self
+            mtk_view.preferredFramesPerSecond = 60
+            mtk_view.clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        }
+    }
+
+    weak var messagesViewControllerDelegate:MessagesViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //touchGesture = TouchRecognizer()
+        
+        projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85.0), aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
+        
+        
         device = MTLCreateSystemDefaultDevice()
+        textureLoader = MTKTextureLoader(device: device)
+        mtk_view.device = device
+        commandQueue = device.makeCommandQueue()
         
-        //projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degrees(toRad: 85.0), aspectRatio:
-            //Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
-        
-        metalLayer = CAMetalLayer()
-        metalLayer.device = device
-        metalLayer.pixelFormat = .bgra8Unorm
-        metalLayer.framebufferOnly = true
-        //metalLayer.frame = view.layer.frame
-        //this puts the metal layer underneath the canvas layer so strokes can be viewed over the metal drawing.
-        view.layer.addSublayer(metalLayer)
-        //view.layer.insertSublayer(metalLayer, below: canvas.layer)
-        
-//        
-//        object2 = Cube(device: device)
-//        floor = Plane(device: device)
-
         let defaultLibrary = device.newDefaultLibrary()
         let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
         let vertexProgram = defaultLibrary!.makeFunction(name: "basic_vertex")
+        
         
         let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
         pipelineStateDescriptor.vertexFunction = vertexProgram
         pipelineStateDescriptor.fragmentFunction = fragmentProgram
         pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+        pipelineStateDescriptor.colorAttachments[0].isBlendingEnabled = true
+        pipelineStateDescriptor.colorAttachments[0].rgbBlendOperation = MTLBlendOperation.add;
+        pipelineStateDescriptor.colorAttachments[0].alphaBlendOperation = MTLBlendOperation.add;
+        pipelineStateDescriptor.colorAttachments[0].sourceRGBBlendFactor = MTLBlendFactor.one;
+        pipelineStateDescriptor.colorAttachments[0].sourceAlphaBlendFactor = MTLBlendFactor.one;
+        pipelineStateDescriptor.colorAttachments[0].destinationRGBBlendFactor = MTLBlendFactor.oneMinusSourceAlpha;
+        pipelineStateDescriptor.colorAttachments[0].destinationAlphaBlendFactor = MTLBlendFactor.oneMinusSourceAlpha;
         
-        do {
-            try self.pipelineState = device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
-        } catch let pipelineError as NSError {
-            print("Failed to create pipeline state, error \(pipelineError)")
-        }
-        
-        commandQueue = device.makeCommandQueue()
-        
-        //timer = CADisplayLink(target: self, selector: #selector(MessagesViewController.gameloop))
-        //timer.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        pipelineState = try! device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
     }
     
-    //renders metal image
-    func renderOld() {
-        var drawable = metalLayer.nextDrawable()
-        let worldModelMatrix = Matrix4()
-        worldModelMatrix?.translate(0.0, y: 0.0, z: -7.0)
-        worldModelMatrix?.rotateAroundX(Matrix4.degrees(toRad: 25), y: 0.0, z: 0.0)
-
-        //draw the cube object
-        //objectToDraw.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
-        
-        object2.positionX = 1.0
-        //object2.transRight()
-        
-        //draw the cube object
-        drawable = metalLayer.nextDrawable()
-        object2.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable!, parentModelViewMatrix: worldModelMatrix!, projectionMatrix: projectionMatrix ,clearColor: nil)
+    func render(_ drawable: CAMetalDrawable?) {
+        guard let drawable = drawable else { return }
+        self.messagesViewControllerDelegate?.renderObjects(drawable)
     }
     
-    func render() {
-        if let drawable = metalLayer.nextDrawable(){
-            self.messagesViewControllerDelegate?.renderObjects(drawable)
-        }
-    }
-    
-    //update cube as it moves with time
-    func newFrame(displayLink: CADisplayLink){
-        
-        if lastFrameTimestamp == 0.0 {
-            lastFrameTimestamp = displayLink.timestamp
-        }
-        
-        let elapsed:CFTimeInterval = displayLink.timestamp - lastFrameTimestamp
-        lastFrameTimestamp = displayLink.timestamp
-        
-        gameloop(timeSinceLastUpdate: elapsed)
-    }
-    
-    //this is what updates the object in the scene and alters its colors and shape
-    func gameloop(timeSinceLastUpdate: CFTimeInterval) {
-        
-        self.messagesViewControllerDelegate?.updateLogic(timeSinceLastUpdate)
-        
-        autoreleasepool {
-            self.render()
+    // TODO: this needs to be an IBAction for a button / action
+    func didPress(button sender: AnyObject) {
+        if let image = createImageForMessage(), let conversation = activeConversation {
+            let layout = MSMessageTemplateLayout()
+            layout.image = image
+            layout.caption = "Stepper Value"
+            
+            let message = MSMessage()
+            message.layout = layout
+            message.url = URL(string: "emptyURL")
+            
+            conversation.insert(message, completionHandler: { (error: Error?) in
+                print(error ?? "Non-error")
+            })
         }
     }
     
@@ -154,7 +110,7 @@ class MessagesViewController: MSMessagesAppViewController {
         label.font = UIFont.systemFont(ofSize: 56.0)
         label.backgroundColor = UIColor.red
         label.textColor = UIColor.white
-        label.text = "\(gesture)" //touchGesture.getGesture()
+        label.text = "Let's Duel!"
         label.textAlignment = .center
         label.layer.cornerRadius = label.frame.size.width/2.0
         label.clipsToBounds = true
@@ -172,72 +128,20 @@ class MessagesViewController: MSMessagesAppViewController {
         
         return image
     }
+}
+
+// MARK: - MTKViewDelegate
+extension MessagesViewController: MTKViewDelegate {
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // 1
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85.0),
+                                                             aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height),
+                                                             nearZ: 0.01, farZ: 100.0)
     }
     
-    // MARK: - Conversation Handling
-    
-    override func willBecomeActive(with conversation: MSConversation) {
-        // Called when the extension is about to move from the inactive to active state.
-        // This will happen when the extension is about to present UI.
-        
-        // Use this method to configure the extension and restore previously stored state.
-    }
-    
-    override func didResignActive(with conversation: MSConversation) {
-        // Called when the extension is about to move from the active to inactive state.
-        // This will happen when the user dissmises the extension, changes to a different
-        // conversation or quits Messages.
-        
-        // Use this method to release shared resources, save user data, invalidate timers,
-        // and store enough state information to restore your extension to its current state
-        // in case it is terminated later.
-    }
-   
-    override func didReceive(_ message: MSMessage, conversation: MSConversation) {
-        // Called when a message arrives that was generated by another instance of this
-        // extension on a remote device.
-        
-        // Use this method to trigger UI updates in response to the message.
-    }
-    
-    override func didStartSending(_ message: MSMessage, conversation: MSConversation) {
-        // Called when the user taps the send button.
-    }
-    
-    override func didCancelSending(_ message: MSMessage, conversation: MSConversation) {
-        // Called when the user deletes the message without sending it.
-    
-        // Use this to clean up state related to the deleted message.
-    }
-    
-    override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // Called before the extension transitions to a new presentation style.
-    
-        // Use this method to prepare for the change in presentation style.
-    }
-    
-    override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // Called after the extension transitions to a new presentation style.
-    
-        // Use this method to finalize any behaviors associated with the change in presentation style.
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        if let window = view.window {
-            let scale = window.screen.nativeScale
-            let layerSize = view.bounds.size
-            //2
-            view.contentScaleFactor = scale
-            metalLayer.frame = CGRect(x: 0, y: 0, width: layerSize.width, height: layerSize.height)
-            metalLayer.drawableSize = CGSize(width: layerSize.width * scale, height: layerSize.height * scale)
-            
-            projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degrees(toRad: 85.0), aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
-        }    
+    // 2
+    func draw(in view: MTKView) {
+        render(view.currentDrawable)
     }
 }

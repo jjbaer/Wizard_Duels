@@ -1,62 +1,64 @@
 //
 //  BufferProvider.swift
-//  Wizard_Duels
+//  Duel
 //
-//  Created by Roslyn Patrick-Sunnes on 2/22/17.
+//  Created by Jenna on 2/23/17.
 //  Copyright © 2017 Jenna. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Metal
+import simd
 
-class BufferProvider {
+class BufferProvider: NSObject {
     // 1
     let inflightBuffersCount: Int
     // 2
     fileprivate var uniformsBuffers: [MTLBuffer]
     // 3
     fileprivate var avaliableBufferIndex: Int = 0
-    
     var avaliableResourcesSemaphore:DispatchSemaphore
     
-    init(device:MTLDevice, inflightBuffersCount: Int, sizeOfUniformsBuffer: Int){
+    init(device:MTLDevice, inflightBuffersCount: Int) {
+        
+        let sizeOfUniformsBuffer = MemoryLayout<Float>.size * (2 * float4x4.numberOfElements()) + Light.size()
         
         avaliableResourcesSemaphore = DispatchSemaphore(value: inflightBuffersCount)
         
         self.inflightBuffersCount = inflightBuffersCount
         uniformsBuffers = [MTLBuffer]()
         
-        for _ in 0...inflightBuffersCount-1 {
+        for _ in 0...inflightBuffersCount-1{
             let uniformsBuffer = device.makeBuffer(length: sizeOfUniformsBuffer, options: [])
             uniformsBuffers.append(uniformsBuffer)
         }
     }
     
-    deinit{
+    deinit {
         for _ in 0...self.inflightBuffersCount{
             self.avaliableResourcesSemaphore.signal()
         }
     }
     
-    func nextUniformsBuffer(_ projectionMatrix: Matrix4, modelViewMatrix: Matrix4) -> MTLBuffer {
+    func nextUniformsBuffer(_ projectionMatrix: float4x4, modelViewMatrix: float4x4, light: Light) -> MTLBuffer {
         
-        // 1
         let buffer = uniformsBuffers[avaliableBufferIndex]
-        
-        // 2
         let bufferPointer = buffer.contents()
         
-        // 3
-        memcpy(bufferPointer, modelViewMatrix.raw(), MemoryLayout<Float>.size*Matrix4.numberOfElements())
-        memcpy(bufferPointer + MemoryLayout<Float>.size*Matrix4.numberOfElements(), projectionMatrix.raw(), MemoryLayout<Float>.size*Matrix4.numberOfElements())
+        // 1
+        var projectionMatrix = projectionMatrix
+        var modelViewMatrix = modelViewMatrix
         
-        // 4
+        // 2
+        memcpy(bufferPointer, &modelViewMatrix, MemoryLayout<Float>.size*float4x4.numberOfElements())
+        memcpy(bufferPointer + MemoryLayout<Float>.size*float4x4.numberOfElements(), &projectionMatrix, MemoryLayout<Float>.size*float4x4.numberOfElements())
+        memcpy(bufferPointer + 2*MemoryLayout<Float>.size*float4x4.numberOfElements(), light.raw(), Light.size())
+        
         avaliableBufferIndex += 1
         if avaliableBufferIndex == inflightBuffersCount{
             avaliableBufferIndex = 0
-        } 
+        }
         
         return buffer
     }
-    
 }

@@ -9,92 +9,36 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Messages View Controller-->
+        <!--My Scene View Controller-->
         <scene sceneID="7MM-of-jgj">
             <objects>
-                <viewController id="ObA-dk-sSI" customClass="MessagesViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X47-rx-isc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="ObA-dk-sSI" customClass="MySceneViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qkL-Od-lgU"/>
-                        <viewControllerLayoutGuide type="bottom" id="n38-gi-rB5"/>
+                        <viewControllerLayoutGuide type="top" id="u2J-jc-LWR"/>
+                        <viewControllerLayoutGuide type="bottom" id="tYE-q4-DHP"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zMn-AG-sqS">
+                    <view key="view" contentMode="scaleToFill" id="V0x-tR-5tF" userLabel="Mtk View" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Hx-e4-lKX" customClass="Canvas" customModule="MessagesExtension" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="426"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="lkY-JI-JyS" appends="YES" id="lTm-At-K9G"/>
-                                    <outletCollection property="gestureRecognizers" destination="iiR-X5-fne" appends="YES" id="0Sj-y8-f6D"/>
-                                    <outletCollection property="gestureRecognizers" destination="rR5-yH-unK" appends="YES" id="4ex-Gb-Hdg"/>
-                                    <outletCollection property="gestureRecognizers" destination="3UG-dF-grb" appends="YES" id="5WL-BX-sWp"/>
-                                    <outletCollection property="gestureRecognizers" destination="uzx-Lq-OmS" appends="YES" id="Xql-VV-iJi"/>
-                                    <outletCollection property="gestureRecognizers" destination="R0x-0o-4OB" appends="YES" id="5xO-sc-jei"/>
-                                    <outletCollection property="gestureRecognizers" destination="t0s-8a-Tb0" appends="YES" id="ncq-xR-nO7"/>
-                                    <outletCollection property="gestureRecognizers" destination="Hyu-au-Oze" appends="YES" id="XSh-VA-9gQ"/>
-                                </connections>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rC0-fP-ySd">
-                                <rect key="frame" x="137" y="461" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sz-S0-4ZX">
+                                <rect key="frame" x="142" y="426" width="36" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Send"/>
                                 <connections>
-                                    <action selector="didPressSend:" destination="ObA-dk-sSI" eventType="touchUpInside" id="wah-jP-KeD"/>
+                                    <action selector="didPressSend:" destination="ObA-dk-sSI" eventType="touchUpInside" id="a3V-T1-W96"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <gestureRecognizers/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="528"/>
                     <connections>
-                        <outlet property="canvas" destination="9Hx-e4-lKX" id="3c9-Fk-PEt"/>
+                        <outlet property="mtk_view" destination="V0x-tR-5tF" id="Uce-Nk-Frv"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X47-rx-isc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="lkY-JI-JyS">
-                    <connections>
-                        <action selector="swipeLeft:" destination="ObA-dk-sSI" id="w2R-tZ-qK3"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="iiR-X5-fne">
-                    <connections>
-                        <action selector="swipeRight:" destination="ObA-dk-sSI" id="9gC-X7-xz1"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="up" id="rR5-yH-unK">
-                    <connections>
-                        <action selector="swipeUp:" destination="ObA-dk-sSI" id="FBz-bV-xRk"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="down" id="3UG-dF-grb">
-                    <connections>
-                        <action selector="swipeDown:" destination="ObA-dk-sSI" id="U8q-A4-Ato"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <pinchGestureRecognizer id="uzx-Lq-OmS">
-                    <connections>
-                        <action selector="pinch:" destination="ObA-dk-sSI" id="zfD-km-lTs"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <rotationGestureRecognizer id="R0x-0o-4OB">
-                    <connections>
-                        <action selector="rotate:" destination="ObA-dk-sSI" id="cYr-X4-9Qr"/>
-                    </connections>
-                </rotationGestureRecognizer>
-                <tapGestureRecognizer id="t0s-8a-Tb0">
-                    <connections>
-                        <action selector="tap:" destination="ObA-dk-sSI" id="YWr-dq-Fze"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Hyu-au-Oze">
-                    <connections>
-                        <action selector="longPress:" destination="ObA-dk-sSI" id="h7Y-hA-fI8"/>
-                    </connections>
-                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="33.600000000000001" y="37.781109445277366"/>
         </scene>

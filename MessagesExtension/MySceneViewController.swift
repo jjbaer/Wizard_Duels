@@ -1,91 +1,71 @@
 //
 //  MySceneViewController.swift
-//  Wizard_Duels
+//  Duel
 //
-//  Created by Jenna on 2/16/17.
+//  Created by Jenna on 2/23/17.
 //  Copyright © 2017 Jenna. All rights reserved.
 //
 
-import Foundation
-import UIKit
 
-class MySceneViewController: MessagesViewController,MessagesViewControllerDelegate {
-    
-    var worldModelMatrix:Matrix4!
+import UIKit
+import simd
+
+class MySceneViewController: MessagesViewController, MessagesViewControllerDelegate {
+
+    var worldModelMatrix:float4x4!
     var objectToDraw: Cube!
+    
+    let panSensivity:Float = 5.0
+    var lastPanLocation: CGPoint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        worldModelMatrix = Matrix4()
+        worldModelMatrix = float4x4()
         worldModelMatrix.translate(0.0, y: 0.0, z: -4)
-        worldModelMatrix.rotateAroundX(Matrix4.degrees(toRad: 25), y: 0.0, z: 0.0)
+        worldModelMatrix.rotateAroundX(float4x4.degrees(toRad: 25), y: 0.0, z: 0.0)
         
-        objectToDraw = Cube(device: device, commandQ:commandQueue)
+        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader)
+        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader)
+        objectToDraw.addCube(x: -3.5, y: 0, z: 0)
+        objectToDraw.addCube(x: -2.0, y: 1.0, z: -2.5)
         self.messagesViewControllerDelegate = self
+        
+        setupGestures()
     }
     
-  /*  @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
-        print(" Handle long press...")
-        gesture = "long press"
-        objectToDraw.makeMedium()
-    }
-    
-    @IBAction func tap(_ sender: UITapGestureRecognizer) {
-        print(" Handle tap...")
-        gesture = "tap"
-        objectToDraw.makeBig()
-    }
-    
-    @IBAction func rotate(_ sender: UIRotationGestureRecognizer) {
-        print(" Handle rotate...")
-        gesture = "rotate"
-        objectToDraw.makeSmall()
-    }
-    
-    @IBAction func pinch(_ sender: UIPinchGestureRecognizer) {
-        print(" Handle pinch...")
-        gesture = "pinch"
-        objectToDraw.makeSmall()
-    }
-    
-    @IBAction func swipeDown(_ sender: UISwipeGestureRecognizer) {
-        print(" Handle swipe down...")
-        canvas.setColor(newColor: UIColor(red: 0, green: 1, blue: 0, alpha: 1))
-        gesture = "down"
-//        objectToDraw.makeEarth()
-    }
-    
-    @IBAction func swipeUp(_ sender: UISwipeGestureRecognizer) {
-        print(" Handle swipe up...")
-        canvas.setColor(newColor: UIColor(red: 0, green: 0, blue: 1, alpha: 1))
-        gesture = "up"
-//        objectToDraw.makeIce()
-    }
-    
-    @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
-        print(" Handle swipe right...")
-        canvas.setColor(newColor: UIColor(red: 0, green: 0, blue: 0, alpha: 1))
-        gesture = "right"
-//        objectToDraw.makeLightening()
-    }
-    
-    @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
-        print(" Handle swipe left...")
-        canvas.setColor(newColor: UIColor(red: 1, green: 0, blue: 0, alpha: 1))
-        gesture = "left"
-//        objectToDraw.makeFire()
-    }
-    */
-    //MARK: - MessagesViewControllerDelegate
+    //MARK: - MetalViewControllerDelegate
     func renderObjects(_ drawable:CAMetalDrawable) {
         
-        objectToDraw.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable, parentModelViewMatrix: worldModelMatrix, projectionMatrix: projectionMatrix, clearColor: nil)
+        objectToDraw.render(commandQueue, pipelineState: pipelineState, drawable: drawable, parentModelViewMatrix: worldModelMatrix, projectionMatrix: projectionMatrix, clearColor: nil)
     }
     
     func updateLogic(_ timeSinceLastUpdate: CFTimeInterval) {
-        objectToDraw.updateWithDelta(delta: timeSinceLastUpdate)
+        objectToDraw.updateWithDelta(timeSinceLastUpdate)
     }
     
+    //MARK: - Gesture related
+    // 1
+    func setupGestures() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(MySceneViewController.pan(_:)))
+        self.view.addGestureRecognizer(pan)
+    }
+    
+    // 2
+    func pan(_ panGesture: UIPanGestureRecognizer) {
+        if panGesture.state == UIGestureRecognizerState.changed {
+            let pointInView = panGesture.location(in: self.view)
+            // 3
+            let xDelta = Float((lastPanLocation.x - pointInView.x)/self.view.bounds.width) * panSensivity
+            let yDelta = Float((lastPanLocation.y - pointInView.y)/self.view.bounds.height) * panSensivity
+            // 4
+            objectToDraw.rotationY -= xDelta
+            objectToDraw.rotationX -= yDelta
+            lastPanLocation = pointInView
+        } else if panGesture.state == UIGestureRecognizerState.began {
+            lastPanLocation = panGesture.location(in: self.view)
+        }
+    }
     
 }
+
