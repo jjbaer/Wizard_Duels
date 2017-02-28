@@ -10,7 +10,6 @@
 		13868CF11E5E22B10062B828 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = 13868CF01E5E22B10062B828 /* cube.png */; };
 		13AEB11E1E3A8BBF00B92C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */; };
 		13AEB1231E56208A00B92C65 /* MySceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEB1221E56208A00B92C65 /* MySceneViewController.swift */; };
-		13AEB1271E562C9700B92C65 /* salvagable in Resources */ = {isa = PBXBuildFile; fileRef = 13AEB1261E562C9700B92C65 /* salvagable */; };
 		13EB79571E2817D800FE673B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EB79561E2817D800FE673B /* Assets.xcassets */; };
 		13EB795E1E2817D800FE673B /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 13EB795D1E2817D800FE673B /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		13EB79631E2817D800FE673B /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EB79621E2817D800FE673B /* Messages.framework */; };
@@ -60,7 +59,6 @@
 		13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13AEB11F1E3A8C2500B92C65 /* MessagesExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessagesExtension.entitlements; sourceTree = "<group>"; };
 		13AEB1221E56208A00B92C65 /* MySceneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySceneViewController.swift; sourceTree = "<group>"; };
-		13AEB1261E562C9700B92C65 /* salvagable */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = salvagable; sourceTree = "<group>"; };
 		13EB79531E2817D800FE673B /* Wizard_Duels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wizard_Duels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EB79561E2817D800FE673B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13EB79581E2817D800FE673B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				20FDC24A1E4CFB8800B03F34 /* Triangle.swift */,
 				201B61381E52337800690B15 /* Plane.swift */,
 				13AEB1221E56208A00B92C65 /* MySceneViewController.swift */,
-				13AEB1261E562C9700B92C65 /* salvagable */,
 				2091E9271E5E517300CA05A0 /* BufferProvider.swift */,
 				20003C261E64CC3D00DE69BB /* float4x4.swift */,
 				20003C281E64CC7400DE69BB /* MetalTexture.swift */,
@@ -269,7 +266,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13AEB1271E562C9700B92C65 /* salvagable in Resources */,
 				13868CF11E5E22B10062B828 /* cube.png in Resources */,
 				13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */,
 				13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */,
