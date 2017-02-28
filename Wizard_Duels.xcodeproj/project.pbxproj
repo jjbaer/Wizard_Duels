@@ -19,6 +19,7 @@
 		20003C271E64CC3D00DE69BB /* float4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20003C261E64CC3D00DE69BB /* float4x4.swift */; };
 		20003C291E64CC7400DE69BB /* MetalTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20003C281E64CC7400DE69BB /* MetalTexture.swift */; };
 		20003C2B1E64CCC500DE69BB /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20003C2A1E64CCC500DE69BB /* Light.swift */; };
+		20105DD11E65F0F500BE0DDB /* ivy.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20105DD01E65F0F500BE0DDB /* ivy.jpeg */; };
 		201B61391E52337800690B15 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201B61381E52337800690B15 /* Plane.swift */; };
 		206C69ED1E54E8DE00EBB232 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C69EC1E54E8DE00EBB232 /* Canvas.swift */; };
 		206C69F11E54E8EB00EBB232 /* Matrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 206C69EF1E54E8EB00EBB232 /* Matrix4.m */; };
@@ -72,6 +73,7 @@
 		20003C261E64CC3D00DE69BB /* float4x4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = float4x4.swift; sourceTree = "<group>"; };
 		20003C281E64CC7400DE69BB /* MetalTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalTexture.swift; sourceTree = "<group>"; };
 		20003C2A1E64CCC500DE69BB /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
+		20105DD01E65F0F500BE0DDB /* ivy.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ivy.jpeg; sourceTree = "<group>"; };
 		201B61381E52337800690B15 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		206C69EC1E54E8DE00EBB232 /* Canvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
 		206C69EE1E54E8EB00EBB232 /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		13AEB1281E562CED00B92C65 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				20105DD01E65F0F500BE0DDB /* ivy.jpeg */,
 				20FB803F1E651B2700B3C024 /* fire.jpeg */,
 				13868CF01E5E22B10062B828 /* cube.png */,
 			);
@@ -269,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20105DD11E65F0F500BE0DDB /* ivy.jpeg in Resources */,
 				13868CF11E5E22B10062B828 /* cube.png in Resources */,
 				13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */,
 				13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */,

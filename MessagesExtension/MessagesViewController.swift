@@ -64,7 +64,6 @@ class MessagesViewController: MSMessagesAppViewController {
         let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
         let vertexProgram = defaultLibrary!.makeFunction(name: "basic_vertex")
         
-        
         let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
         pipelineStateDescriptor.vertexFunction = vertexProgram
         pipelineStateDescriptor.fragmentFunction = fragmentProgram

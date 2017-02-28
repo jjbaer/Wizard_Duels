@@ -34,6 +34,11 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         setupGestures()
     }
     
+    @IBAction func pinch(_ sender: Any) {
+        print("pinch")
+        objectToDraw.changeTexture(resource: "ivy", type: "jpeg", textureLoader: textureLoader)
+    }
+    
     @IBAction func tap(_ sender: Any) {
         print("tap")
         objectToDraw.changeTexture(resource: "fire", type: "jpeg", textureLoader: textureLoader)

@@ -63,7 +63,11 @@ class Cube: Node {
         let data = NSData(contentsOfFile: path) as! Data
         let texture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
-        super.init(name: "Cube", vertices: verticesArray, device: device, texture: texture)
+        let path2 = Bundle.main.path(forResource: "ivy", ofType: "jpeg")!
+        let data2 = NSData(contentsOfFile: path2) as! Data
+        let texture2 = try! textureLoader.newTexture(with: data2, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+        
+        super.init(name: "Cube", vertices: verticesArray, device: device, texture: texture, texture2: texture2)
     }
     
     func addCube(x: Float, y: Float, z: Float) {

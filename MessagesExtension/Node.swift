@@ -33,9 +33,10 @@ class Node {
     
     var bufferProvider: BufferProvider
     var texture: MTLTexture
+    var texture2: MTLTexture
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(self.device)
     
-    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture) {
+    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture) {
         
         var vertexData = Array<Float>()
         for vertex in vertices{
@@ -49,6 +50,7 @@ class Node {
         self.device = device
         vertexCount = vertices.count
         self.texture = texture
+        self.texture2 = texture2
         
         self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3)
     }
@@ -60,7 +62,7 @@ class Node {
         let renderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
         renderPassDescriptor.colorAttachments[0].loadAction = .clear
-        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
         renderPassDescriptor.colorAttachments[0].storeAction = .store
         
         let commandBuffer = commandQueue.makeCommandBuffer()

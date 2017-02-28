@@ -30,11 +30,12 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.99708503484725952" green="0.98515313863754272" blue="0.98472696542739868" alpha="0.729411780834198" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="1wT-S6-0U6" appends="YES" id="RMN-38-bqB"/>
                             <outletCollection property="gestureRecognizers" destination="zBB-7w-S4y" appends="YES" id="4ve-ms-G7X"/>
+                            <outletCollection property="gestureRecognizers" destination="Ei1-IB-a5Z" appends="YES" id="OhR-az-J2E"/>
                         </connections>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -54,6 +55,11 @@
                         <action selector="longPress:" destination="ObA-dk-sSI" id="UBk-CG-LVJ"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <pinchGestureRecognizer id="Ei1-IB-a5Z">
+                    <connections>
+                        <action selector="pinch:" destination="ObA-dk-sSI" id="Pcf-ES-eiN"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="33.600000000000001" y="37.781109445277366"/>
         </scene>
