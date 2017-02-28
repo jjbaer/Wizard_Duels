@@ -85,23 +85,6 @@ class MessagesViewController: MSMessagesAppViewController {
         self.messagesViewControllerDelegate?.renderObjects(drawable)
     }
     
-    // TODO: this needs to be an IBAction for a button / action
-    func didPress(button sender: AnyObject) {
-        if let image = createImageForMessage(), let conversation = activeConversation {
-            let layout = MSMessageTemplateLayout()
-            layout.image = image
-            layout.caption = "Stepper Value"
-            
-            let message = MSMessage()
-            message.layout = layout
-            message.url = URL(string: "emptyURL")
-            
-            conversation.insert(message, completionHandler: { (error: Error?) in
-                print(error ?? "Non-error")
-            })
-        }
-    }
-    
     func createImageForMessage() -> UIImage? {
         let background = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         background.backgroundColor = UIColor.white

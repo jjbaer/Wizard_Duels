@@ -13,7 +13,6 @@ class Cube: Node {
     var verticesArray:Array<Vertex>
     
     init(device: MTLDevice, commandQ: MTLCommandQueue, textureLoader :MTKTextureLoader) {
-        // 1
         
         //Front
         let A = Vertex(x: 1.0, y:   1.0, z:   1.0, r:  1.0, g:  0.0, b:  0.0, a:  1.0, s: 0.25, t: 0.25, nX: 0.0, nY: 0.0, nZ: 1.0)
@@ -51,7 +50,6 @@ class Cube: Node {
         let W = Vertex(x: 1.0, y:  -1.0, z:  -1.0, r:  0.0, g:  0.0, b:  1.0, a:  1.0, s: 1.00, t: 0.50, nX: 0.0, nY: 0.0, nZ: -1.0)
         let X = Vertex(x: 1.0, y:   1.0, z:  -1.0, r:  0.1, g:  0.6, b:  0.4, a:  1.0, s: 1.00, t: 0.25, nX: 0.0, nY: 0.0, nZ: -1.0)
         
-        // 2
         verticesArray = [
             A,B,C ,A,C,D,   //Front
             E,F,G ,E,G,H,   //Left
@@ -61,7 +59,6 @@ class Cube: Node {
             U,V,W ,U,W,X    //Back
         ]
         
-        //3
         let path = Bundle.main.path(forResource: "cube", ofType: "png")!
         let data = NSData(contentsOfFile: path) as! Data
         let texture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
@@ -117,5 +114,12 @@ class Cube: Node {
         
         verticesArray += newCube
         update(vertices: verticesArray)
+    }
+    
+    func changeTexture(resource: String, type: String, textureLoader :MTKTextureLoader) {
+        let path = Bundle.main.path(forResource: resource, ofType: type)!
+        let data = NSData(contentsOfFile: path) as! Data
+        let newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+        updateTexture(texture: newTexture)
     }
 }

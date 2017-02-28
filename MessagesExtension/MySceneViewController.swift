@@ -34,6 +34,16 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         setupGestures()
     }
     
+    @IBAction func tap(_ sender: Any) {
+        print("tap")
+        objectToDraw.changeTexture(resource: "fire", type: "jpeg", textureLoader: textureLoader)
+    }
+    
+    @IBAction func longPress(_ sender: Any) {
+        print("long press")
+        objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
+    }
+    
     //MARK: - MetalViewControllerDelegate
     func renderObjects(_ drawable:CAMetalDrawable) {
         

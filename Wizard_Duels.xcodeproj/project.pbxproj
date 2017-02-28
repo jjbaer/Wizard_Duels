@@ -24,6 +24,7 @@
 		206C69F11E54E8EB00EBB232 /* Matrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 206C69EF1E54E8EB00EBB232 /* Matrix4.m */; };
 		2091E9281E5E517300CA05A0 /* BufferProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2091E9271E5E517300CA05A0 /* BufferProvider.swift */; };
 		20CDE0BD1E47CE3200E0A9E2 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */; };
+		20FB80401E651B2700B3C024 /* fire.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20FB803F1E651B2700B3C024 /* fire.jpeg */; };
 		20FDC2451E4CF79500B03F34 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2441E4CF79500B03F34 /* Vertex.swift */; };
 		20FDC2471E4CF7EC00B03F34 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2461E4CF7EC00B03F34 /* Node.swift */; };
 		20FDC2491E4CFB1600B03F34 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2481E4CFB1600B03F34 /* Cube.swift */; };
@@ -78,6 +79,7 @@
 		206C69F01E54E8EB00EBB232 /* MessagesExtension-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MessagesExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		2091E9271E5E517300CA05A0 /* BufferProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferProvider.swift; sourceTree = "<group>"; };
 		20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		20FB803F1E651B2700B3C024 /* fire.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fire.jpeg; sourceTree = "<group>"; };
 		20FDC2441E4CF79500B03F34 /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		20FDC2461E4CF7EC00B03F34 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		20FDC2481E4CFB1600B03F34 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		13AEB1281E562CED00B92C65 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				20FB803F1E651B2700B3C024 /* fire.jpeg */,
 				13868CF01E5E22B10062B828 /* cube.png */,
 			);
 			name = Images;
@@ -269,6 +272,7 @@
 				13868CF11E5E22B10062B828 /* cube.png in Resources */,
 				13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */,
 				13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */,
+				20FB80401E651B2700B3C024 /* fire.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

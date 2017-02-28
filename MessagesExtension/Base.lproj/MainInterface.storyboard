@@ -12,7 +12,6 @@
         <!--My Scene View Controller-->
         <scene sceneID="7MM-of-jgj">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X47-rx-isc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="ObA-dk-sSI" customClass="MySceneViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u2J-jc-LWR"/>
@@ -32,6 +31,11 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="1wT-S6-0U6" appends="YES" id="RMN-38-bqB"/>
+                            <outletCollection property="gestureRecognizers" destination="zBB-7w-S4y" appends="YES" id="4ve-ms-G7X"/>
+                        </connections>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="528"/>
@@ -39,6 +43,17 @@
                         <outlet property="mtk_view" destination="V0x-tR-5tF" id="Uce-Nk-Frv"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X47-rx-isc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1wT-S6-0U6">
+                    <connections>
+                        <action selector="tap:" destination="ObA-dk-sSI" id="xhv-FF-TIg"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="zBB-7w-S4y">
+                    <connections>
+                        <action selector="longPress:" destination="ObA-dk-sSI" id="UBk-CG-LVJ"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="33.600000000000001" y="37.781109445277366"/>
         </scene>

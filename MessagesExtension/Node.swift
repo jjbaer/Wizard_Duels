@@ -135,4 +135,8 @@ class Node {
         let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
         vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
     }
+    
+    func updateTexture(texture: MTLTexture) {
+        self.texture = texture
+    }
 }
