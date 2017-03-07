@@ -17,6 +17,8 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
     
     let panSensivity:Float = 5.0
     var lastPanLocation: CGPoint!
+    // pull out the string from the URL here
+    var gameState = GameState(texture: "yo")
     
     override func viewDidLoad() {
         super.viewDidLoad()
