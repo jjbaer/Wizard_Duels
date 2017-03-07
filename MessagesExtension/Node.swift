@@ -98,11 +98,11 @@ class Node {
         
         //set up walls
         renderEncoder.setFragmentTexture(texture3, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 48, vertexCount: 96)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 48, vertexCount: 144)
         
         //set up objects
         renderEncoder.setFragmentTexture(texture, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 96, vertexCount: vertexCount - 96)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 144, vertexCount: vertexCount - 144)
         
         renderEncoder.endEncoding()
         
