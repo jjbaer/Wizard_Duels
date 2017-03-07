@@ -36,16 +36,19 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
     
     @IBAction func pinch(_ sender: Any) {
         print("pinch")
+        gameState.currentTexture = "ivy"
         objectToDraw.changeTexture(resource: "ivy", type: "jpeg", textureLoader: textureLoader)
     }
     
     @IBAction func tap(_ sender: Any) {
         print("tap")
+        gameState.currentTexture = "fire"
         objectToDraw.changeTexture(resource: "fire", type: "jpeg", textureLoader: textureLoader)
     }
     
     @IBAction func longPress(_ sender: Any) {
         print("long press")
+        gameState.currentTexture = "cube"
         objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
     }
     
