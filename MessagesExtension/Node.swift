@@ -94,15 +94,15 @@ class Node {
         
         //Set up floor
         renderEncoder.setFragmentTexture(texture2, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 24)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 48)
         
         //set up walls
         renderEncoder.setFragmentTexture(texture3, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 24, vertexCount: 72)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 48, vertexCount: 96)
         
         //set up objects
         renderEncoder.setFragmentTexture(texture, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 72, vertexCount: vertexCount - 72)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 96, vertexCount: vertexCount - 96)
         
         renderEncoder.endEncoding()
         
