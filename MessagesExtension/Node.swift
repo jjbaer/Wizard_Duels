@@ -35,9 +35,10 @@ class Node {
     var texture: MTLTexture
     var texture2: MTLTexture
     var texture3: MTLTexture
+    var texture4: MTLTexture
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(self.device)
     
-    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture) {
+    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture, texture4: MTLTexture) {
         
         var vertexData = Array<Float>()
         for vertex in vertices{
@@ -53,6 +54,7 @@ class Node {
         self.texture = texture
         self.texture2 = texture2
         self.texture3 = texture3
+        self.texture4 = texture4
         
         self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3)
     }
@@ -64,7 +66,7 @@ class Node {
         let renderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
         renderPassDescriptor.colorAttachments[0].loadAction = .clear
-        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.2, green: 0.0, blue: 0.0, alpha: 1.0)
+        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.2, green: 0.2, blue: 0.35, alpha: 1.0)
         renderPassDescriptor.colorAttachments[0].storeAction = .store
         
         let commandBuffer = commandQueue.makeCommandBuffer()
@@ -78,7 +80,6 @@ class Node {
         renderEncoder.setRenderPipelineState(pipelineState)
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
         renderEncoder.setFragmentTexture(texture, at: 0)
-        //renderEncoder.setFragmentTexture(texture2, at: 1)
         
         if let samplerState = samplerState {
             renderEncoder.setFragmentSamplerState(samplerState, at: 0)
@@ -100,9 +101,13 @@ class Node {
         renderEncoder.setFragmentTexture(texture3, at: 0)
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 48, vertexCount: 144)
         
+        //set up sky
+        renderEncoder.setFragmentTexture(texture4, at: 0)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 144, vertexCount: 150)
+        
         //set up objects
         renderEncoder.setFragmentTexture(texture, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 144, vertexCount: vertexCount - 144)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 150, vertexCount: vertexCount - 150)
         
         renderEncoder.endEncoding()
         

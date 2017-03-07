@@ -143,6 +143,13 @@ class Building {
     let z15 = Vertex(x: 4.0, y: -3.0, z: 6.0, r:  0.0, g:  0.0, b:  1.0, a:  1.0, s: 0.25, t: 0.50, nX: 0.0, nY: 0.0, nZ: -1.0)
     let z16 = Vertex(x: 4.0, y: 1.0, z: 6.0, r:  0.1, g:  0.6, b:  0.4, a:  1.0, s: 0.25, t: 0.25, nX: 0.0, nY: 0.0, nZ: -1.0)
     
+    //sky
+    let s1 = Vertex(x: 0.0, y: 5.0, z: -6.0, r:  1.0, g:  0.0, b:  0.0, a:  1.0, s: 0.25, t: 0.50, nX: 0.0, nY: -1.0, nZ: 0.0)
+    let s2 = Vertex(x: 9.0, y: 5.0, z: 2.0, r:  0.0, g:  1.0, b:  0.0, a:  1.0, s: 0.25, t: 0.75, nX: 0.0, nY: -1.0, nZ: 0.0)
+    let s3 = Vertex(x: 0.0, y: 5.0, z: 10.0, r:  0.0, g:  0.0, b:  1.0, a:  1.0, s: 0.50, t: 0.75, nX: 0.0, nY: -1.0, nZ: 0.0)
+    let s4 = Vertex(x: -9.0, y: 5.0, z: 2.0, r:  0.1, g:  0.6, b:  0.4, a:  1.0, s: 0.50, t: 0.50, nX: 0.0, nY: -1.0, nZ: 0.0)
+    
+    
     func getVertices() -> Array<Vertex> {
         let verticesArray:Array<Vertex> = [
             f1, f2, f3, f1, f3, f4,     //floor
@@ -168,7 +175,8 @@ class Building {
             z3, z2, z1, z4, z3, z1,     //wall4
             z7, z6, z5, z8, z7, z5,
             z9, z10, z11, z9, z11, z12,
-            z13, z14, z15, z13, z15, z16
+            z13, z14, z15, z13, z15, z16,
+            s1, s2, s3, s1, s3, s4      //sky
         ]
         return verticesArray
     }
