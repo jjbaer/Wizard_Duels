@@ -17,6 +17,8 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
     
     let panSensivity:Float = 5.0
     var lastPanLocation: CGPoint!
+    // pull out the string from the URL here
+    var gameState = GameState(texture: "yo")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +38,19 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
     
     @IBAction func pinch(_ sender: Any) {
         print("pinch")
+        gameState.currentTexture = "ivy"
         objectToDraw.changeTexture(resource: "ivy", type: "jpeg", textureLoader: textureLoader)
     }
     
     @IBAction func tap(_ sender: Any) {
         print("tap")
+        gameState.currentTexture = "fire"
         objectToDraw.changeTexture(resource: "fire", type: "jpeg", textureLoader: textureLoader)
     }
     
     @IBAction func longPress(_ sender: Any) {
         print("long press")
+        gameState.currentTexture = "cube"
         objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
     }
     

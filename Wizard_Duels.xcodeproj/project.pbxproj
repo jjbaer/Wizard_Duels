@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		13868CF11E5E22B10062B828 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = 13868CF01E5E22B10062B828 /* cube.png */; };
+		138FA7011E6F19E2003EBF8E /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138FA7001E6F19E2003EBF8E /* GameState.swift */; };
 		13AEB11E1E3A8BBF00B92C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */; };
 		13AEB1231E56208A00B92C65 /* MySceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEB1221E56208A00B92C65 /* MySceneViewController.swift */; };
 		13EB79571E2817D800FE673B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EB79561E2817D800FE673B /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		13868CF01E5E22B10062B828 /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube.png; sourceTree = "<group>"; };
+		138FA7001E6F19E2003EBF8E /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13AEB11F1E3A8C2500B92C65 /* MessagesExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessagesExtension.entitlements; sourceTree = "<group>"; };
 		13AEB1221E56208A00B92C65 /* MySceneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySceneViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				20003C281E64CC7400DE69BB /* MetalTexture.swift */,
 				20003C2A1E64CCC500DE69BB /* Light.swift */,
 				20540C8A1E6E974A00333346 /* Building.swift */,
+				138FA7001E6F19E2003EBF8E /* GameState.swift */,
 			);
 			path = MessagesExtension;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				20003C271E64CC3D00DE69BB /* float4x4.swift in Sources */,
 				2091E9281E5E517300CA05A0 /* BufferProvider.swift in Sources */,
 				206C69F11E54E8EB00EBB232 /* Matrix4.m in Sources */,
+				138FA7011E6F19E2003EBF8E /* GameState.swift in Sources */,
 				13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */,
 				20540C8B1E6E974A00333346 /* Building.swift in Sources */,
 			);
