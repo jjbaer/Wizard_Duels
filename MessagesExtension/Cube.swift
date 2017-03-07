@@ -13,7 +13,7 @@ class Cube: Node {
     var verticesArray:Array<Vertex>
     let building:Building
     
-    init(device: MTLDevice, commandQ: MTLCommandQueue, textureLoader :MTKTextureLoader) {
+    init(device: MTLDevice, commandQ: MTLCommandQueue, textureLoader :MTKTextureLoader, gameState: GameState) {
         //Front
         let A = Vertex(x: 1.0, y: 1.0, z: 1.0, r:  1.0, g:  0.0, b:  0.0, a:  1.0, s: 0.25, t: 0.25, nX: 0.0, nY: 0.0, nZ: 1.0)
         let B = Vertex(x: 1.0, y: 0.0, z: 1.0, r:  0.0, g:  1.0, b:  0.0, a:  1.0, s: 0.25, t: 0.50, nX: 0.0, nY: 0.0, nZ: 1.0)
@@ -62,8 +62,18 @@ class Cube: Node {
         ]
         
         verticesArray = building.getVertices() + verticesArray
+        var path: String
         
-        let path = Bundle.main.path(forResource: "cube", ofType: "png")!
+        if (gameState.currentTexture == "cube") {
+            path = Bundle.main.path(forResource: "cube", ofType: "png")!
+        }
+        else if (gameState.currentTexture == "fire") {
+            path = Bundle.main.path(forResource: "fire", ofType: "jpeg")!
+        }
+        else {
+            path = Bundle.main.path(forResource: "ivy", ofType: "jpeg")!
+        }
+        
         let data = NSData(contentsOfFile: path) as! Data
         let texture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         

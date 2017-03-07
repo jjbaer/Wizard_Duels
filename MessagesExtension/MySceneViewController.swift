@@ -27,8 +27,8 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         worldModelMatrix.translate(0.0, y: 0.0, z: -4)
         worldModelMatrix.rotateAroundX(float4x4.degrees(toRad: 25), y: 0.0, z: 0.0)
         
-        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader)
-        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader)
+        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, gameState: gameState)
+        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, gameState: gameState)
         objectToDraw.addCube(x: -2.0, y: 0, z: 0)
         objectToDraw.addCube(x: -1.0, y: 1.0, z: -2.0)
         self.messagesViewControllerDelegate = self
