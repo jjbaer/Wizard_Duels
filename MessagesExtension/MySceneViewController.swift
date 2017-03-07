@@ -27,8 +27,8 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         
         objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader)
         objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader)
-        objectToDraw.addCube(x: -3.5, y: 0, z: 0)
-        objectToDraw.addCube(x: -2.0, y: 1.0, z: -2.5)
+        objectToDraw.addCube(x: -2.0, y: 0, z: 0)
+        objectToDraw.addCube(x: -1.0, y: 1.0, z: -2.0)
         self.messagesViewControllerDelegate = self
         
         setupGestures()
@@ -60,13 +60,11 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
     }
     
     //MARK: - Gesture related
-    // 1
     func setupGestures() {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(MySceneViewController.pan(_:)))
         self.view.addGestureRecognizer(pan)
     }
     
-    // 2
     func pan(_ panGesture: UIPanGestureRecognizer) {
         if panGesture.state == UIGestureRecognizerState.changed {
             let pointInView = panGesture.location(in: self.view)
@@ -74,8 +72,8 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
             let xDelta = Float((lastPanLocation.x - pointInView.x)/self.view.bounds.width) * panSensivity
             let yDelta = Float((lastPanLocation.y - pointInView.y)/self.view.bounds.height) * panSensivity
             // 4
-            objectToDraw.rotationY -= xDelta
-            objectToDraw.rotationX -= yDelta
+            //objectToDraw.rotationY -= xDelta
+            //objectToDraw.rotationX -= yDelta
             lastPanLocation = pointInView
         } else if panGesture.state == UIGestureRecognizerState.began {
             lastPanLocation = panGesture.location(in: self.view)

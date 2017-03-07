@@ -34,9 +34,10 @@ class Node {
     var bufferProvider: BufferProvider
     var texture: MTLTexture
     var texture2: MTLTexture
+    var texture3: MTLTexture
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(self.device)
     
-    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture) {
+    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture) {
         
         var vertexData = Array<Float>()
         for vertex in vertices{
@@ -51,6 +52,7 @@ class Node {
         vertexCount = vertices.count
         self.texture = texture
         self.texture2 = texture2
+        self.texture3 = texture3
         
         self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3)
     }
@@ -62,7 +64,7 @@ class Node {
         let renderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
         renderPassDescriptor.colorAttachments[0].loadAction = .clear
-        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.2, green: 0.0, blue: 0.0, alpha: 1.0)
         renderPassDescriptor.colorAttachments[0].storeAction = .store
         
         let commandBuffer = commandQueue.makeCommandBuffer()
@@ -76,6 +78,7 @@ class Node {
         renderEncoder.setRenderPipelineState(pipelineState)
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
         renderEncoder.setFragmentTexture(texture, at: 0)
+        //renderEncoder.setFragmentTexture(texture2, at: 1)
         
         if let samplerState = samplerState {
             renderEncoder.setFragmentSamplerState(samplerState, at: 0)
@@ -88,7 +91,19 @@ class Node {
         
         renderEncoder.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
         renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, at: 1)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexCount)
+        
+        //Set up floor
+        renderEncoder.setFragmentTexture(texture2, at: 0)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 24)
+        
+        //set up walls
+        renderEncoder.setFragmentTexture(texture3, at: 0)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 24, vertexCount: 72)
+        
+        //set up objects
+        renderEncoder.setFragmentTexture(texture, at: 0)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 72, vertexCount: vertexCount - 72)
+        
         renderEncoder.endEncoding()
         
         commandBuffer.present(drawable)
