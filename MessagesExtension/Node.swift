@@ -103,7 +103,7 @@ class Node {
         
         //set up sky
         renderEncoder.setFragmentTexture(texture4, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 144, vertexCount: 150)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 144, vertexCount: 6)
         
         //set up objects
         renderEncoder.setFragmentTexture(texture, at: 0)
