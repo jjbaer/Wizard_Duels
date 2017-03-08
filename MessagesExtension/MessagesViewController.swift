@@ -22,12 +22,17 @@ class MessagesViewController: MSMessagesAppViewController {
     var commandQueue: MTLCommandQueue! = nil
     var projectionMatrix: float4x4!
     var textureLoader: MTKTextureLoader! = nil
+    var currentPlayer: String = "X"
+    var session: MSSession?
+    // TODO: pull out the string from the URL here
+    var gameState = GameState(texture: "yo")
+    var caption: String?
     
     @IBAction func didPressSend(_ sender: UIButton) {
         if let image = createImageForMessage(), let conversation = activeConversation {
             let layout = MSMessageTemplateLayout()
             layout.image = image
-            layout.caption = "Let's Duel"
+            layout.caption = caption
             
             let message = MSMessage()
             message.layout = layout
@@ -92,7 +97,7 @@ class MessagesViewController: MSMessagesAppViewController {
         label.font = UIFont.systemFont(ofSize: 56.0)
         label.backgroundColor = UIColor.red
         label.textColor = UIColor.white
-        label.text = "Let's Duel!"
+        label.text = "Let's duel"
         label.textAlignment = .center
         label.layer.cornerRadius = label.frame.size.width/2.0
         label.clipsToBounds = true
@@ -109,6 +114,68 @@ class MessagesViewController: MSMessagesAppViewController {
         background.removeFromSuperview()
         
         return image
+    }
+    
+    func prepareURL() -> URL {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https";
+        urlComponents.host = "www.wizardduels.com";
+        let playerQuery = URLQueryItem(name: "currentPlayer",
+                                       value: currentPlayer)
+        
+        urlComponents.queryItems = [playerQuery]
+        let textureQuery = URLQueryItem(name: "currentTexture",
+                                        value: gameState.currentTexture)
+        
+        urlComponents.queryItems?.append(textureQuery)
+        
+        return urlComponents.url!
+    }
+    
+    // you changed this so it doesn't take in a URL, don't forget
+    func prepareMessage() {
+        
+        let message = MSMessage()
+        
+        let layout = MSMessageTemplateLayout()
+        layout.caption = caption
+        
+        message.layout = layout
+        message.url = prepareURL()
+        
+        let conversation = self.activeConversation
+        
+        conversation?.insert(message, completionHandler: {(error) in
+            if let error = error {
+                print(error)
+            }
+        })
+        
+        self.dismiss()
+    }
+    
+    func decodeURL(_ url: URL) {
+        
+        let components = URLComponents(url: url,
+                                       resolvingAgainstBaseURL: false)
+        
+        for (index, queryItem) in (components?.queryItems?.enumerated())! {
+            
+            if queryItem.name == "currentPlayer" {
+                currentPlayer = queryItem.value == "X" ? "O" : "X"
+            } else if queryItem.name == "currentTexture" {
+                gameState.currentTexture = queryItem.value!
+            }
+        }
+    }
+    
+    // you deleted some stuff in here
+    override func willBecomeActive(with conversation: MSConversation) {
+        
+        if let messageURL = conversation.selectedMessage?.url {
+            decodeURL(messageURL)
+            caption = "It's your move!"
+        }
     }
 }
 
