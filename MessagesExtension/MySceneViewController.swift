@@ -25,8 +25,9 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         worldModelMatrix.translate(0.0, y: 0.0, z: -4)
         worldModelMatrix.rotateAroundX(float4x4.degrees(toRad: 25), y: 0.0, z: 0.0)
         
-        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, gameState: gameState)
-        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, gameState: gameState)
+        // pass in texture
+        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: currentTexture)
+        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: currentTexture)
         objectToDraw.addCube(x: -2.0, y: 0, z: 0)
         objectToDraw.addCube(x: -1.0, y: 1.0, z: -2.0)
         self.messagesViewControllerDelegate = self
@@ -34,27 +35,37 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         setupGestures()
     }
     
+    func initializeTexture(texture: String) {
+        switch texture {
+        case "fire":
+            objectToDraw.changeTexture(resource: "fire", type: "jpeg", textureLoader: textureLoader)
+        default:
+            objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
+        }
+    }
+    
     @IBAction func pinch(_ sender: Any) {
         print("pinch")
-        gameState.currentTexture = "ivy"
-        objectToDraw.changeTexture(resource: "ivy", type: "jpeg", textureLoader: textureLoader)
+        currentTexture = "ivy"
+//        objectToDraw.changeTexture(resource: "ivy", type: "jpeg", textureLoader: textureLoader)
     }
     
     @IBAction func tap(_ sender: Any) {
         print("tap")
-        gameState.currentTexture = "fire"
-        objectToDraw.changeTexture(resource: "fire", type: "jpeg", textureLoader: textureLoader)
+        currentTexture = "fire"
+//        objectToDraw.changeTexture(resource: "fire", type: "jpeg", textureLoader: textureLoader)
     }
     
     @IBAction func longPress(_ sender: Any) {
         print("long press")
-        gameState.currentTexture = "cube"
-        objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
+        currentTexture = "cube"
+//        objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
     }
     
     //MARK: - MetalViewControllerDelegate
     func renderObjects(_ drawable:CAMetalDrawable) {
         
+        initializeTexture(texture: currentTexture)
         objectToDraw.render(commandQueue, pipelineState: pipelineState, drawable: drawable, parentModelViewMatrix: worldModelMatrix, projectionMatrix: projectionMatrix, clearColor: nil)
     }
     

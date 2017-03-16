@@ -9,10 +9,6 @@
 import Foundation
 
 class GameState {
-    var currentTexture: String
-    
-    init(texture : String) {
-        currentTexture = texture
-    }
-    
+    var currentTexture: String?
+    var currentPlayer: Int?
 }

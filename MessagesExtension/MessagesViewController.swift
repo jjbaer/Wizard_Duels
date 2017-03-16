@@ -22,11 +22,12 @@ class MessagesViewController: MSMessagesAppViewController {
     var commandQueue: MTLCommandQueue! = nil
     var projectionMatrix: float4x4!
     var textureLoader: MTKTextureLoader! = nil
+    
+    var gameStatus = [String](repeating: "-", count: 2)
     var currentPlayer: String = "X"
+    var caption = "Want to duel?"
     var session: MSSession?
-    // TODO: pull out the string from the URL here
-    var gameState = GameState(texture: "yo")
-    var caption: String?
+    var currentTexture: String = "cube"
     
     @IBAction func didPressSend(_ sender: UIButton) {
         if let image = createImageForMessage(), let conversation = activeConversation {
@@ -36,7 +37,7 @@ class MessagesViewController: MSMessagesAppViewController {
             
             let message = MSMessage()
             message.layout = layout
-            message.url = URL(string: "emptyURL")
+            message.url = prepareURL()
             
             conversation.insert(message, completionHandler: { (error: Error?) in
                 print(error ?? "not an error")
@@ -56,7 +57,7 @@ class MessagesViewController: MSMessagesAppViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("in view did load")
         projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85.0), aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
         
         
@@ -122,11 +123,10 @@ class MessagesViewController: MSMessagesAppViewController {
         urlComponents.host = "www.wizardduels.com";
         let playerQuery = URLQueryItem(name: "currentPlayer",
                                        value: currentPlayer)
-        
         urlComponents.queryItems = [playerQuery]
-        let textureQuery = URLQueryItem(name: "currentTexture",
-                                        value: gameState.currentTexture)
         
+        let textureQuery = URLQueryItem(name: "xTexture",
+                                        value: currentTexture)
         urlComponents.queryItems?.append(textureQuery)
         
         return urlComponents.url!
@@ -135,6 +135,10 @@ class MessagesViewController: MSMessagesAppViewController {
     // you changed this so it doesn't take in a URL, don't forget
     func prepareMessage() {
         
+        
+        if session == nil {
+            session = MSSession()
+        }
         let message = MSMessage()
         
         let layout = MSMessageTemplateLayout()
@@ -155,18 +159,22 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     func decodeURL(_ url: URL) {
-        
+
+        print("in decodeURL")
         let components = URLComponents(url: url,
                                        resolvingAgainstBaseURL: false)
         
-        for (index, queryItem) in (components?.queryItems?.enumerated())! {
+        for (_, queryItem) in (components?.queryItems?.enumerated())! {
             
             if queryItem.name == "currentPlayer" {
                 currentPlayer = queryItem.value == "X" ? "O" : "X"
-            } else if queryItem.name == "currentTexture" {
-                gameState.currentTexture = queryItem.value!
+            } else if queryItem.name == "xTexture" {
+                currentTexture = queryItem.value!
+                // TODO: figure out how to store the second players texture (aka move)
+                print("gamestate current texture in decode is :" + currentTexture)
             }
         }
+        
     }
     
     // you deleted some stuff in here
@@ -175,6 +183,7 @@ class MessagesViewController: MSMessagesAppViewController {
         if let messageURL = conversation.selectedMessage?.url {
             decodeURL(messageURL)
             caption = "It's your move!"
+            session = conversation.selectedMessage?.session
         }
     }
 }
