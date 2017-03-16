@@ -39,27 +39,25 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         switch texture {
         case "fire":
             objectToDraw.changeTexture(resource: "fire", type: "jpeg", textureLoader: textureLoader)
+        case "cube":
+            objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
+        case "ivy":
+            objectToDraw.changeTexture(resource: "ivy", type: "jpeg", textureLoader: textureLoader)
         default:
             objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
         }
     }
     
     @IBAction func pinch(_ sender: Any) {
-        print("pinch")
         currentTexture = "ivy"
-//        objectToDraw.changeTexture(resource: "ivy", type: "jpeg", textureLoader: textureLoader)
     }
     
     @IBAction func tap(_ sender: Any) {
-        print("tap")
         currentTexture = "fire"
-//        objectToDraw.changeTexture(resource: "fire", type: "jpeg", textureLoader: textureLoader)
     }
     
     @IBAction func longPress(_ sender: Any) {
-        print("long press")
         currentTexture = "cube"
-//        objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
     }
     
     //MARK: - MetalViewControllerDelegate

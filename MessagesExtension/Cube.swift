@@ -87,7 +87,7 @@ class Cube: Node {
         let data3 = NSData(contentsOfFile: path3) as! Data
         let texture3 = try! textureLoader.newTexture(with: data3, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
-        // fix later, this should be sky
+        // setting texture for sky
         let path4 = Bundle.main.path(forResource: "storm", ofType: "jpeg")!
         let data4 = NSData(contentsOfFile: path4) as! Data
         let texture4 = try! textureLoader.newTexture(with: data4, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
@@ -121,7 +121,7 @@ class Cube: Node {
         let O = Vertex(x: 2.0 + x, y: 1.0 + y, z: 1.0 + z, r: 0.0, g: 0.0, b: 1.0, a: 1.0, s: 0.50, t: 0.25, nX: 0.0, nY: 1.0, nZ: 0.0)
         let P = Vertex(x: 2.0 + x, y: 1.0 + y, z: z, r: 0.1, g: 0.6, b: 0.4, a: 1.0, s: 0.50, t: 0.00, nX: 0.0, nY: 1.0, nZ: 0.0)
         
-        //Bot
+        //Bottom
         let Q = Vertex(x: 1.0 + x, y: y, z: 1.0 + z, r: 1.0, g: 0.0, b: 0.0, a: 1.0, s: 0.25, t: 0.50, nX: 0.0, nY: -1.0, nZ: 0.0)
         let R = Vertex(x: 1.0 + x, y: y, z: z, r: 0.0, g: 1.0, b: 0.0, a: 1.0, s: 0.25, t: 0.75, nX: 0.0, nY: -1.0, nZ: 0.0)
         let S = Vertex(x: 2.0 + x, y: y, z: z, r: 0.0, g: 0.0, b: 1.0, a: 1.0, s: 0.50, t: 0.75, nX: 0.0, nY: -1.0, nZ: 0.0)

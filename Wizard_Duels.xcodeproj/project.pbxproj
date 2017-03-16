@@ -17,6 +17,7 @@
 		13EB79661E2817D800FE673B /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EB79651E2817D800FE673B /* MessagesViewController.swift */; };
 		13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13EB79671E2817D800FE673B /* MainInterface.storyboard */; };
 		13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EB796A1E2817D800FE673B /* Assets.xcassets */; };
+		13F481971E7A0FE800EF9A10 /* storm.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 13F481961E7A0FE800EF9A10 /* storm.jpeg */; };
 		20003C271E64CC3D00DE69BB /* float4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20003C261E64CC3D00DE69BB /* float4x4.swift */; };
 		20003C291E64CC7400DE69BB /* MetalTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20003C281E64CC7400DE69BB /* MetalTexture.swift */; };
 		20003C2B1E64CCC500DE69BB /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20003C2A1E64CCC500DE69BB /* Light.swift */; };
@@ -73,6 +74,7 @@
 		13EB79681E2817D800FE673B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		13EB796A1E2817D800FE673B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13EB796C1E2817D800FE673B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13F481961E7A0FE800EF9A10 /* storm.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = storm.jpeg; sourceTree = "<group>"; };
 		20003C261E64CC3D00DE69BB /* float4x4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = float4x4.swift; sourceTree = "<group>"; };
 		20003C281E64CC7400DE69BB /* MetalTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalTexture.swift; sourceTree = "<group>"; };
 		20003C2A1E64CCC500DE69BB /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				20540C861E6E876700333346 /* stone.jpeg */,
 				20540C841E6E86E400333346 /* wood.jpeg */,
 				20105DD01E65F0F500BE0DDB /* ivy.jpeg */,
+				13F481961E7A0FE800EF9A10 /* storm.jpeg */,
 				20FB803F1E651B2700B3C024 /* fire.jpeg */,
 				13868CF01E5E22B10062B828 /* cube.png */,
 			);
@@ -281,6 +284,7 @@
 				20105DD11E65F0F500BE0DDB /* ivy.jpeg in Resources */,
 				13868CF11E5E22B10062B828 /* cube.png in Resources */,
 				13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */,
+				13F481971E7A0FE800EF9A10 /* storm.jpeg in Resources */,
 				13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */,
 				20540C851E6E86E400333346 /* wood.jpeg in Resources */,
 				20540C871E6E876700333346 /* stone.jpeg in Resources */,

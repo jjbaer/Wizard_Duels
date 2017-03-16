@@ -57,7 +57,6 @@ class MessagesViewController: MSMessagesAppViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("in view did load")
         projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85.0), aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
         
         
@@ -135,7 +134,6 @@ class MessagesViewController: MSMessagesAppViewController {
     // you changed this so it doesn't take in a URL, don't forget
     func prepareMessage() {
         
-        
         if session == nil {
             session = MSSession()
         }
@@ -160,7 +158,6 @@ class MessagesViewController: MSMessagesAppViewController {
     
     func decodeURL(_ url: URL) {
 
-        print("in decodeURL")
         let components = URLComponents(url: url,
                                        resolvingAgainstBaseURL: false)
         
@@ -171,7 +168,7 @@ class MessagesViewController: MSMessagesAppViewController {
             } else if queryItem.name == "xTexture" {
                 currentTexture = queryItem.value!
                 // TODO: figure out how to store the second players texture (aka move)
-                print("gamestate current texture in decode is :" + currentTexture)
+                print("gamestate current texture in decode is: " + currentTexture)
             }
         }
         
