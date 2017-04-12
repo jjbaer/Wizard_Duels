@@ -29,7 +29,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: currentTexture)
         objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: currentTexture)
         objectToDraw.addCube(x: -2.0, y: 0, z: 0)
-        objectToDraw.addCube(x: -1.0, y: 1.0, z: -2.0)
+        //objectToDraw.addCube(x: -1.0, y: 1.0, z: -2.0)
         self.messagesViewControllerDelegate = self
         
         setupGestures()
@@ -43,21 +43,35 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
             objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
         case "ivy":
             objectToDraw.changeTexture(resource: "ivy", type: "jpeg", textureLoader: textureLoader)
+        case "rock":
+            objectToDraw.changeTexture(resource: "rock", type: "jpeg", textureLoader: textureLoader)
+        case "paper":
+            objectToDraw.changeTexture(resource: "paper", type: "jpeg", textureLoader: textureLoader)
+        case "scissors":
+            objectToDraw.changeTexture(resource: "scissors", type: "jpeg", textureLoader: textureLoader)
         default:
             objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
         }
     }
+
+    @IBAction func doubleTap(_ sender: Any) {
+        currentTexture = "paper"
+    }
+    
+    @IBAction func rotate(_ sender: Any) {
+        currentTexture = "scissors"
+    }
     
     @IBAction func pinch(_ sender: Any) {
-        currentTexture = "ivy"
+        currentTexture = "scissors" //"ivy"
     }
     
     @IBAction func tap(_ sender: Any) {
-        currentTexture = "fire"
+        currentTexture = "paper" //"fire"
     }
     
     @IBAction func longPress(_ sender: Any) {
-        currentTexture = "cube"
+        currentTexture = "rock" //"cube"
     }
     
     //MARK: - MetalViewControllerDelegate

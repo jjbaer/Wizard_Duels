@@ -92,7 +92,12 @@ class Cube: Node {
         let data4 = NSData(contentsOfFile: path4) as! Data
         let texture4 = try! textureLoader.newTexture(with: data4, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
-        super.init(name: "Cube", vertices: verticesArray, device: device, texture: texture, texture2: texture2, texture3: texture3, texture4: texture4)
+        // win, lose, or tied cube
+        let path5 = Bundle.main.path(forResource: "questions", ofType: "png")!
+        let data5 = NSData(contentsOfFile: path5) as! Data
+        let texture5 = try! textureLoader.newTexture(with: data5, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+        
+        super.init(name: "Cube", vertices: verticesArray, device: device, texture: texture, texture2: texture2, texture3: texture3, texture4: texture4, texture5: texture5)
         
     }
     
