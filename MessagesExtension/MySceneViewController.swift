@@ -49,17 +49,21 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
             objectToDraw.changeTexture(resource: "paper", type: "jpeg", textureLoader: textureLoader)
         case "scissors":
             objectToDraw.changeTexture(resource: "scissors", type: "jpeg", textureLoader: textureLoader)
+        case "lost":
+            objectToDraw.showGameResults(resource: "loser", type: "jpeg", textureLoader: textureLoader)
+        case "won":
+            objectToDraw.showGameResults(resource: "winner", type: "jpeg", textureLoader: textureLoader)
         default:
             objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
         }
     }
 
     @IBAction func doubleTap(_ sender: Any) {
-        currentTexture = "paper"
+        currentTexture = "won"
     }
     
     @IBAction func rotate(_ sender: Any) {
-        currentTexture = "scissors"
+        currentTexture = "lost"
     }
     
     @IBAction func pinch(_ sender: Any) {

@@ -168,4 +168,8 @@ class Node {
     func updateTexture(texture: MTLTexture) {
         self.texture = texture
     }
+    
+    func updateTexture5(texture: MTLTexture) {
+        self.texture5 = texture
+    }
 }

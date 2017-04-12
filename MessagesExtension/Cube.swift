@@ -157,4 +157,12 @@ class Cube: Node {
         let newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         updateTexture(texture: newTexture)
     }
+    
+    func showGameResults(resource: String, type: String, textureLoader :MTKTextureLoader) {
+        let path = Bundle.main.path(forResource: resource, ofType: type)!
+        let data = NSData(contentsOfFile: path) as! Data
+        let newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+        //this is the texture for the cube with the game results
+        updateTexture5(texture: newTexture)
+    }
 }
