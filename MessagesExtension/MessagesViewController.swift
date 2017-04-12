@@ -124,14 +124,21 @@ class MessagesViewController: MSMessagesAppViewController {
                                        value: currentPlayer)
         urlComponents.queryItems = [playerQuery]
         
-        let textureQuery = URLQueryItem(name: "xTexture",
-                                        value: currentTexture)
+        var textureQuery: URLQueryItem
+        
+        if currentPlayer == "X" {
+            textureQuery = URLQueryItem(name: "xTexture",
+                                            value: currentTexture)
+        } else {
+            textureQuery = URLQueryItem(name: "oTexture",
+                                            value: currentTexture)
+        }
+        
         urlComponents.queryItems?.append(textureQuery)
         
         return urlComponents.url!
     }
     
-    // you changed this so it doesn't take in a URL, don't forget
     func prepareMessage() {
         
         if session == nil {
@@ -167,14 +174,15 @@ class MessagesViewController: MSMessagesAppViewController {
                 currentPlayer = queryItem.value == "X" ? "O" : "X"
             } else if queryItem.name == "xTexture" {
                 currentTexture = queryItem.value!
-                // TODO: figure out how to store the second players texture (aka move)
-                print("gamestate current texture in decode is: " + currentTexture)
+                print("xTexture: " + currentTexture)
+            } else if queryItem.name == "oTexture" {
+                currentTexture = queryItem.value!
+                print("oTexture: " + currentTexture)
             }
         }
         
     }
     
-    // you deleted some stuff in here
     override func willBecomeActive(with conversation: MSConversation) {
         
         if let messageURL = conversation.selectedMessage?.url {
@@ -188,14 +196,12 @@ class MessagesViewController: MSMessagesAppViewController {
 // MARK: - MTKViewDelegate
 extension MessagesViewController: MTKViewDelegate {
     
-    // 1
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85.0),
                                                              aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height),
                                                              nearZ: 0.01, farZ: 100.0)
     }
     
-    // 2
     func draw(in view: MTKView) {
         render(view.currentDrawable)
     }
