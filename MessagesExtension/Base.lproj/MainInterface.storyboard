@@ -36,6 +36,8 @@
                             <outletCollection property="gestureRecognizers" destination="1wT-S6-0U6" appends="YES" id="RMN-38-bqB"/>
                             <outletCollection property="gestureRecognizers" destination="zBB-7w-S4y" appends="YES" id="4ve-ms-G7X"/>
                             <outletCollection property="gestureRecognizers" destination="Ei1-IB-a5Z" appends="YES" id="OhR-az-J2E"/>
+                            <outletCollection property="gestureRecognizers" destination="Qzi-hR-ch0" appends="YES" id="tXk-se-pke"/>
+                            <outletCollection property="gestureRecognizers" destination="Avj-cJ-5Y8" appends="YES" id="kYl-ot-faQ"/>
                         </connections>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -60,6 +62,16 @@
                         <action selector="pinch:" destination="ObA-dk-sSI" id="Pcf-ES-eiN"/>
                     </connections>
                 </pinchGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Qzi-hR-ch0">
+                    <connections>
+                        <action selector="doubleTap:" destination="ObA-dk-sSI" id="usw-I0-4d9"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <rotationGestureRecognizer id="Avj-cJ-5Y8">
+                    <connections>
+                        <action selector="rotate:" destination="ObA-dk-sSI" id="yve-Qi-H44"/>
+                    </connections>
+                </rotationGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="33.600000000000001" y="37.781109445277366"/>
         </scene>

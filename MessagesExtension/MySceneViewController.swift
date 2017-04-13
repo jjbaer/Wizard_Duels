@@ -29,7 +29,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: "question")
         objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: "question")
         objectToDraw.addCube(x: -2.0, y: 0, z: 0)
-        objectToDraw.addCube(x: -1.0, y: 1.0, z: -2.0)
+        //objectToDraw.addCube(x: -1.0, y: 1.0, z: -2.0)
         self.messagesViewControllerDelegate = self
         
         setupGestures()
@@ -43,12 +43,31 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
             objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
         case "ivy":
             objectToDraw.changeTexture(resource: "ivy", type: "jpeg", textureLoader: textureLoader)
+        case "rock":
+            objectToDraw.changeTexture(resource: "rock", type: "jpeg", textureLoader: textureLoader)
+        case "paper":
+            objectToDraw.changeTexture(resource: "paper", type: "jpeg", textureLoader: textureLoader)
+        case "scissors":
+            objectToDraw.changeTexture(resource: "scissors", type: "jpeg", textureLoader: textureLoader)
+        case "lost":
+            objectToDraw.showGameResults(resource: "loser", type: "jpeg", textureLoader: textureLoader)
+        case "won":
+            objectToDraw.showGameResults(resource: "winner", type: "jpeg", textureLoader: textureLoader)
         default:
             objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
         }
     }
+
+    @IBAction func doubleTap(_ sender: Any) {
+        gameState.currentTexture = "won"
+    }
+    
+    @IBAction func rotate(_ sender: Any) {
+        gameState.currentTexture = "lost"
+    }
     
     @IBAction func pinch(_ sender: Any) {
+
         gameState.currentTexture = "ivy"
     }
     

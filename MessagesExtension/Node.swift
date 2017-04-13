@@ -32,13 +32,14 @@ class Node {
     var scale:Float     = 1.0
     
     var bufferProvider: BufferProvider
-    var texture: MTLTexture
+    var texture: MTLTexture //spell cast
     var texture2: MTLTexture
     var texture3: MTLTexture
     var texture4: MTLTexture
+    var texture5: MTLTexture //win, lose, tied
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(self.device)
     
-    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture, texture4: MTLTexture) {
+    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture, texture4: MTLTexture, texture5: MTLTexture) {
         
         var vertexData = Array<Float>()
         for vertex in vertices{
@@ -55,6 +56,7 @@ class Node {
         self.texture2 = texture2
         self.texture3 = texture3
         self.texture4 = texture4
+        self.texture5 = texture5
         
         self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3)
     }
@@ -106,8 +108,13 @@ class Node {
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 144, vertexCount: 6)
         
         //set up objects
+        //cube to display winning, losing or tied
+        renderEncoder.setFragmentTexture(texture5, at: 0)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 150, vertexCount: 36)
+        
+        //cube to display spell cast
         renderEncoder.setFragmentTexture(texture, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 150, vertexCount: vertexCount - 150)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 186, vertexCount: vertexCount - 186)
         
         renderEncoder.endEncoding()
         
@@ -160,5 +167,9 @@ class Node {
     
     func updateTexture(texture: MTLTexture) {
         self.texture = texture
+    }
+    
+    func updateTexture5(texture: MTLTexture) {
+        self.texture5 = texture
     }
 }
