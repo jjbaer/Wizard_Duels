@@ -24,10 +24,11 @@ class MessagesViewController: MSMessagesAppViewController {
     var textureLoader: MTKTextureLoader! = nil
     
     var gameStatus = [String](repeating: "-", count: 2)
-    var currentPlayer: String = "X"
     var caption = "Want to duel?"
     var session: MSSession?
-    var currentTexture: String = "cube"
+    // might need to look at differentiating between a "new game" and a continuing game
+    // maybe use a "first game" flag
+    var gameState = GameState(currentTexture: "question", currentPlayer: "Z", xMove: "Z", oMove: "Z", gameResult: "Z")
     
     @IBAction func didPressSend(_ sender: UIButton) {
         if let image = createImageForMessage(), let conversation = activeConversation {
@@ -120,21 +121,36 @@ class MessagesViewController: MSMessagesAppViewController {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https";
         urlComponents.host = "www.wizardduels.com";
+        
+        // current player
         let playerQuery = URLQueryItem(name: "currentPlayer",
-                                       value: currentPlayer)
+                                       value: gameState.currentPlayer)
         urlComponents.queryItems = [playerQuery]
         
-        var textureQuery: URLQueryItem
-        
-        if currentPlayer == "X" {
-            textureQuery = URLQueryItem(name: "xTexture",
-                                            value: currentTexture)
+        // this player's move
+        var moveQuery: URLQueryItem
+        if gameState.currentPlayer == "X" {
+            moveQuery = URLQueryItem(name: "xMove",
+                                            value: gameState.xMove)
         } else {
-            textureQuery = URLQueryItem(name: "oTexture",
-                                            value: currentTexture)
+            moveQuery = URLQueryItem(name: "oMove",
+                                            value: gameState.oMove)
         }
+        urlComponents.queryItems?.append(moveQuery)
         
-        urlComponents.queryItems?.append(textureQuery)
+        // result
+        print(gameState.determineResult())
+        var resultQuery: URLQueryItem
+        resultQuery = URLQueryItem(name: "result",
+                                   value: gameState.gameResult)
+        urlComponents.queryItems?.append(resultQuery)
+        // if the result is Z...then don't show a dialog
+        
+        // Current Texture
+        var currentTextureQuery: URLQueryItem
+        currentTextureQuery = URLQueryItem(name: "currentTexture", value: gameState.currentTexture)
+        urlComponents.queryItems?.append(currentTextureQuery)
+        
         
         return urlComponents.url!
     }
@@ -168,17 +184,33 @@ class MessagesViewController: MSMessagesAppViewController {
         let components = URLComponents(url: url,
                                        resolvingAgainstBaseURL: false)
         
+        // if this is the first game
+        // current player is x
+        // last result is none
+        // change their move
+        // TODO: Start here!
+        
         for (_, queryItem) in (components?.queryItems?.enumerated())! {
             
             if queryItem.name == "currentPlayer" {
-                currentPlayer = queryItem.value == "X" ? "O" : "X"
-            } else if queryItem.name == "xTexture" {
-                currentTexture = queryItem.value!
-                print("xTexture: " + currentTexture)
-            } else if queryItem.name == "oTexture" {
-                currentTexture = queryItem.value!
-                print("oTexture: " + currentTexture)
+                gameState.currentPlayer = queryItem.value == "X" ? "O" : "X"
             }
+            else if queryItem.name == "gameResult" {
+                gameState.gameResult = queryItem.value!
+                print("gameResult: " + gameState.gameResult)
+            }
+            else if queryItem.name == "xMove" {
+                gameState.xMove = queryItem.value!
+                print("xMove: " + gameState.xMove)
+            }
+            else if queryItem.name == "oMove" {
+                gameState.oMove = queryItem.value!
+                print("oMove: " + gameState.oMove)
+            } else {
+                gameState.currentTexture = queryItem.value!
+                print("current Texture: " + gameState.currentTexture)
+            }
+            
         }
         
     }

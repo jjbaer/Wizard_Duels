@@ -26,8 +26,8 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         worldModelMatrix.rotateAroundX(float4x4.degrees(toRad: 25), y: 0.0, z: 0.0)
         
         // pass in texture
-        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: currentTexture)
-        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: currentTexture)
+        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: "question")
+        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: "question")
         objectToDraw.addCube(x: -2.0, y: 0, z: 0)
         objectToDraw.addCube(x: -1.0, y: 1.0, z: -2.0)
         self.messagesViewControllerDelegate = self
@@ -49,21 +49,21 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
     }
     
     @IBAction func pinch(_ sender: Any) {
-        currentTexture = "ivy"
+        gameState.currentTexture = "ivy"
     }
     
     @IBAction func tap(_ sender: Any) {
-        currentTexture = "fire"
+        gameState.currentTexture = "fire"
     }
     
     @IBAction func longPress(_ sender: Any) {
-        currentTexture = "cube"
+        gameState.currentTexture = "cube"
     }
     
     //MARK: - MetalViewControllerDelegate
     func renderObjects(_ drawable:CAMetalDrawable) {
         
-        initializeTexture(texture: currentTexture)
+        initializeTexture(texture: gameState.currentTexture)
         objectToDraw.render(commandQueue, pipelineState: pipelineState, drawable: drawable, parentModelViewMatrix: worldModelMatrix, projectionMatrix: projectionMatrix, clearColor: nil)
     }
     
