@@ -129,10 +129,10 @@ class MessagesViewController: MSMessagesAppViewController {
         // this player's move
         var moveQuery: URLQueryItem
         if gameState.currentPlayer == "X" {
-            moveQuery = URLQueryItem(name: "xMove",
+            moveQuery = URLQueryItem(name: "p1Move",
                                             value: gameState.p1Move)
         } else {
-            moveQuery = URLQueryItem(name: "oMove",
+            moveQuery = URLQueryItem(name: "p2Move",
                                             value: gameState.p2Move)
         }
         urlComponents.queryItems?.append(moveQuery)
@@ -206,13 +206,13 @@ class MessagesViewController: MSMessagesAppViewController {
                 gameResult = queryItem.value!
                 print("gameResult: " + gameResult)
             }
-            else if queryItem.name == "xMove" {
+            else if queryItem.name == "p1Move" {
                 p1Move = queryItem.value!
-                print("xMove: " + p1Move)
+                print("p1Move: " + p1Move)
             }
-            else if queryItem.name == "oMove" {
+            else if queryItem.name == "p2Move" {
                 p2Move = queryItem.value!
-                print("oMove: " + p2Move)
+                print("p2Move: " + p2Move)
             } else if queryItem.name == "round" {
                 round = Int(queryItem.value!)!
                 print("round: " + String(round))
