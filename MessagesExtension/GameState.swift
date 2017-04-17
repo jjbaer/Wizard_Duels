@@ -11,16 +11,18 @@ import Foundation
 class GameState {
     var currentTexture: String
     var currentPlayer: String
-    var xMove: String
-    var oMove: String
+    var p1Move: String
+    var p2Move: String
     var gameResult: String
+    var round: Int
     
-    init(currentTexture: String, currentPlayer: String, xMove: String, oMove: String, gameResult: String) {
+    init(currentTexture: String, currentPlayer: String, p1Move: String, p2Move: String, gameResult: String, round: Int) {
         self.currentTexture = currentTexture
         self.currentPlayer = currentPlayer
-        self.xMove = xMove
-        self.oMove = oMove
+        self.p1Move = p1Move
+        self.p2Move = p2Move
         self.gameResult = gameResult
+        self.round = round
     }
     
     func determineResult() -> String {
@@ -28,15 +30,15 @@ class GameState {
         var oponentMove: String
         
         // if this is a new game
-        if (oMove == "Z") {
-            return "Z"
+        if (p2Move == "Z") {
+            return "incomplete"
         }
         
         // determine winner from completed exchange
         if (currentPlayer == "X") {
-            oponentMove = oMove
+            oponentMove = p2Move
         } else {
-            oponentMove = xMove
+            oponentMove = p1Move
         }
         
         switch currentTexture {
@@ -74,7 +76,7 @@ class GameState {
                 gameResult = "tie"
             }
         default:
-            gameResult = "tie"
+            gameResult = "incomplete"
         }
         
         return gameResult

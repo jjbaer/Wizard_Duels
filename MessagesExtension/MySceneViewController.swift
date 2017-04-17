@@ -53,36 +53,46 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
             objectToDraw.showGameResults(resource: "loser", type: "jpeg", textureLoader: textureLoader)
         case "won":
             objectToDraw.showGameResults(resource: "winner", type: "jpeg", textureLoader: textureLoader)
+        case "questions":
+            objectToDraw.showGameResults(resource: "questions", type: "png", textureLoader: textureLoader)
         default:
             objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
         }
     }
 
     @IBAction func doubleTap(_ sender: Any) {
-        gameState.currentTexture = "won"
+        currentMove = "rock"
+        print("rock")
     }
     
     @IBAction func rotate(_ sender: Any) {
-        gameState.currentTexture = "lost"
+        currentMove = "lost"
     }
     
     @IBAction func pinch(_ sender: Any) {
 
-        gameState.currentTexture = "ivy"
+        currentMove = "won"
     }
     
     @IBAction func tap(_ sender: Any) {
-        gameState.currentTexture = "fire"
+        currentMove = "paper"
+        print("paper")
     }
     
     @IBAction func longPress(_ sender: Any) {
-        gameState.currentTexture = "cube"
+        currentMove = "scissors"
+        print("scissors")
     }
     
     //MARK: - MetalViewControllerDelegate
     func renderObjects(_ drawable:CAMetalDrawable) {
         
-        initializeTexture(texture: gameState.currentTexture)
+        // check if gameState is nil
+        if (gameState != nil) {
+            initializeTexture(texture: currentMove)
+        } else {
+            initializeTexture(texture: currentMove)
+        }
         objectToDraw.render(commandQueue, pipelineState: pipelineState, drawable: drawable, parentModelViewMatrix: worldModelMatrix, projectionMatrix: projectionMatrix, clearColor: nil)
     }
     

@@ -26,9 +26,8 @@ class MessagesViewController: MSMessagesAppViewController {
     var gameStatus = [String](repeating: "-", count: 2)
     var caption = "Want to duel?"
     var session: MSSession?
-    // might need to look at differentiating between a "new game" and a continuing game
-    // maybe use a "first game" flag
-    var gameState = GameState(currentTexture: "question", currentPlayer: "Z", xMove: "Z", oMove: "Z", gameResult: "Z")
+    var gameState: GameState!
+    var currentMove = "questions"
     
     @IBAction func didPressSend(_ sender: UIButton) {
         if let image = createImageForMessage(), let conversation = activeConversation {
@@ -131,10 +130,10 @@ class MessagesViewController: MSMessagesAppViewController {
         var moveQuery: URLQueryItem
         if gameState.currentPlayer == "X" {
             moveQuery = URLQueryItem(name: "xMove",
-                                            value: gameState.xMove)
+                                            value: gameState.p1Move)
         } else {
             moveQuery = URLQueryItem(name: "oMove",
-                                            value: gameState.oMove)
+                                            value: gameState.p2Move)
         }
         urlComponents.queryItems?.append(moveQuery)
         
@@ -150,6 +149,11 @@ class MessagesViewController: MSMessagesAppViewController {
         var currentTextureQuery: URLQueryItem
         currentTextureQuery = URLQueryItem(name: "currentTexture", value: gameState.currentTexture)
         urlComponents.queryItems?.append(currentTextureQuery)
+        
+        // Round
+        var roundQuery: URLQueryItem
+        roundQuery = URLQueryItem(name: "round", value: String(gameState.round))
+        urlComponents.queryItems?.append(roundQuery)
         
         
         return urlComponents.url!
@@ -184,34 +188,42 @@ class MessagesViewController: MSMessagesAppViewController {
         let components = URLComponents(url: url,
                                        resolvingAgainstBaseURL: false)
         
-        // if this is the first game
-        // current player is x
-        // last result is none
-        // change their move
-        // TODO: Start here!
+        // default values
+        var currentPlayer = "Z"
+        var gameResult = "Z"
+        var p1Move = "Z"
+        var p2Move = "Z"
+        var round = -1
+        var currentTexture = "questions"
         
+        // decoding information about the games state as recieved from the other player
         for (_, queryItem) in (components?.queryItems?.enumerated())! {
             
             if queryItem.name == "currentPlayer" {
-                gameState.currentPlayer = queryItem.value == "X" ? "O" : "X"
+                currentPlayer = queryItem.value == "X" ? "O" : "X"
             }
             else if queryItem.name == "gameResult" {
-                gameState.gameResult = queryItem.value!
-                print("gameResult: " + gameState.gameResult)
+                gameResult = queryItem.value!
+                print("gameResult: " + gameResult)
             }
             else if queryItem.name == "xMove" {
-                gameState.xMove = queryItem.value!
-                print("xMove: " + gameState.xMove)
+                p1Move = queryItem.value!
+                print("xMove: " + p1Move)
             }
             else if queryItem.name == "oMove" {
-                gameState.oMove = queryItem.value!
-                print("oMove: " + gameState.oMove)
+                p2Move = queryItem.value!
+                print("oMove: " + p2Move)
+            } else if queryItem.name == "round" {
+                round = Int(queryItem.value!)!
+                print("round: " + String(round))
             } else {
-                gameState.currentTexture = queryItem.value!
-                print("current Texture: " + gameState.currentTexture)
+                currentTexture = queryItem.value!
+                print("current Texture: " + currentTexture)
             }
-            
         }
+        
+        // instantiate gameState
+        gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round)
         
     }
     
