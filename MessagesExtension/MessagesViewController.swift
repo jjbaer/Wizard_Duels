@@ -121,29 +121,32 @@ class MessagesViewController: MSMessagesAppViewController {
         urlComponents.scheme = "https";
         urlComponents.host = "www.wizardduels.com";
         
+        // if this is the first player's first game
+        if (gameState == nil) {
+            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "none", round: 1)
+        }
+        
+        if (gameState.currentPlayer == "1") {
+            gameState.p1Move = currentMove
+        } else {
+            gameState.p2Move = currentMove
+        }
+        
         // current player
         let playerQuery = URLQueryItem(name: "currentPlayer",
                                        value: gameState.currentPlayer)
         urlComponents.queryItems = [playerQuery]
         
         // this player's move
-        var moveQuery: URLQueryItem
-        if gameState.currentPlayer == "X" {
-            moveQuery = URLQueryItem(name: "p1Move",
+        var p1Query: URLQueryItem
+        p1Query = URLQueryItem(name: "p1Move",
                                             value: gameState.p1Move)
-        } else {
-            moveQuery = URLQueryItem(name: "p2Move",
+        var p2Query: URLQueryItem
+        p2Query = URLQueryItem(name: "p2Move",
                                             value: gameState.p2Move)
-        }
-        urlComponents.queryItems?.append(moveQuery)
         
-        // result
-        print(gameState.determineResult())
-        var resultQuery: URLQueryItem
-        resultQuery = URLQueryItem(name: "result",
-                                   value: gameState.gameResult)
-        urlComponents.queryItems?.append(resultQuery)
-        // if the result is Z...then don't show a dialog
+        urlComponents.queryItems?.append(p1Query)
+        urlComponents.queryItems?.append(p2Query)
         
         // Current Texture
         var currentTextureQuery: URLQueryItem
@@ -154,6 +157,12 @@ class MessagesViewController: MSMessagesAppViewController {
         var roundQuery: URLQueryItem
         roundQuery = URLQueryItem(name: "round", value: String(gameState.round))
         urlComponents.queryItems?.append(roundQuery)
+        
+        // result
+        var resultQuery: URLQueryItem
+        resultQuery = URLQueryItem(name: "result",
+                                   value: gameState.determineResult())
+        urlComponents.queryItems?.append(resultQuery)
         
         
         return urlComponents.url!
@@ -200,23 +209,24 @@ class MessagesViewController: MSMessagesAppViewController {
         for (_, queryItem) in (components?.queryItems?.enumerated())! {
             
             if queryItem.name == "currentPlayer" {
-                currentPlayer = queryItem.value == "X" ? "O" : "X"
+                currentPlayer = queryItem.value == "1" ? "2" : "1"
+                print("current player: " + currentPlayer)
             }
-            else if queryItem.name == "gameResult" {
+            else if queryItem.name == "result" {
                 gameResult = queryItem.value!
                 print("gameResult: " + gameResult)
             }
-            else if queryItem.name == "p1Move" {
+            else if queryItem.name == "p1Move" { // got it
                 p1Move = queryItem.value!
                 print("p1Move: " + p1Move)
             }
             else if queryItem.name == "p2Move" {
                 p2Move = queryItem.value!
                 print("p2Move: " + p2Move)
-            } else if queryItem.name == "round" {
+            } else if queryItem.name == "round" { // got it
                 round = Int(queryItem.value!)!
                 print("round: " + String(round))
-            } else {
+            } else if queryItem.name == "currentTexture" { // double check
                 currentTexture = queryItem.value!
                 print("current Texture: " + currentTexture)
             }
@@ -224,6 +234,8 @@ class MessagesViewController: MSMessagesAppViewController {
         
         // instantiate gameState
         gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round)
+        print("After decoding: " + gameState.determineResult())
+        currentMove = currentTexture
         
     }
     

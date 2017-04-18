@@ -35,23 +35,26 @@ class GameState {
         }
         
         // determine winner from completed exchange
-        if (currentPlayer == "X") {
+        if (currentPlayer == "1") {
             oponentMove = p2Move
         } else {
             oponentMove = p1Move
         }
+        
+        print("opponent move: " + oponentMove)
         
         switch currentTexture {
         case "rock":
             switch oponentMove {
             case "rock":
                 gameResult = "tie"
+                print("1")
             case "paper":
                 gameResult = "lose"
-            case "scisors":
+            case "scissors":
                 gameResult = "win"
             default:
-                gameResult = "tie"
+                gameResult = "incomplete"
             }
         case "paper":
             switch oponentMove {
@@ -59,21 +62,23 @@ class GameState {
                 gameResult = "win"
             case "paper":
                 gameResult = "tie"
-            case "scisors":
+                print("2")
+            case "scissors":
                 gameResult = "lose"
             default:
-                gameResult = "tie"
+                gameResult = "incomplete"
             }
-        case "scisors":
+        case "scissors":
             switch oponentMove {
             case "rock":
                 gameResult = "lose"
             case "paper":
                 gameResult = "win"
-            case "scisors":
+            case "scissors":
                 gameResult = "tie"
+                print("3")
             default:
-                gameResult = "tie"
+                gameResult = "incomplete"
             }
         default:
             gameResult = "incomplete"
