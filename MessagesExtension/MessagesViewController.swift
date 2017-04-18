@@ -45,6 +45,24 @@ class MessagesViewController: MSMessagesAppViewController {
         }
     }
     
+    @IBAction func didPressSubmit(_ sender: Any) {
+        print("\n---IN SUBMIT--- \n")
+        if (gameState == nil) {
+            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "none", round: 1)
+        } else {
+            gameState.currentTexture = currentMove
+        }
+        
+        if (gameState.currentPlayer == "1") {
+            gameState.p1Move = currentMove
+        } else {
+            gameState.p2Move = currentMove
+        }
+        
+        print(gameState.determineResult())
+    }
+    
+    
     @IBOutlet var mtk_view: MTKView! {
         didSet {
             mtk_view.delegate = self
@@ -117,13 +135,14 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     func prepareURL() -> URL {
+        print("\n---IN PREPARE--- \n")
         var urlComponents = URLComponents()
         urlComponents.scheme = "https";
         urlComponents.host = "www.wizardduels.com";
         
         // if this is the first player's first game
         if (gameState == nil) {
-            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "none", round: 1)
+            // then warn them to submit their move first
         }
         
         if (gameState.currentPlayer == "1") {
@@ -160,8 +179,14 @@ class MessagesViewController: MSMessagesAppViewController {
         
         // result
         var resultQuery: URLQueryItem
+        var result = gameState.determineResult()
+        if (result == "win") {
+            result = "lose"
+        } else if (result == "lose") {
+            result = "win"
+        }
         resultQuery = URLQueryItem(name: "result",
-                                   value: gameState.determineResult())
+                                   value: result)
         urlComponents.queryItems?.append(resultQuery)
         
         
@@ -193,6 +218,7 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     func decodeURL(_ url: URL) {
+        print("\n---IN DECODE--- \n")
 
         let components = URLComponents(url: url,
                                        resolvingAgainstBaseURL: false)
@@ -234,7 +260,6 @@ class MessagesViewController: MSMessagesAppViewController {
         
         // instantiate gameState
         gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round)
-        print("After decoding: " + gameState.determineResult())
         currentMove = currentTexture
         
     }
