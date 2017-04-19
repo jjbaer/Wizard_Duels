@@ -27,9 +27,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         
         // pass in texture
         objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: "question")
-        objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: "question")
-        objectToDraw.addCube(x: -2.0, y: 0, z: 0)
-        //objectToDraw.addCube(x: -1.0, y: 1.0, z: -2.0)
+        //objectToDraw.addCube(x: 0.0, y: 0, z: -2.0)
         self.messagesViewControllerDelegate = self
         
         setupGestures()
