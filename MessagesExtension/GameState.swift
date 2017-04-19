@@ -47,35 +47,35 @@ class GameState {
         case "rock":
             switch oponentMove {
             case "rock":
-                gameResult = "tie"
+                gameResult = "tied"
                 print("1")
             case "paper":
-                gameResult = "lose"
+                gameResult = "lost"
             case "scissors":
-                gameResult = "win"
+                gameResult = "won"
             default:
                 gameResult = "incomplete"
             }
         case "paper":
             switch oponentMove {
             case "rock":
-                gameResult = "win"
+                gameResult = "won"
             case "paper":
-                gameResult = "tie"
+                gameResult = "tied"
                 print("2")
             case "scissors":
-                gameResult = "lose"
+                gameResult = "lost"
             default:
                 gameResult = "incomplete"
             }
         case "scissors":
             switch oponentMove {
             case "rock":
-                gameResult = "lose"
+                gameResult = "lost"
             case "paper":
-                gameResult = "win"
+                gameResult = "won"
             case "scissors":
-                gameResult = "tie"
+                gameResult = "tied"
                 print("3")
             default:
                 gameResult = "incomplete"

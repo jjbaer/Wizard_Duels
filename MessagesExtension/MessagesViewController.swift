@@ -60,6 +60,19 @@ class MessagesViewController: MSMessagesAppViewController {
         }
         
         print(gameState.determineResult())
+        //tell user if they won or lost last game
+        if (gameState.determineResult() != "incomplete") {
+            showAlertMsg(title: "Alert", message: "You " + gameState.determineResult() + "!")
+        }
+        //refresh other players last move to nothing for a new game
+        if (gameState.currentPlayer == "1") {
+            //refresh player 2s last move to nothing
+            gameState.p2Move = "Z"
+        }
+        else {
+            //refresh player 2s last move to nothing
+            gameState.p1Move = "Z"
+        }
     }
     
     
@@ -261,7 +274,10 @@ class MessagesViewController: MSMessagesAppViewController {
         // instantiate gameState
         gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round)
         currentMove = currentTexture
-        showAlertMsg(title: "Alert", message: "You lost")
+        //tell user if they won or lost last game
+        if (gameState.determineResult() != "incomplete") {
+            showAlertMsg(title: "Alert", message: "You " + gameState.determineResult() + " the last game! They challenged you to a new duel. Reply with another spell.")
+        }
         
     }
     
