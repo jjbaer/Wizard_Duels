@@ -30,7 +30,7 @@ class GameState {
         var oponentMove: String
         
         // if this is a new game
-        if (p2Move == "Z") {
+        if (p2Move == "Z" || p1Move == "Z") {
             return "incomplete"
         }
         

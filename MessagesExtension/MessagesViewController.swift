@@ -48,7 +48,7 @@ class MessagesViewController: MSMessagesAppViewController {
     @IBAction func didPressSubmit(_ sender: Any) {
         print("\n---IN SUBMIT--- \n")
         if (gameState == nil) {
-            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "none", round: 1)
+            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "incomplete", round: 1)
         } else {
             gameState.currentTexture = currentMove
         }
@@ -192,16 +192,17 @@ class MessagesViewController: MSMessagesAppViewController {
         
         // result
         var resultQuery: URLQueryItem
-        var result = gameState.determineResult()
-        if (result == "win") {
-            result = "lose"
-        } else if (result == "lose") {
-            result = "win"
+        var result = gameState.gameResult
+        if (result == "won") {
+            result = "lost"
+        } else if (result == "lost") {
+            result = "won"
         }
         resultQuery = URLQueryItem(name: "result",
                                    value: result)
         urlComponents.queryItems?.append(resultQuery)
         
+        print("Sending: " + result)
         
         return urlComponents.url!
     }
@@ -266,7 +267,7 @@ class MessagesViewController: MSMessagesAppViewController {
                 round = Int(queryItem.value!)!
                 print("round: " + String(round))
             } else if queryItem.name == "currentTexture" { // double check
-                currentTexture = queryItem.value!
+                //currentTexture = queryItem.value!
                 print("current Texture: " + currentTexture)
             }
         }
@@ -275,8 +276,8 @@ class MessagesViewController: MSMessagesAppViewController {
         gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round)
         currentMove = currentTexture
         //tell user if they won or lost last game
-        if (gameState.determineResult() != "incomplete") {
-            showAlertMsg(title: "Alert", message: "You " + gameState.determineResult() + " the last game! They challenged you to a new duel. Reply with another spell.")
+        if (gameState.gameResult != "incomplete") {
+            showAlertMsg(title: "Alert", message: "You " + gameState.gameResult + " the last game! They challenged you to a new duel. Reply with another spell.")
         }
         
     }
