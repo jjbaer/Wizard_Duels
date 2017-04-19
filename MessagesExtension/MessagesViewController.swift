@@ -261,7 +261,22 @@ class MessagesViewController: MSMessagesAppViewController {
         // instantiate gameState
         gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round)
         currentMove = currentTexture
+        showAlertMsg(title: "Alert", message: "You lost")
         
+    }
+    
+    func showAlertMsg(title: String, message: String){
+        
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        self.present(alertController, animated: true, completion: nil)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            print("Alert was cancelled")
+            alertController.dismiss(animated: false, completion: nil)
+        }
+        
+        alertController.addAction(cancelAction)
     }
     
     override func willBecomeActive(with conversation: MSConversation) {
