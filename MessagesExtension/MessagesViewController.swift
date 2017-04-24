@@ -12,7 +12,6 @@ import simd
 import Messages
 
 protocol MessagesViewControllerDelegate : class {
-    func updateLogic(_ timeSinceLastUpdate:CFTimeInterval)
     func renderObjects(_ drawable:CAMetalDrawable)
 }
 

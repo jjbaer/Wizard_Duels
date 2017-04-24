@@ -70,6 +70,7 @@ class Node {
         if (moving) {
             updateMovement()
         }
+        //could add here if moving == -3 then stop moving
         
         let _ = bufferProvider.avaliableResourcesSemaphore.wait(timeout: DispatchTime.distantFuture)
         

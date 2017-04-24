@@ -99,11 +99,6 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         objectToDraw.render(commandQueue, pipelineState: pipelineState, drawable: drawable, parentModelViewMatrix: worldModelMatrix, projectionMatrix: projectionMatrix, clearColor: nil)
     }
     
-    func updateLogic(_ timeSinceLastUpdate: CFTimeInterval) {
-        print("updateLogic in MySceneViewController")
-        //objectToDraw.updateWithDelta(timeSinceLastUpdate)
-    }
-    
     //panning for viewing the whole room
     /*func setupGestures() {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(MySceneViewController.pan(_:)))
