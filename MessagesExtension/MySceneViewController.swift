@@ -30,7 +30,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         //objectToDraw.addCube(x: 0.0, y: 0, z: -2.0)
         self.messagesViewControllerDelegate = self
         
-        setupGestures()
+        //setupGestures()
     }
     
     func initializeTexture(texture: String) {
@@ -60,25 +60,29 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
 
     @IBAction func doubleTap(_ sender: Any) {
         currentMove = "rock"
+        objectToDraw.moving = true
         print("rock")
     }
     
     @IBAction func rotate(_ sender: Any) {
         currentMove = "lost"
+        objectToDraw.moving = true
     }
     
     @IBAction func pinch(_ sender: Any) {
-
         currentMove = "won"
+        objectToDraw.moving = true
     }
     
     @IBAction func tap(_ sender: Any) {
         currentMove = "paper"
+        objectToDraw.moving = true
         print("paper")
     }
     
     @IBAction func longPress(_ sender: Any) {
         currentMove = "scissors"
+        objectToDraw.moving = true
         print("scissors")
     }
     
@@ -91,15 +95,17 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         } else {
             initializeTexture(texture: currentMove)
         }
+
         objectToDraw.render(commandQueue, pipelineState: pipelineState, drawable: drawable, parentModelViewMatrix: worldModelMatrix, projectionMatrix: projectionMatrix, clearColor: nil)
     }
     
     func updateLogic(_ timeSinceLastUpdate: CFTimeInterval) {
-        objectToDraw.updateWithDelta(timeSinceLastUpdate)
+        print("updateLogic in MySceneViewController")
+        //objectToDraw.updateWithDelta(timeSinceLastUpdate)
     }
     
-    //MARK: - Gesture related
-    func setupGestures() {
+    //panning for viewing the whole room
+    /*func setupGestures() {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(MySceneViewController.pan(_:)))
         self.view.addGestureRecognizer(pan)
     }
@@ -115,7 +121,6 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         } else if panGesture.state == UIGestureRecognizerState.began {
             lastPanLocation = panGesture.location(in: self.view)
         }
-    }
-    
+    }*/    
 }
 

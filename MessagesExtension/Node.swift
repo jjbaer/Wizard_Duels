@@ -14,7 +14,8 @@ import simd
 
 class Node {
     
-    var time:CFTimeInterval = 0.0
+    var time:Float = 0.0
+    var moving:Bool
     
     let name: String
     let light = Light(color: (1.0,1.0,1.0), ambientIntensity: 0.1, direction: (0.0, 0.0, 1.0), diffuseIntensity: 0.8, shininess: 10, specularIntensity: 2)
@@ -41,6 +42,8 @@ class Node {
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(self.device)
     
     init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture, texture4: MTLTexture, texture5: MTLTexture) {
+        //cube should start out not moving
+        moving = false;
         
         var vertexData = Array<Float>()
         for vertex in vertices{
@@ -63,6 +66,10 @@ class Node {
     }
     
     func render(_ commandQueue: MTLCommandQueue, pipelineState: MTLRenderPipelineState, drawable: CAMetalDrawable, parentModelViewMatrix: float4x4, projectionMatrix: float4x4, clearColor: MTLClearColor?) {
+        
+        if (moving) {
+            updateMovement()
+        }
         
         let _ = bufferProvider.avaliableResourcesSemaphore.wait(timeout: DispatchTime.distantFuture)
         
@@ -131,8 +138,8 @@ class Node {
         return matrix
     }
     
-    func updateWithDelta(_ delta: CFTimeInterval) {
-        time += delta
+    func updateMovement() {
+        time -= 0.1 //delta
     }
     
     class func defaultSampler(_ device: MTLDevice) -> MTLSamplerState {
