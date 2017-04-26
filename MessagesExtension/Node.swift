@@ -118,17 +118,17 @@ class Node {
         renderEncoder.setFragmentTexture(texture4, at: 0)
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 144, vertexCount: 6)
         
-        //set up witch face
-        renderEncoder.setFragmentTexture(texture5, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 150, vertexCount: 24)
-        
         //set up witch cloak and hat
         renderEncoder.setFragmentTexture(texture6, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 174, vertexCount: 90)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 150, vertexCount: 234)
+        
+        //set up witch face
+        renderEncoder.setFragmentTexture(texture5, at: 0)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 384, vertexCount: 24)
         
         //set up cube, 36 count for a cube
         renderEncoder.setFragmentTexture(texture, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 264, vertexCount: vertexCount - 264)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 408, vertexCount: vertexCount - 408)
         
         renderEncoder.endEncoding()
         

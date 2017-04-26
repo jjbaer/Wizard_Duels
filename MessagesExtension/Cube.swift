@@ -166,7 +166,7 @@ class Cube: Node {
     
     //method to move the cube when a spell is cast
     func moveCube(x: Float, y: Float, z: Float) {
-        let range:Range = 264..<300 //36 vertices for the cube, it is the last 36 vertices in the array
+        let range:Range = 408..<444 //36 vertices for the cube, it is the last 36 vertices in the array
         //Front
         let A = Vertex(x: -0.5 + x, y: 1.0 + y, z: 1.0 + z, r:  1.0, g:  0.0, b:  0.0, a:  1.0, s: 0.25, t: 0.25, nX: 0.0, nY: 0.0, nZ: 1.0)
         let B = Vertex(x: -0.5 + x, y: 0.0 + y, z: 1.0 + z, r:  0.0, g:  1.0, b:  0.0, a:  1.0, s: 0.25, t: 0.50, nX: 0.0, nY: 0.0, nZ: 1.0)
