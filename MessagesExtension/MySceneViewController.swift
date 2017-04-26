@@ -27,10 +27,9 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         
         // pass in texture
         objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: "questions")
-        //objectToDraw.addCube(x: 0.0, y: 0, z: -2.0)
         self.messagesViewControllerDelegate = self
         
-        //setupGestures()
+        setupGestures()
     }
     
     func initializeTexture(texture: String) {
@@ -47,14 +46,8 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
             objectToDraw.changeTexture(resource: "paper", type: "jpeg", textureLoader: textureLoader)
         case "scissors":
             objectToDraw.changeTexture(resource: "scissors", type: "jpeg", textureLoader: textureLoader)
-        case "lost":
-            objectToDraw.showGameResults(resource: "loser", type: "jpeg", textureLoader: textureLoader)
-        case "won":
-            objectToDraw.showGameResults(resource: "winner", type: "jpeg", textureLoader: textureLoader)
-        case "questions":
-            objectToDraw.showGameResults(resource: "questions", type: "png", textureLoader: textureLoader)
         default:
-            objectToDraw.changeTexture(resource: "cube", type: "png", textureLoader: textureLoader)
+            objectToDraw.changeTexture(resource: "questions", type: "png", textureLoader: textureLoader)
         }
     }
 
@@ -100,7 +93,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
     }
     
     //panning for viewing the whole room
-    /*func setupGestures() {
+    func setupGestures() {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(MySceneViewController.pan(_:)))
         self.view.addGestureRecognizer(pan)
     }
@@ -116,6 +109,6 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         } else if panGesture.state == UIGestureRecognizerState.began {
             lastPanLocation = panGesture.location(in: self.view)
         }
-    }*/    
+    }    
 }
 

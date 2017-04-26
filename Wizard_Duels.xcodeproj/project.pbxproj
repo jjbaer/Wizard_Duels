@@ -34,6 +34,9 @@
 		20A0899D1E9EA6F600CD73F6 /* winner.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20A0899C1E9EA6F600CD73F6 /* winner.jpeg */; };
 		20A0899F1E9EA70800CD73F6 /* paper.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20A0899E1E9EA70800CD73F6 /* paper.jpeg */; };
 		20A089A11E9EA71600CD73F6 /* loser.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20A089A01E9EA71600CD73F6 /* loser.jpeg */; };
+		20A1382A1EB12AF600435430 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A138291EB12AF600435430 /* Wizard.swift */; };
+		20A138351EB135F000435430 /* witchFace.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A138341EB135F000435430 /* witchFace.png */; };
+		20A138361EB135F000435430 /* witchFace.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A138341EB135F000435430 /* witchFace.png */; };
 		20CDE0BD1E47CE3200E0A9E2 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */; };
 		20FB80401E651B2700B3C024 /* fire.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20FB803F1E651B2700B3C024 /* fire.jpeg */; };
 		20FDC2451E4CF79500B03F34 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2441E4CF79500B03F34 /* Vertex.swift */; };
@@ -99,6 +102,8 @@
 		20A0899C1E9EA6F600CD73F6 /* winner.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = winner.jpeg; sourceTree = "<group>"; };
 		20A0899E1E9EA70800CD73F6 /* paper.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paper.jpeg; sourceTree = "<group>"; };
 		20A089A01E9EA71600CD73F6 /* loser.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loser.jpeg; sourceTree = "<group>"; };
+		20A138291EB12AF600435430 /* Wizard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
+		20A138341EB135F000435430 /* witchFace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = witchFace.png; sourceTree = "<group>"; };
 		20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		20FB803F1E651B2700B3C024 /* fire.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fire.jpeg; sourceTree = "<group>"; };
 		20FDC2441E4CF79500B03F34 /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
@@ -121,6 +126,7 @@
 		13AEB1281E562CED00B92C65 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				20A138341EB135F000435430 /* witchFace.png */,
 				20A089961E9EA6CF00CD73F6 /* questions.png */,
 				20A089981E9EA6D800CD73F6 /* rock.jpeg */,
 				20540C861E6E876700333346 /* stone.jpeg */,
@@ -198,6 +204,7 @@
 				20003C2A1E64CCC500DE69BB /* Light.swift */,
 				20540C8A1E6E974A00333346 /* Building.swift */,
 				138FA7001E6F19E2003EBF8E /* GameState.swift */,
+				20A138291EB12AF600435430 /* Wizard.swift */,
 			);
 			path = MessagesExtension;
 			sourceTree = "<group>";
@@ -292,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13EB79571E2817D800FE673B /* Assets.xcassets in Resources */,
+				20A138351EB135F000435430 /* witchFace.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +313,7 @@
 				13F481971E7A0FE800EF9A10 /* storm.jpeg in Resources */,
 				13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */,
 				20A0899F1E9EA70800CD73F6 /* paper.jpeg in Resources */,
+				20A138361EB135F000435430 /* witchFace.png in Resources */,
 				20A0899B1E9EA6DF00CD73F6 /* scissors.jpeg in Resources */,
 				20540C851E6E86E400333346 /* wood.jpeg in Resources */,
 				20A089991E9EA6D800CD73F6 /* rock.jpeg in Resources */,
@@ -331,6 +340,7 @@
 				20003C2B1E64CCC500DE69BB /* Light.swift in Sources */,
 				20FDC2451E4CF79500B03F34 /* Vertex.swift in Sources */,
 				20003C291E64CC7400DE69BB /* MetalTexture.swift in Sources */,
+				20A1382A1EB12AF600435430 /* Wizard.swift in Sources */,
 				13AEB11E1E3A8BBF00B92C65 /* AppDelegate.swift in Sources */,
 				20003C271E64CC3D00DE69BB /* float4x4.swift in Sources */,
 				2091E9281E5E517300CA05A0 /* BufferProvider.swift in Sources */,

@@ -35,10 +35,10 @@ class Node {
     
     var bufferProvider: BufferProvider
     var texture: MTLTexture //spell cast
-    var texture2: MTLTexture
-    var texture3: MTLTexture
-    var texture4: MTLTexture
-    var texture5: MTLTexture //win, lose, tied
+    var texture2: MTLTexture //floor
+    var texture3: MTLTexture //walls
+    var texture4: MTLTexture //sky
+    var texture5: MTLTexture //witch face
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(self.device)
     
     init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture, texture4: MTLTexture, texture5: MTLTexture) {
@@ -116,14 +116,13 @@ class Node {
         renderEncoder.setFragmentTexture(texture4, at: 0)
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 144, vertexCount: 6)
         
-        //set up person here, currently cube is being set up
-        renderEncoder.setFragmentTexture(texture, at: 0)
+        //set up wizard
+        renderEncoder.setFragmentTexture(texture5, at: 0)
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 150, vertexCount: 36)
-        //36 count for a cube, also when it becomes a person change to texture5
-    
-        //set up cube
-        //renderEncoder.setFragmentTexture(texture, at: 0)
-        //renderEncoder.drawPrimitives(type: .triangle, vertexStart: 186, vertexCount: vertexCount - 186)
+        
+        //set up cube, 36 count for a cube
+        renderEncoder.setFragmentTexture(texture, at: 0)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 186, vertexCount: vertexCount - 186)
         
         renderEncoder.endEncoding()
         
@@ -176,10 +175,5 @@ class Node {
     
     func updateTexture(texture: MTLTexture) {
         self.texture = texture
-    }
-    
-    
-    func updateTexture5(texture: MTLTexture) {
-        self.texture5 = texture
     }
 }

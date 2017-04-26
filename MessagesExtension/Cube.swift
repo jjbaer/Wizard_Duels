@@ -12,6 +12,7 @@ import MetalKit
 class Cube: Node {
     var verticesArray:Array<Vertex>
     let building:Building
+    let wizard:Wizard
     
     init(device: MTLDevice, commandQ: MTLCommandQueue, textureLoader :MTKTextureLoader, texture: String) {
         
@@ -52,6 +53,7 @@ class Cube: Node {
         let X = Vertex(x: -0.5, y: 1.0, z: 0.0, r:  0.1, g:  0.6, b:  0.4, a:  1.0, s: 1.00, t: 0.25, nX: 0.0, nY: 0.0, nZ: -1.0)
         
         self.building = Building()
+        self.wizard = Wizard()
         
         verticesArray = [
             A,B,C ,A,C,D,   //Front
@@ -62,19 +64,10 @@ class Cube: Node {
             U,V,W ,U,W,X    //Back
         ]
         
-        verticesArray = building.getVertices() + verticesArray
-        var path: String
+        verticesArray = building.getVertices() + wizard.getVertices() + verticesArray
         
-        if (texture == "cube") {
-            path = Bundle.main.path(forResource: "cube", ofType: "png")!
-        }
-        else if (texture == "fire") {
-            path = Bundle.main.path(forResource: "fire", ofType: "jpeg")!
-        }
-        else {
-            path = Bundle.main.path(forResource: "questions", ofType: "png")!
-        }
-        
+        //setting texture for the cube
+        let path = Bundle.main.path(forResource: "questions", ofType: "png")!
         let data = NSData(contentsOfFile: path)! as Data
         let texture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
@@ -93,8 +86,8 @@ class Cube: Node {
         let data4 = NSData(contentsOfFile: path4)! as Data
         let texture4 = try! textureLoader.newTexture(with: data4, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
-        // win, lose, or tied cube
-        let path5 = Bundle.main.path(forResource: "questions", ofType: "png")!
+        //setting texture of wizard
+        let path5 = Bundle.main.path(forResource: "witchFace", ofType: "png")!
         let data5 = NSData(contentsOfFile: path5)! as Data
         let texture5 = try! textureLoader.newTexture(with: data5, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
@@ -160,15 +153,6 @@ class Cube: Node {
         updateTexture(texture: newTexture)
     }
     
-    //this will be the texture of the person eventually, currenly it is the main cube
-    func showGameResults(resource: String, type: String, textureLoader :MTKTextureLoader) {
-        let path = Bundle.main.path(forResource: resource, ofType: type)!
-        let data = NSData(contentsOfFile: path)! as Data
-        let newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
-        //this is the texture for the cube with the game results
-        updateTexture5(texture: newTexture)
-    }
-    
     override func updateMovement() { 
         super.updateMovement()
         moveCube(x: 0.0, y: 0.0, z: time)
@@ -176,7 +160,7 @@ class Cube: Node {
     
     //method to move the cube when a spell is cast
     func moveCube(x: Float, y: Float, z: Float) {
-        let range:Range = 150..<186
+        let range:Range = 186..<222 //36 vertices for the cube, it is the last 36 vertices in the array
         //Front
         let A = Vertex(x: -0.5 + x, y: 1.0 + y, z: 1.0 + z, r:  1.0, g:  0.0, b:  0.0, a:  1.0, s: 0.25, t: 0.25, nX: 0.0, nY: 0.0, nZ: 1.0)
         let B = Vertex(x: -0.5 + x, y: 0.0 + y, z: 1.0 + z, r:  0.0, g:  1.0, b:  0.0, a:  1.0, s: 0.25, t: 0.50, nX: 0.0, nY: 0.0, nZ: 1.0)
