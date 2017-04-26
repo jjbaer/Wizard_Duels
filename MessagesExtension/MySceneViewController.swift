@@ -90,6 +90,11 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         }
 
         objectToDraw.render(commandQueue, pipelineState: pipelineState, drawable: drawable, parentModelViewMatrix: worldModelMatrix, projectionMatrix: projectionMatrix, clearColor: nil)
+        if (objectToDraw.spellCast) {
+            print("about to submit")
+            submit()
+            objectToDraw.spellCast = false
+        }
     }
     
     //panning for viewing the whole room

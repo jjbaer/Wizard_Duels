@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,19 +28,10 @@
                                     <action selector="didPressSend:" destination="ObA-dk-sSI" eventType="touchUpInside" id="a3V-T1-W96"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v44-A3-7pR">
-                                <rect key="frame" x="136" y="394" width="49" height="30"/>
-                                <state key="normal" title="Submit"/>
-                                <connections>
-                                    <action selector="didPressSubmit:" destination="ObA-dk-sSI" eventType="touchUpInside" id="UqU-qj-zAt"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99708503484725952" green="0.98515313863754272" blue="0.98472696542739868" alpha="0.729411780834198" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="7Sz-S0-4ZX" firstAttribute="top" secondItem="v44-A3-7pR" secondAttribute="bottom" constant="2" id="3yu-r7-jNc"/>
-                            <constraint firstItem="v44-A3-7pR" firstAttribute="centerX" secondItem="V0x-tR-5tF" secondAttribute="centerX" id="dJd-cd-C3i"/>
                             <constraint firstItem="7Sz-S0-4ZX" firstAttribute="centerX" secondItem="V0x-tR-5tF" secondAttribute="centerX" id="k9T-Ca-CQg"/>
                             <constraint firstItem="tYE-q4-DHP" firstAttribute="top" secondItem="7Sz-S0-4ZX" secondAttribute="bottom" constant="72" id="olC-hR-Cos"/>
                         </constraints>

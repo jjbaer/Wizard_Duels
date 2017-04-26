@@ -44,7 +44,7 @@ class MessagesViewController: MSMessagesAppViewController {
         }
     }
     
-    @IBAction func didPressSubmit(_ sender: Any) {
+    func submit() {
         print("\n---IN SUBMIT--- \n")
         if (gameState == nil) {
             gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "incomplete", round: 1)

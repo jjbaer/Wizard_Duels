@@ -8,6 +8,7 @@
 
 import UIKit
 import MetalKit
+import Foundation
 
 class Cube: Node {
     var verticesArray:Array<Vertex>
@@ -162,6 +163,7 @@ class Cube: Node {
     override func updateMovement() { 
         super.updateMovement()
         moveCube(x: 0.0, y: 0.0, z: time)
+        //moveCube(x: 0.5*cos(time), y: 0.0, z: 0.5 + 0.5*sin(time))
     }
     
     //method to move the cube when a spell is cast
@@ -169,9 +171,9 @@ class Cube: Node {
         let range:Range = 408..<444 //36 vertices for the cube, it is the last 36 vertices in the array
         //Front
         let A = Vertex(x: -0.5 + x, y: 1.0 + y, z: 1.0 + z, r:  1.0, g:  0.0, b:  0.0, a:  1.0, s: 0.25, t: 0.25, nX: 0.0, nY: 0.0, nZ: 1.0)
-        let B = Vertex(x: -0.5 + x, y: 0.0 + y, z: 1.0 + z, r:  0.0, g:  1.0, b:  0.0, a:  1.0, s: 0.25, t: 0.50, nX: 0.0, nY: 0.0, nZ: 1.0)
-        let C = Vertex(x: 0.5 + x, y: 0.0 + y, z: 1.0 + z, r:  0.0, g:  0.0, b:  1.0, a:  1.0, s: 0.50, t: 0.50, nX: 0.0, nY: 0.0, nZ: 1.0)
-        let D = Vertex(x: 0.5 + x, y: 1.0 + y, z: 1.0 + z, r:  0.1, g:  0.6, b:  0.4, a:  1.0, s: 0.50, t: 0.25, nX: 0.0, nY: 0.0, nZ: 1.0)
+        let B = Vertex(x: -0.5  + x, y: 0.0 + y, z: 1.0 + z, r:  0.0, g:  1.0, b:  0.0, a:  1.0, s: 0.25, t: 0.50, nX: 0.0, nY: 0.0, nZ: 1.0)
+        let C = Vertex(x: 0.5  + x, y: 0.0 + y, z: 1.0 + z, r:  0.0, g:  0.0, b:  1.0, a:  1.0, s: 0.50, t: 0.50, nX: 0.0, nY: 0.0, nZ: 1.0)
+        let D = Vertex(x: 0.5  + x, y: 1.0 + y, z: 1.0 + z, r:  0.1, g:  0.6, b:  0.4, a:  1.0, s: 0.50, t: 0.25, nX: 0.0, nY: 0.0, nZ: 1.0)
         
         //Left
         let E = Vertex(x: -0.5 + x, y: 1.0 + y, z: 0.0 + z, r:  1.0, g:  0.0, b:  0.0, a:  1.0, s: 0.00, t: 0.25, nX: -1.0, nY: 0.0, nZ: 0.0)

@@ -16,6 +16,7 @@ class Node {
     
     var time:Float = 0.0
     var moving:Bool
+    var spellCast:Bool
     
     let name: String
     let light = Light(color: (1.0,1.0,1.0), ambientIntensity: 0.1, direction: (0.0, 0.0, 1.0), diffuseIntensity: 0.8, shininess: 10, specularIntensity: 2)
@@ -44,7 +45,8 @@ class Node {
     
     init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture, texture4: MTLTexture, texture5: MTLTexture, texture6: MTLTexture) {
         //cube should start out not moving
-        moving = false;
+        moving = false
+        spellCast = false
         
         var vertexData = Array<Float>()
         for vertex in vertices{
@@ -72,7 +74,14 @@ class Node {
         if (moving) {
             updateMovement()
         }
-        //could add here if moving == -3 then stop moving
+        
+        //stop moving at -5.0 back
+        if (time <= -5.0) {
+            print("stop moving")
+            spellCast = true
+            time = 0.0
+            moving = false
+        }
         
         let _ = bufferProvider.avaliableResourcesSemaphore.wait(timeout: DispatchTime.distantFuture)
         
