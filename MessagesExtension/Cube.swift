@@ -67,31 +67,37 @@ class Cube: Node {
         verticesArray = building.getVertices() + wizard.getVertices() + verticesArray
         
         //setting texture for the cube
-        let path = Bundle.main.path(forResource: "questions", ofType: "png")!
-        let data = NSData(contentsOfFile: path)! as Data
+        var path = Bundle.main.path(forResource: "questions", ofType: "png")!
+        var data = NSData(contentsOfFile: path)! as Data
         let texture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
         //setting texture for floor
-        let path2 = Bundle.main.path(forResource: "wood", ofType: "jpeg")!
-        let data2 = NSData(contentsOfFile: path2)! as Data
-        let texture2 = try! textureLoader.newTexture(with: data2, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+        path = Bundle.main.path(forResource: "wood", ofType: "jpeg")!
+        data = NSData(contentsOfFile: path)! as Data
+        let texture2 = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
         // setting texture for walls
-        let path3 = Bundle.main.path(forResource: "stone", ofType: "jpeg")!
-        let data3 = NSData(contentsOfFile: path3)! as Data
-        let texture3 = try! textureLoader.newTexture(with: data3, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+        path = Bundle.main.path(forResource: "stone", ofType: "jpeg")!
+        data = NSData(contentsOfFile: path)! as Data
+        let texture3 = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
         // setting texture for sky
-        let path4 = Bundle.main.path(forResource: "storm", ofType: "jpeg")!
-        let data4 = NSData(contentsOfFile: path4)! as Data
-        let texture4 = try! textureLoader.newTexture(with: data4, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+        path = Bundle.main.path(forResource: "storm", ofType: "jpeg")!
+        data = NSData(contentsOfFile: path)! as Data
+        let texture4 = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
         //setting texture of wizard
-        let path5 = Bundle.main.path(forResource: "witchFace", ofType: "png")!
-        let data5 = NSData(contentsOfFile: path5)! as Data
-        let texture5 = try! textureLoader.newTexture(with: data5, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+        path = Bundle.main.path(forResource: "witchFace", ofType: "png")!
+        data = NSData(contentsOfFile: path)! as Data
+        let texture5 = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         
-        super.init(name: "Cube", vertices: verticesArray, device: device, texture: texture, texture2: texture2, texture3: texture3, texture4: texture4, texture5: texture5)
+        //setting texture of wizard
+        path = Bundle.main.path(forResource: "blackFabric", ofType: "jpeg")!
+        data = NSData(contentsOfFile: path)! as Data
+        let texture6 = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+        
+        
+        super.init(name: "Cube", vertices: verticesArray, device: device, texture: texture, texture2: texture2, texture3: texture3, texture4: texture4, texture5: texture5, texture6: texture6)
         
     }
     
@@ -160,7 +166,7 @@ class Cube: Node {
     
     //method to move the cube when a spell is cast
     func moveCube(x: Float, y: Float, z: Float) {
-        let range:Range = 186..<222 //36 vertices for the cube, it is the last 36 vertices in the array
+        let range:Range = 264..<300 //36 vertices for the cube, it is the last 36 vertices in the array
         //Front
         let A = Vertex(x: -0.5 + x, y: 1.0 + y, z: 1.0 + z, r:  1.0, g:  0.0, b:  0.0, a:  1.0, s: 0.25, t: 0.25, nX: 0.0, nY: 0.0, nZ: 1.0)
         let B = Vertex(x: -0.5 + x, y: 0.0 + y, z: 1.0 + z, r:  0.0, g:  1.0, b:  0.0, a:  1.0, s: 0.25, t: 0.50, nX: 0.0, nY: 0.0, nZ: 1.0)

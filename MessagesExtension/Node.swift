@@ -39,9 +39,10 @@ class Node {
     var texture3: MTLTexture //walls
     var texture4: MTLTexture //sky
     var texture5: MTLTexture //witch face
+    var texture6: MTLTexture //witchcloak
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(self.device)
     
-    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture, texture4: MTLTexture, texture5: MTLTexture) {
+    init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture, texture4: MTLTexture, texture5: MTLTexture, texture6: MTLTexture) {
         //cube should start out not moving
         moving = false;
         
@@ -61,6 +62,7 @@ class Node {
         self.texture3 = texture3
         self.texture4 = texture4
         self.texture5 = texture5
+        self.texture6 = texture6
         
         self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3)
     }
@@ -116,13 +118,17 @@ class Node {
         renderEncoder.setFragmentTexture(texture4, at: 0)
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 144, vertexCount: 6)
         
-        //set up wizard
+        //set up witch face
         renderEncoder.setFragmentTexture(texture5, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 150, vertexCount: 36)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 150, vertexCount: 24)
+        
+        //set up witch cloak and hat
+        renderEncoder.setFragmentTexture(texture6, at: 0)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 174, vertexCount: 90)
         
         //set up cube, 36 count for a cube
         renderEncoder.setFragmentTexture(texture, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 186, vertexCount: vertexCount - 186)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 264, vertexCount: vertexCount - 264)
         
         renderEncoder.endEncoding()
         
