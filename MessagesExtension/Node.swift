@@ -76,7 +76,7 @@ class Node {
         }
         
         //stop moving at -5.0 back
-        if (time <= -5.0) {
+        if (time <= -7.0) {
             print("stop moving")
             spellCast = true
             time = 0.0
@@ -178,6 +178,7 @@ class Node {
         return device.makeSamplerState(descriptor: pSamplerDescriptor!)
     }
     
+    //updates the vertices of the cube if they have moved or had their texture changed
     func update(vertices: Array<Vertex>) {
         vertexCount = vertices.count
         var vertexData = Array<Float>()
@@ -188,6 +189,7 @@ class Node {
         vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
     }
     
+    //change the texture of the cube
     func updateTexture(texture: MTLTexture) {
         self.texture = texture
     }
