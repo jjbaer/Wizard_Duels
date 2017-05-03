@@ -22,6 +22,7 @@
 		20003C291E64CC7400DE69BB /* MetalTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20003C281E64CC7400DE69BB /* MetalTexture.swift */; };
 		20003C2B1E64CCC500DE69BB /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20003C2A1E64CCC500DE69BB /* Light.swift */; };
 		20105DD11E65F0F500BE0DDB /* ivy.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20105DD01E65F0F500BE0DDB /* ivy.jpeg */; };
+		202AC3521EBA9C2C00BF713F /* water.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 202AC3511EBA9C2C00BF713F /* water.jpeg */; };
 		20540C851E6E86E400333346 /* wood.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20540C841E6E86E400333346 /* wood.jpeg */; };
 		20540C871E6E876700333346 /* stone.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20540C861E6E876700333346 /* stone.jpeg */; };
 		20540C8B1E6E974A00333346 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20540C8A1E6E974A00333346 /* Building.swift */; };
@@ -90,6 +91,7 @@
 		20003C281E64CC7400DE69BB /* MetalTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalTexture.swift; sourceTree = "<group>"; };
 		20003C2A1E64CCC500DE69BB /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		20105DD01E65F0F500BE0DDB /* ivy.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ivy.jpeg; sourceTree = "<group>"; };
+		202AC3511EBA9C2C00BF713F /* water.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpeg; sourceTree = "<group>"; };
 		20540C841E6E86E400333346 /* wood.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood.jpeg; sourceTree = "<group>"; };
 		20540C861E6E876700333346 /* stone.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stone.jpeg; sourceTree = "<group>"; };
 		20540C8A1E6E974A00333346 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				20A138341EB135F000435430 /* witchFace.png */,
 				20A089961E9EA6CF00CD73F6 /* questions.png */,
 				20A089981E9EA6D800CD73F6 /* rock.jpeg */,
+				202AC3511EBA9C2C00BF713F /* water.jpeg */,
 				20540C861E6E876700333346 /* stone.jpeg */,
 				20A138371EB13AA000435430 /* blackFabric.jpeg */,
 				20A0899A1E9EA6DF00CD73F6 /* scissors.jpeg */,
@@ -314,6 +317,7 @@
 			files = (
 				20105DD11E65F0F500BE0DDB /* ivy.jpeg in Resources */,
 				13868CF11E5E22B10062B828 /* cube.png in Resources */,
+				202AC3521EBA9C2C00BF713F /* water.jpeg in Resources */,
 				13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */,
 				13F481971E7A0FE800EF9A10 /* storm.jpeg in Resources */,
 				13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */,

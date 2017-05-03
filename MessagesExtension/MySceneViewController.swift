@@ -47,7 +47,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         case "scissors":
             objectToDraw.changeTexture(resource: "scissors", type: "jpeg", textureLoader: textureLoader)
         case "water":
-            objectToDraw.changeTexture(resource: "scissors", type: "jpeg", textureLoader: textureLoader)
+            objectToDraw.changeTexture(resource: "water", type: "jpeg", textureLoader: textureLoader)
         default:
             objectToDraw.changeTexture(resource: "questions", type: "png", textureLoader: textureLoader)
         }
