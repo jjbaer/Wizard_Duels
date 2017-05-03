@@ -29,7 +29,7 @@ class MessagesViewController: MSMessagesAppViewController {
     var currentMove = "questions"
     
     @IBAction func didPressSend(_ sender: UIButton) {
-        if let image = createImageForMessage(), let conversation = activeConversation {
+        if let image = createImageForMessage(gameState: gameState), let conversation = activeConversation {
             let layout = MSMessageTemplateLayout()
             layout.image = image
             layout.caption = caption
@@ -47,7 +47,7 @@ class MessagesViewController: MSMessagesAppViewController {
     func submit() {
         print("\n---IN SUBMIT--- \n")
         if (gameState == nil) {
-            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "incomplete", round: 1)
+            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "incomplete", round: 1, p1Health: "3", p2Health: "3")
         } else {
             gameState.currentTexture = currentMove
         }
@@ -119,15 +119,20 @@ class MessagesViewController: MSMessagesAppViewController {
         self.messagesViewControllerDelegate?.renderObjects(drawable)
     }
     
-    func createImageForMessage() -> UIImage? {
+    func createImageForMessage(gameState: GameState) -> UIImage? {
         let background = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         background.backgroundColor = UIColor.white
         
         let label = UILabel(frame: CGRect(x: 75, y: 75, width: 150, height: 150))
         label.font = UIFont.systemFont(ofSize: 56.0)
-        label.backgroundColor = UIColor.red
+        if (gameState.currentPlayer == "1") {
+            label.backgroundColor = UIColor.red
+            label.text = "P1"
+        } else {
+            label.backgroundColor = UIColor.blue
+            label.text = "P2"
+        }
         label.textColor = UIColor.white
-        label.text = "Let's duel"
         label.textAlignment = .center
         label.layer.cornerRadius = label.frame.size.width/2.0
         label.clipsToBounds = true
@@ -186,6 +191,7 @@ class MessagesViewController: MSMessagesAppViewController {
         
         // Round
         var roundQuery: URLQueryItem
+        gameState.round += 1
         roundQuery = URLQueryItem(name: "round", value: String(gameState.round))
         urlComponents.queryItems?.append(roundQuery)
         
@@ -201,7 +207,13 @@ class MessagesViewController: MSMessagesAppViewController {
                                    value: result)
         urlComponents.queryItems?.append(resultQuery)
         
-        print("Sending: " + result)
+        // Health
+        var p1Health: URLQueryItem
+        p1Health = URLQueryItem(name: "p1Health", value: gameState.p1Health)
+        urlComponents.queryItems?.append(p1Health)
+        var p2Health: URLQueryItem
+        p2Health = URLQueryItem(name: "p2Health", value: gameState.p2Health)
+        urlComponents.queryItems?.append(p2Health)
         
         return urlComponents.url!
     }
@@ -241,6 +253,8 @@ class MessagesViewController: MSMessagesAppViewController {
         var gameResult = "Z"
         var p1Move = "Z"
         var p2Move = "Z"
+        var p1Health = "3"
+        var p2Health = "3"
         var round = -1
         var currentTexture = "questions"
         
@@ -249,34 +263,37 @@ class MessagesViewController: MSMessagesAppViewController {
             
             if queryItem.name == "currentPlayer" {
                 currentPlayer = queryItem.value == "1" ? "2" : "1"
-                print("current player: " + currentPlayer)
             }
             else if queryItem.name == "result" {
                 gameResult = queryItem.value!
-                print("gameResult: " + gameResult)
             }
             else if queryItem.name == "p1Move" { // got it
                 p1Move = queryItem.value!
-                print("p1Move: " + p1Move)
             }
             else if queryItem.name == "p2Move" {
                 p2Move = queryItem.value!
-                print("p2Move: " + p2Move)
             } else if queryItem.name == "round" { // got it
                 round = Int(queryItem.value!)!
-                print("round: " + String(round))
-            } else if queryItem.name == "currentTexture" { // double check
-                //currentTexture = queryItem.value!
-                print("current Texture: " + currentTexture)
+            } else if (queryItem.name == "p1Health") {
+                p1Health = queryItem.value!
+            } else if (queryItem.name == "p2Health") {
+                p2Health = queryItem.value!
             }
+//                else if queryItem.name == "currentTexture" { // double check
+//                //currentTexture = queryItem.value!
+//                print("current Texture: " + currentTexture)
+            
         }
         
         // instantiate gameState
-        gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round)
+        gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round, p1Health: p1Health, p2Health: p2Health)
         currentMove = currentTexture
+        
+        // FOR TESTING / DEBUGGING ONLY
+        debugPrintDecode(gameState: gameState)
         //tell user if they won or lost last game
         if (gameState.gameResult != "incomplete") {
-            showAlertMsg(title: "Alert", message: "You " + gameState.gameResult + " the last game! They challenged you to a new duel. Reply with another spell.")
+            showAlertMsg(title: "Hey!", message: "You " + gameState.gameResult + " the last game! They challenged you to a new duel. Reply with another spell.")
         }
         
     }
@@ -302,6 +319,18 @@ class MessagesViewController: MSMessagesAppViewController {
             caption = "It's your move!"
             session = conversation.selectedMessage?.session
         }
+    }
+    
+    private func debugPrintDecode(gameState: GameState) {
+        
+        print("-- DECODE GAMESTATE --")
+        print("current player: " + gameState.currentPlayer)
+        print("gameResult: " + gameState.gameResult)
+        print("p1Move: " + gameState.p1Move)
+        print("p2Move: " + gameState.p2Move)
+        print("p1Health: " + gameState.p1Health)
+        print("p2Health: " + gameState.p1Health)
+        print("round: " + String(gameState.round))
     }
 }
 
