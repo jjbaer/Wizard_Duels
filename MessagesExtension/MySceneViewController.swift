@@ -52,16 +52,52 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
             objectToDraw.changeTexture(resource: "questions", type: "png", textureLoader: textureLoader)
         }
     }
+    
+    @IBAction func swipeRight(_ sender: Any) {
+        //NOT YET IN GAME LOGIC
+        //currentMove = "rock"
+        objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "")
+        print("swipRight")
+    }
 
+    @IBAction func swipeLeft(_ sender: Any) {
+        //NOT YET IN GAME LOGIC
+        //currentMove = "rock"
+        objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "")
+        print("swipLeft")
+    }
+    
+    @IBAction func swipeDown(_ sender: Any) {
+        //NOT YET IN GAME LOGIC
+        //currentMove = "rock"
+        objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "")
+        print("swipDown")
+    }
+    
+    @IBAction func swipeUp(_ sender: Any) {
+        //NOT YET IN GAME LOGIC
+        //currentMove = "rock"
+        objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "")
+        print("swipUp")
+    }
+    
     @IBAction func doubleTap(_ sender: Any) {
+        //NOT YET IN GAME LOGIC
         currentMove = "rock"
         objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "grow")
         print("rock")
     }
     
     @IBAction func rotate(_ sender: Any) {
-        currentMove = "lost"
+        //NOT YET IN GAME LOGIC
+        //currentMove = "rock"
         objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "")
     }
     
     @IBAction func pinch(_ sender: Any) {

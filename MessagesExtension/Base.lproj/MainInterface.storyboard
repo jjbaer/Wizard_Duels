@@ -22,10 +22,26 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sz-S0-4ZX">
-                                <rect key="frame" x="142" y="426" width="36" height="30"/>
-                                <state key="normal" title="Send"/>
+                                <rect key="frame" x="144" y="426" width="32" height="30"/>
+                                <state key="normal" title="Cast"/>
                                 <connections>
                                     <action selector="didPressSend:" destination="ObA-dk-sSI" eventType="touchUpInside" id="a3V-T1-W96"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sO8-4V-l3D">
+                                <rect key="frame" x="11" y="490" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="My Spells"/>
+                                <connections>
+                                    <action selector="mySpellsButtonPressed:" destination="ObA-dk-sSI" eventType="touchUpInside" id="eb3-yq-x5n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPC-Uo-8Zf">
+                                <rect key="frame" x="228" y="490" width="84" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="How to Duel"/>
+                                <connections>
+                                    <action selector="howToDuelButton:" destination="ObA-dk-sSI" eventType="touchUpInside" id="ghc-rh-0Br"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -41,6 +57,11 @@
                             <outletCollection property="gestureRecognizers" destination="Ei1-IB-a5Z" appends="YES" id="OhR-az-J2E"/>
                             <outletCollection property="gestureRecognizers" destination="Qzi-hR-ch0" appends="YES" id="tXk-se-pke"/>
                             <outletCollection property="gestureRecognizers" destination="Avj-cJ-5Y8" appends="YES" id="kYl-ot-faQ"/>
+                            <outletCollection property="gestureRecognizers" destination="CWK-Ki-TyN" appends="YES" id="Bgg-hz-4hC"/>
+                            <outletCollection property="gestureRecognizers" destination="HrW-oQ-MmA" appends="YES" id="yw7-AD-73H"/>
+                            <outletCollection property="gestureRecognizers" destination="NaD-lK-dhs" appends="YES" id="1NI-jQ-bf7"/>
+                            <outletCollection property="gestureRecognizers" destination="HPN-mq-L4g" appends="YES" id="8wX-2M-nBM"/>
+                            <outletCollection property="gestureRecognizers" destination="gwA-p5-Zch" appends="YES" id="lmu-Yy-2xh"/>
                         </connections>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -73,6 +94,31 @@
                 <rotationGestureRecognizer id="Avj-cJ-5Y8">
                     <connections>
                         <action selector="rotate:" destination="ObA-dk-sSI" id="yve-Qi-H44"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="CWK-Ki-TyN">
+                    <connections>
+                        <action selector="swipeRight:" destination="ObA-dk-sSI" id="9OY-EM-Ztr"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="HrW-oQ-MmA">
+                    <connections>
+                        <action selector="swipeLeft:" destination="ObA-dk-sSI" id="vlf-q3-JcI"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="NaD-lK-dhs">
+                    <connections>
+                        <action selector="swipeDown:" destination="ObA-dk-sSI" id="n2o-pM-RC3"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="HPN-mq-L4g">
+                    <connections>
+                        <action selector="swipeUp:" destination="ObA-dk-sSI" id="hsT-Rp-wJA"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <rotationGestureRecognizer id="gwA-p5-Zch">
+                    <connections>
+                        <action selector="rotate:" destination="ObA-dk-sSI" id="FgH-fE-Tkm"/>
                     </connections>
                 </rotationGestureRecognizer>
             </objects>
