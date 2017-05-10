@@ -44,6 +44,10 @@ class MessagesViewController: MSMessagesAppViewController {
         }
     }
     
+    @IBAction func mySpellsButtonPressed(_ sender: UIButton) {
+        showMySpells()
+    }
+    
     func submit() {
         print("\n---IN SUBMIT--- \n")
         if (gameState == nil) {
@@ -300,14 +304,99 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     func showAlertMsg(title: String, message: String){
-        
-        
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         self.present(alertController, animated: true, completion: nil)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             print("Alert was cancelled")
             alertController.dismiss(animated: false, completion: nil)
+        }
+        
+        alertController.addAction(cancelAction)
+    }
+    
+    @IBAction func howToDuelButton(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "How to Duel", message: "Welcome to Wizard Duels! Cast a spell by making a gesture on the screen at your opponent. Depending on how you wave your wand, different spells will be cast. Once you have waved your wand, hit the cast button to challenge your opponent. You can then send your spell at them, and they can respond with an opposing spell. They will see if they won or lost that round after they receive your spell and cast their own spell. They can then cast a another spell to challenge you to a another round. Once you recieve this new spell you will be able to see if you won or lost the previous round, and you can then also reply with a new spell for the new round.", preferredStyle: .alert)
+        self.present(alertController, animated: true, completion: nil)
+        
+        let cancelAction = UIAlertAction(title: "Close", style: .cancel) { (action) in
+            print("Alert was cancelled")
+            alertController.dismiss(animated: false, completion: nil)
+        }
+        
+        alertController.addAction(cancelAction)
+    }
+    
+    func showMySpells() {
+        let alertController = UIAlertController(title: "My Spells", message: "", preferredStyle: .alert)
+        self.present(alertController, animated: true, completion: nil)
+        
+        //set up close button
+        let cancelAction = UIAlertAction(title: "Close", style: .cancel) { (action) in
+            alertController.dismiss(animated: false, completion: nil)
+        }
+        
+        //set up water button
+        let waterAction = UIAlertAction(title: "Water Jet", style: .default) { (action) in
+            self.waterSpell()
+        }
+        
+        //set up fire button
+        let fireAction = UIAlertAction(title: "Fire Ball", style: .default) { (action) in
+            self.fireSpell()
+        }
+        
+        //set up ivy button
+        let ivyAction = UIAlertAction(title: "Ivy Takeover", style: .default) { (action) in
+            self.ivySpell()
+        }
+        
+        alertController.addAction(waterAction)
+        alertController.addAction(fireAction)
+        alertController.addAction(ivyAction)
+        alertController.addAction(cancelAction)
+    }
+    
+    //this alert explains how to cast a water spell to the user
+    func waterSpell() {
+        let alertController = UIAlertController(title: "Water Jet", message: "Shoot a jet of water at your enemy by making a pinching motion with your wand. This spell will put out any fire.", preferredStyle: .alert)
+        self.present(alertController, animated: true, completion: nil)
+        
+        //set up close button
+        let cancelAction = UIAlertAction(title: "Back to My Spells", style: .cancel) { (action) in
+            print("Alert was cancelled")
+            alertController.dismiss(animated: false, completion: nil)
+            self.showMySpells()
+        }
+        
+        alertController.addAction(cancelAction)
+    }
+    
+    //this alert explains how to cast a fire spell to the user
+    func fireSpell() {
+        let alertController = UIAlertController(title: "Fire Ball", message: "Throw a fire ball at your enemy. To do this you must jab your wand at them. Fire will burn through any plant spells and damage your opponent.", preferredStyle: .alert)
+        self.present(alertController, animated: true, completion: nil)
+        
+        //set up close button
+        let cancelAction = UIAlertAction(title: "Back to My Spells", style: .cancel) { (action) in
+            print("Alert was cancelled")
+            alertController.dismiss(animated: false, completion: nil)
+            self.showMySpells()
+        }
+        
+        alertController.addAction(cancelAction)
+    }
+    
+    //this alert explains to the user how to cast the ivy spell
+    func ivySpell() {
+        let alertController = UIAlertController(title: "Ivy Takeover", message: "Cast ivy by holding your wand out in a long pressing motion towards your opponent. Plants will then take over and consume the castle room with other wizards in it. This spell is stronger when cast againt water, because the ivy will soak up the liquid and become bigger and stronger.", preferredStyle: .alert)
+        self.present(alertController, animated: true, completion: nil)
+        
+        //set up close button
+        let cancelAction = UIAlertAction(title: "Back to My Spells", style: .cancel) { (action) in
+            print("Alert was cancelled")
+            alertController.dismiss(animated: false, completion: nil)
+            self.showMySpells()
         }
         
         alertController.addAction(cancelAction)

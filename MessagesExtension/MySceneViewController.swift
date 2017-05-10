@@ -29,7 +29,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         objectToDraw = Cube(device: device, commandQ: commandQueue, textureLoader: textureLoader, texture: "questions")
         self.messagesViewControllerDelegate = self
         
-        setupGestures()
+       // setupGestures()
     }
     
     func initializeTexture(texture: String) {
@@ -46,37 +46,79 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
             objectToDraw.changeTexture(resource: "paper", type: "jpeg", textureLoader: textureLoader)
         case "scissors":
             objectToDraw.changeTexture(resource: "scissors", type: "jpeg", textureLoader: textureLoader)
+        case "water":
+            objectToDraw.changeTexture(resource: "water", type: "jpeg", textureLoader: textureLoader)
         default:
             objectToDraw.changeTexture(resource: "questions", type: "png", textureLoader: textureLoader)
         }
     }
+    
+    @IBAction func swipeRight(_ sender: Any) {
+        //NOT YET IN GAME LOGIC
+        //currentMove = "rock"
+        objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "")
+        print("swipRight")
+    }
 
+    @IBAction func swipeLeft(_ sender: Any) {
+        //NOT YET IN GAME LOGIC
+        //currentMove = "rock"
+        objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "")
+        print("swipLeft")
+    }
+    
+    @IBAction func swipeDown(_ sender: Any) {
+        //NOT YET IN GAME LOGIC
+        //currentMove = "rock"
+        objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "")
+        print("swipDown")
+    }
+    
+    @IBAction func swipeUp(_ sender: Any) {
+        //NOT YET IN GAME LOGIC
+        //currentMove = "rock"
+        objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "")
+        print("swipUp")
+    }
+    
     @IBAction func doubleTap(_ sender: Any) {
+        //NOT YET IN GAME LOGIC
         currentMove = "rock"
         objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "grow")
         print("rock")
     }
     
     @IBAction func rotate(_ sender: Any) {
-        currentMove = "lost"
+        //NOT YET IN GAME LOGIC
+        //currentMove = "rock"
         objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "")
     }
     
     @IBAction func pinch(_ sender: Any) {
-        currentMove = "won"
+        currentMove = "water"
         objectToDraw.moving = true
+        objectToDraw.updateMotion(newMotion: "sinWave")
+        print("water")
     }
     
     @IBAction func tap(_ sender: Any) {
-        currentMove = "paper"
+        currentMove = "fire"
         objectToDraw.moving = true
-        print("paper")
+        objectToDraw.updateMotion(newMotion: "spin")
+        print("fire")
     }
     
     @IBAction func longPress(_ sender: Any) {
-        currentMove = "scissors"
+        currentMove = "ivy"
         objectToDraw.moving = true
-        print("scissors")
+        objectToDraw.updateMotion(newMotion: "grow")
+        print("ivy")
     }
     
     //MARK: - MetalViewControllerDelegate
@@ -98,7 +140,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
     }
     
     //panning for viewing the whole room
-    func setupGestures() {
+    /*func setupGestures() {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(MySceneViewController.pan(_:)))
         self.view.addGestureRecognizer(pan)
     }
@@ -114,6 +156,6 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         } else if panGesture.state == UIGestureRecognizerState.began {
             lastPanLocation = panGesture.location(in: self.view)
         }
-    }    
+    }  */
 }
 

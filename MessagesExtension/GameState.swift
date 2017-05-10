@@ -48,35 +48,37 @@ class GameState {
         print("opponent move: " + oponentMove)
         
         switch currentTexture {
-        case "rock":
+        case "ivy":
             switch oponentMove {
-            case "rock":
+            case "ivy":
                 gameResult = "tied"
-            case "paper":
+                print("1")
+            case "fire":
                 gameResult = "lost"
-            case "scissors":
+            case "water":
                 gameResult = "won"
             default:
                 gameResult = "incomplete"
             }
-        case "paper":
+        case "fire":
             switch oponentMove {
-            case "rock":
+            case "ivy":
                 gameResult = "won"
-            case "paper":
+            case "fire":
                 gameResult = "tied"
-            case "scissors":
+                print("2")
+            case "water":
                 gameResult = "lost"
             default:
                 gameResult = "incomplete"
             }
-        case "scissors":
+        case "water":
             switch oponentMove {
-            case "rock":
+            case "ivy":
                 gameResult = "lost"
-            case "paper":
+            case "fire":
                 gameResult = "won"
-            case "scissors":
+            case "water":
                 gameResult = "tied"
             default:
                 gameResult = "incomplete"
