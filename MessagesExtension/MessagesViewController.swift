@@ -208,6 +208,7 @@ class MessagesViewController: MSMessagesAppViewController {
         urlComponents.queryItems?.append(resultQuery)
         
         // Health
+        gameState.calculateHealth()
         var p1Health: URLQueryItem
         p1Health = URLQueryItem(name: "p1Health", value: gameState.p1Health)
         urlComponents.queryItems?.append(p1Health)
