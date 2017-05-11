@@ -87,16 +87,27 @@ class GameState {
             gameResult = "incomplete"
         }
         
+        calculateHealth()
+        
         return gameResult
     }
     
     // this one deals with converting strings --> ints and back
     func calculateHealth() {
-        if (currentPlayer == "1" && gameResult == "lost") {
-            p1Health = String((Int(p1Health)! - 1))
+        if (currentPlayer == "1") {
+            if (gameResult == "lost") {
+                p1Health = String((Int(p1Health)! - 1))
+            } else if (gameResult == "won") {
+                p2Health = String((Int(p2Health)! - 1))
+            }
+            
         }
-        else if (currentPlayer == "2" && gameResult == "lost") {
-            p2Health = String((Int(p2Health)! - 1))
+        else {
+            if (gameResult == "lost") {
+                p2Health = String((Int(p2Health)! - 1))
+            } else if (gameResult == "won") {
+                p1Health = String((Int(p1Health)! - 1))
+            }
         }
     }
     

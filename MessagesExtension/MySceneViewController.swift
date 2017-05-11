@@ -124,12 +124,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
     //MARK: - MetalViewControllerDelegate
     func renderObjects(_ drawable:CAMetalDrawable) {
         
-        // check if gameState is nil
-        if (gameState != nil) {
-            initializeTexture(texture: currentMove)
-        } else {
-            initializeTexture(texture: currentMove)
-        }
+        initializeTexture(texture: currentMove)
 
         objectToDraw.render(commandQueue, pipelineState: pipelineState, drawable: drawable, parentModelViewMatrix: worldModelMatrix, projectionMatrix: projectionMatrix, clearColor: nil)
         if (objectToDraw.spellCast) {

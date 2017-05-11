@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1362EBB11EC3F45A004A590C /* full_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1362EBB01EC3F45A004A590C /* full_heart.png */; };
+		1362EBB31EC3F460004A590C /* broken_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1362EBB21EC3F460004A590C /* broken_heart.png */; };
 		13868CF11E5E22B10062B828 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = 13868CF01E5E22B10062B828 /* cube.png */; };
 		138FA7011E6F19E2003EBF8E /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138FA7001E6F19E2003EBF8E /* GameState.swift */; };
 		13AEB11E1E3A8BBF00B92C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */; };
@@ -72,6 +74,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1362EBB01EC3F45A004A590C /* full_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = full_heart.png; sourceTree = "<group>"; };
+		1362EBB21EC3F460004A590C /* broken_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = broken_heart.png; sourceTree = "<group>"; };
 		13868CF01E5E22B10062B828 /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube.png; sourceTree = "<group>"; };
 		138FA7001E6F19E2003EBF8E /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		13AEB11D1E3A8BBF00B92C65 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,7 +138,9 @@
 				20A138341EB135F000435430 /* witchFace.png */,
 				20A089961E9EA6CF00CD73F6 /* questions.png */,
 				20A089981E9EA6D800CD73F6 /* rock.jpeg */,
+				1362EBB01EC3F45A004A590C /* full_heart.png */,
 				202AC3511EBA9C2C00BF713F /* water.jpeg */,
+				1362EBB21EC3F460004A590C /* broken_heart.png */,
 				20540C861E6E876700333346 /* stone.jpeg */,
 				20A138371EB13AA000435430 /* blackFabric.jpeg */,
 				20A0899A1E9EA6DF00CD73F6 /* scissors.jpeg */,
@@ -320,7 +326,9 @@
 				202AC3521EBA9C2C00BF713F /* water.jpeg in Resources */,
 				13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */,
 				13F481971E7A0FE800EF9A10 /* storm.jpeg in Resources */,
+				1362EBB31EC3F460004A590C /* broken_heart.png in Resources */,
 				13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */,
+				1362EBB11EC3F45A004A590C /* full_heart.png in Resources */,
 				20A0899F1E9EA70800CD73F6 /* paper.jpeg in Resources */,
 				20A138361EB135F000435430 /* witchFace.png in Resources */,
 				20A0899B1E9EA6DF00CD73F6 /* scissors.jpeg in Resources */,

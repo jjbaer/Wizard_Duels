@@ -44,6 +44,11 @@ class MessagesViewController: MSMessagesAppViewController {
         }
     }
     
+    @IBOutlet weak var heart1: UIImageView!
+    @IBOutlet weak var heart2: UIImageView!
+
+    @IBOutlet weak var heart3: UIImageView!
+    
     @IBAction func mySpellsButtonPressed(_ sender: UIButton) {
         showMySpells()
     }
@@ -51,7 +56,7 @@ class MessagesViewController: MSMessagesAppViewController {
     func submit() {
         print("\n---IN SUBMIT--- \n")
         if (gameState == nil) {
-            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "incomplete", round: 1, p1Health: "3", p2Health: "3")
+            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "incomplete", round: 1, p1Health: "5", p2Health: "5")
         } else {
             gameState.currentTexture = currentMove
         }
@@ -64,8 +69,8 @@ class MessagesViewController: MSMessagesAppViewController {
         
         print(gameState.determineResult())
         //tell user if they won or lost last game
-        if (gameState.determineResult() != "incomplete") {
-            showAlertMsg(title: "Alert", message: "You " + gameState.determineResult() + "!")
+        if (gameState.gameResult != "incomplete") {
+            showAlertMsg(title: "Alert", message: "You " + gameState.gameResult + "!")
         }
         //refresh other players last move to nothing for a new game
         if (gameState.currentPlayer == "1") {
@@ -156,15 +161,11 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     func prepareURL() -> URL {
+        // suddenly it's back to 3
         print("\n---IN PREPARE--- \n")
         var urlComponents = URLComponents()
         urlComponents.scheme = "https";
         urlComponents.host = "www.wizardduels.com";
-        
-        // if this is the first player's first game
-        if (gameState == nil) {
-            // then warn them to submit their move first
-        }
         
         if (gameState.currentPlayer == "1") {
             gameState.p1Move = currentMove
@@ -223,30 +224,6 @@ class MessagesViewController: MSMessagesAppViewController {
         return urlComponents.url!
     }
     
-    func prepareMessage() {
-        
-        if session == nil {
-            session = MSSession()
-        }
-        let message = MSMessage()
-        
-        let layout = MSMessageTemplateLayout()
-        layout.caption = caption
-        
-        message.layout = layout
-        message.url = prepareURL()
-        
-        let conversation = self.activeConversation
-        
-        conversation?.insert(message, completionHandler: {(error) in
-            if let error = error {
-                print(error)
-            }
-        })
-        
-        self.dismiss()
-    }
-    
     func decodeURL(_ url: URL) {
         print("\n---IN DECODE--- \n")
 
@@ -258,10 +235,10 @@ class MessagesViewController: MSMessagesAppViewController {
         var gameResult = "Z"
         var p1Move = "Z"
         var p2Move = "Z"
-        var p1Health = "3"
-        var p2Health = "3"
+        var p1Health = "5"
+        var p2Health = "5"
         var round = -1
-        var currentTexture = "questions"
+        let currentTexture = "questions" // changed from var
         
         // decoding information about the games state as recieved from the other player
         for (_, queryItem) in (components?.queryItems?.enumerated())! {
@@ -272,31 +249,29 @@ class MessagesViewController: MSMessagesAppViewController {
             else if queryItem.name == "result" {
                 gameResult = queryItem.value!
             }
-            else if queryItem.name == "p1Move" { // got it
+            else if queryItem.name == "p1Move" {
                 p1Move = queryItem.value!
             }
             else if queryItem.name == "p2Move" {
                 p2Move = queryItem.value!
-            } else if queryItem.name == "round" { // got it
+            } else if queryItem.name == "round" {
                 round = Int(queryItem.value!)!
             } else if (queryItem.name == "p1Health") {
                 p1Health = queryItem.value!
             } else if (queryItem.name == "p2Health") {
                 p2Health = queryItem.value!
             }
-//                else if queryItem.name == "currentTexture" { // double check
-//                //currentTexture = queryItem.value!
-//                print("current Texture: " + currentTexture)
-            
         }
         
         // instantiate gameState
         gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round, p1Health: p1Health, p2Health: p2Health)
         currentMove = currentTexture
+        if (currentPlayer == "1" && Int(p1Health)! < 5) {
+            heart3.image = UIImage(named: "broken_heart.png")
+        }
         
         // FOR TESTING / DEBUGGING ONLY
         debugPrintDecode(gameState: gameState)
-        //tell user if they won or lost last game
         if (gameState.gameResult != "incomplete") {
             showAlertMsg(title: "Hey!", message: "You " + gameState.gameResult + " the last game! They challenged you to a new duel. Reply with another spell.")
         }
