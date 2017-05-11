@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -43,22 +43,22 @@
                                     <action selector="howToDuelButton:" destination="ObA-dk-sSI" eventType="touchUpInside" id="ghc-rh-0Br"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="full_heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="Osa-ax-t7P">
-                                <rect key="frame" x="37" y="41" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="full_heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="Osa-ax-t7P">
+                                <rect key="frame" x="8" y="41" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ENK-uN-V5O"/>
                                     <constraint firstAttribute="width" constant="30" id="vbq-Pm-MAN"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="full_heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="TXh-7W-Cu2">
-                                <rect key="frame" x="75" y="41" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="full_heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="TXh-7W-Cu2">
+                                <rect key="frame" x="45" y="41" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="AWN-RU-rtT"/>
                                     <constraint firstAttribute="height" constant="30" id="sZ8-di-m3R"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="full_heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="PHO-0O-flz">
-                                <rect key="frame" x="113" y="41" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="full_heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="PHO-0O-flz">
+                                <rect key="frame" x="83" y="41" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="438-3u-5Ol"/>
                                     <constraint firstAttribute="height" constant="30" id="HOs-MH-UBG"/>

@@ -87,10 +87,10 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
     
     @IBAction func doubleTap(_ sender: Any) {
         //NOT YET IN GAME LOGIC
-        currentMove = "rock"
+        //currentMove = "rock"
         objectToDraw.moving = true
-        objectToDraw.updateMotion(newMotion: "grow")
-        print("rock")
+        objectToDraw.updateMotion(newMotion: "")
+        print("double tap")
     }
     
     @IBAction func rotate(_ sender: Any) {
