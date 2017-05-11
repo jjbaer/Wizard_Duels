@@ -282,7 +282,7 @@ class MessagesViewController: MSMessagesAppViewController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         self.present(alertController, animated: true, completion: nil)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "Close", style: .cancel) { (action) in
             print("Alert was cancelled")
             alertController.dismiss(animated: false, completion: nil)
         }
