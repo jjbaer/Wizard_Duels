@@ -16,9 +16,11 @@ class GameState {
     var p2Health: String
     var p2Move: String
     var gameResult: String
+    var p1Round: String
+    var p2Round: String
     var round: Int
     
-    init(currentTexture: String, currentPlayer: String, p1Move: String, p2Move: String, gameResult: String, round: Int, p1Health: String, p2Health: String) {
+    init(currentTexture: String, currentPlayer: String, p1Move: String, p2Move: String, gameResult: String, round: Int, p1Health: String, p2Health: String, p1Round: String, p2Round: String) {
         self.currentTexture = currentTexture
         self.currentPlayer = currentPlayer
         self.p1Move = p1Move
@@ -26,16 +28,19 @@ class GameState {
         self.p1Health = p1Health
         self.p2Health = p2Health
         self.gameResult = gameResult
+        self.p1Round = p1Round
+        self.p2Round = p2Round
         self.round = round
     }
     
-    func determineResult() -> String {
-        
+    func determineResult() {
         var oponentMove: String
         
+        incrementCurrentPlayerRound()
         // if this is a new game
-        if (p2Move == "Z" || p1Move == "Z") {
-            return "incomplete"
+        if (p1Round != p2Round) {
+            gameResult = "incomplete"
+            return
         }
         
         // determine winner from completed exchange
@@ -88,8 +93,6 @@ class GameState {
         }
         
         calculateHealth()
-        
-        return gameResult
     }
     
     // this one deals with converting strings --> ints and back
@@ -114,5 +117,15 @@ class GameState {
     // next time: determine if there is a loser
     func isLoser() -> Bool {
         return false
+    }
+    
+    // increment the round for the current player
+    func incrementCurrentPlayerRound() {
+        
+        if (currentPlayer == "1") {
+            p1Round = String(Int(p1Round)! + 1);
+        } else {
+            p2Round = String(Int(p2Round)! + 1);
+        }
     }
 }

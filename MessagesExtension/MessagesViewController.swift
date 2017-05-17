@@ -42,6 +42,8 @@ class MessagesViewController: MSMessagesAppViewController {
                 print(error ?? "not an error")
             })
         }
+        
+        dismiss()
     }
     
     @IBOutlet weak var heart1: UIImageView!
@@ -56,7 +58,7 @@ class MessagesViewController: MSMessagesAppViewController {
     func submit() {
         print("\n---IN SUBMIT--- \n")
         if (gameState == nil) {
-            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "incomplete", round: 1, p1Health: "5", p2Health: "5")
+            gameState = GameState(currentTexture: currentMove, currentPlayer: "1", p1Move: currentMove, p2Move: "Z", gameResult: "incomplete", round: 1, p1Health: "3", p2Health: "3", p1Round: "0", p2Round: "0")
         } else {
             gameState.currentTexture = currentMove
         }
@@ -68,9 +70,10 @@ class MessagesViewController: MSMessagesAppViewController {
         }
         
         print(gameState.determineResult())
+        updateHealthImage()
         //tell user if they won or lost last game
         if (gameState.gameResult != "incomplete") {
-            showAlertMsg(title: "Hey!", message: "You " + gameState.gameResult + " the last game! They challenged you to a new duel. Reply with another spell.")
+            showAlertMsg(title: "Hey!", message: "You " + gameState.gameResult + "! Challenge them to another duel?")
         }
         //refresh other players last move to nothing for a new game
         if (gameState.currentPlayer == "1") {
@@ -78,7 +81,7 @@ class MessagesViewController: MSMessagesAppViewController {
             gameState.p2Move = "Z"
         }
         else {
-            //refresh player 2s last move to nothing
+            //refresh player 1s last move to nothing
             gameState.p1Move = "Z"
         }
     }
@@ -221,6 +224,15 @@ class MessagesViewController: MSMessagesAppViewController {
         p2Health = URLQueryItem(name: "p2Health", value: gameState.p2Health)
         urlComponents.queryItems?.append(p2Health)
         
+        // Round
+        var p1Round: URLQueryItem
+        p1Round = URLQueryItem(name: "p1Round", value: gameState.p1Round)
+        urlComponents.queryItems?.append(p1Round)
+        var p2Round: URLQueryItem
+        p2Round = URLQueryItem(name: "p2Round", value: gameState.p2Round)
+        urlComponents.queryItems?.append(p2Round)
+        
+        
         return urlComponents.url!
     }
     
@@ -235,9 +247,11 @@ class MessagesViewController: MSMessagesAppViewController {
         var gameResult = "Z"
         var p1Move = "Z"
         var p2Move = "Z"
-        var p1Health = "5"
-        var p2Health = "5"
+        var p1Health = "3"
+        var p2Health = "3"
         var round = -1
+        var p1Round = "0"
+        var p2Round = "0"
         let currentTexture = "questions" // changed from var
         
         // decoding information about the games state as recieved from the other player
@@ -260,15 +274,19 @@ class MessagesViewController: MSMessagesAppViewController {
                 p1Health = queryItem.value!
             } else if (queryItem.name == "p2Health") {
                 p2Health = queryItem.value!
+            } else if (queryItem.name == "p1Round") {
+                p1Round = queryItem.value!
+            } else if (queryItem.name == "p2Round") {
+                p2Round = queryItem.value!
             }
+
         }
         
         // instantiate gameState
-        gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round, p1Health: p1Health, p2Health: p2Health)
+        gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round, p1Health: p1Health, p2Health: p2Health, p1Round: p1Round, p2Round: p2Round)
         currentMove = currentTexture
-        if (currentPlayer == "1" && Int(p1Health)! < 5) {
-            heart3.image = UIImage(named: "broken_heart.png")
-        }
+        
+        updateHealthImage()
         
         // FOR TESTING / DEBUGGING ONLY
         debugPrintDecode(gameState: gameState)
@@ -278,11 +296,44 @@ class MessagesViewController: MSMessagesAppViewController {
         
     }
     
+    // Update Health Image
+    func updateHealthImage() {
+        if (gameState.currentPlayer == "1") {
+            switch gameState.p1Health {
+            case "3":
+                break
+            case "2":
+                heart3.image = UIImage(named: "broken_heart.png")
+            case "1":
+                heart3.image = UIImage(named: "broken_heart.png")
+                heart2.image = UIImage(named: "broken_heart.png")
+            default:
+                heart3.image = UIImage(named: "broken_heart.png")
+                heart2.image = UIImage(named: "broken_heart.png")
+                heart1.image = UIImage(named: "broken_heart.png")
+            }
+        } else {
+            switch gameState.p2Health {
+            case "3":
+                break
+            case "2":
+                heart3.image = UIImage(named: "broken_heart.png")
+            case "1":
+                heart3.image = UIImage(named: "broken_heart.png")
+                heart2.image = UIImage(named: "broken_heart.png")
+            default:
+                heart3.image = UIImage(named: "broken_heart.png")
+                heart2.image = UIImage(named: "broken_heart.png")
+                heart1.image = UIImage(named: "broken_heart.png")
+            }
+        }
+    }
+    
     func showAlertMsg(title: String, message: String){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         self.present(alertController, animated: true, completion: nil)
         
-        let cancelAction = UIAlertAction(title: "Close", style: .cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
             print("Alert was cancelled")
             alertController.dismiss(animated: false, completion: nil)
         }
@@ -396,6 +447,8 @@ class MessagesViewController: MSMessagesAppViewController {
         print("p1Health: " + gameState.p1Health)
         print("p2Health: " + gameState.p1Health)
         print("round: " + String(gameState.round))
+        print("p1Round: " + gameState.p1Round)
+        print("p2Round: " + gameState.p2Round)
     }
 }
 
