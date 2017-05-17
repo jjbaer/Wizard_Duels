@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,27 +22,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sz-S0-4ZX">
-                                <rect key="frame" x="144" y="426" width="32" height="30"/>
-                                <state key="normal" title="Cast"/>
-                                <connections>
-                                    <action selector="didPressSend:" destination="ObA-dk-sSI" eventType="touchUpInside" id="a3V-T1-W96"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sO8-4V-l3D">
-                                <rect key="frame" x="8" y="490" width="67" height="30"/>
-                                <state key="normal" title="My Spells"/>
-                                <connections>
-                                    <action selector="mySpellsButtonPressed:" destination="ObA-dk-sSI" eventType="touchUpInside" id="eb3-yq-x5n"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPC-Uo-8Zf">
-                                <rect key="frame" x="228" y="490" width="84" height="30"/>
-                                <state key="normal" title="How to Duel"/>
-                                <connections>
-                                    <action selector="howToDuelButton:" destination="ObA-dk-sSI" eventType="touchUpInside" id="ghc-rh-0Br"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="full_heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="Osa-ax-t7P">
                                 <rect key="frame" x="8" y="41" width="30" height="30"/>
                                 <constraints>
@@ -64,11 +43,48 @@
                                     <constraint firstAttribute="height" constant="30" id="HOs-MH-UBG"/>
                                 </constraints>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kuV-mT-UpX">
+                                <rect key="frame" x="0.0" y="484" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" id="9PY-wc-IU3">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sO8-4V-l3D">
+                                            <rect key="frame" x="16" y="7" width="67" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="My Spells"/>
+                                            <connections>
+                                                <action selector="mySpellsButtonPressed:" destination="ObA-dk-sSI" eventType="touchUpInside" id="eb3-yq-x5n"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="NTd-Bp-ESa"/>
+                                    <barButtonItem style="plain" id="FjS-cC-kEa">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Sz-S0-4ZX">
+                                            <rect key="frame" x="144" y="7" width="32" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Cast"/>
+                                            <connections>
+                                                <action selector="didPressSend:" destination="ObA-dk-sSI" eventType="touchUpInside" id="a3V-T1-W96"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="RkQ-yM-CBr"/>
+                                    <barButtonItem style="plain" id="Jpy-yQ-v58">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BPC-Uo-8Zf">
+                                            <rect key="frame" x="220" y="7" width="84" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="How to Duel"/>
+                                            <connections>
+                                                <action selector="howToDuelButton:" destination="ObA-dk-sSI" eventType="touchUpInside" id="ghc-rh-0Br"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.99708503484725952" green="0.98515313863754272" blue="0.98472696542739868" alpha="0.729411780834198" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="tYE-q4-DHP" firstAttribute="top" secondItem="sO8-4V-l3D" secondAttribute="bottom" constant="8" id="7Ov-xG-UFc"/>
+                            <constraint firstItem="kuV-mT-UpX" firstAttribute="leading" secondItem="V0x-tR-5tF" secondAttribute="leading" id="6cd-dG-Sfc"/>
                             <constraint firstItem="TXh-7W-Cu2" firstAttribute="leading" secondItem="Osa-ax-t7P" secondAttribute="trailing" constant="8" id="8Ya-D3-5fu"/>
                             <constraint firstItem="Osa-ax-t7P" firstAttribute="top" secondItem="u2J-jc-LWR" secondAttribute="bottom" constant="21" id="Cn9-iv-F4D"/>
                             <constraint firstItem="TXh-7W-Cu2" firstAttribute="leading" secondItem="Osa-ax-t7P" secondAttribute="trailing" constant="8" id="DhU-mv-Nox"/>
@@ -76,12 +92,11 @@
                             <constraint firstItem="PHO-0O-flz" firstAttribute="top" secondItem="u2J-jc-LWR" secondAttribute="bottom" constant="21" id="Nz1-Ac-NoO"/>
                             <constraint firstItem="TXh-7W-Cu2" firstAttribute="top" secondItem="u2J-jc-LWR" secondAttribute="bottom" constant="21" id="ORw-Cf-1b9"/>
                             <constraint firstItem="PHO-0O-flz" firstAttribute="leading" secondItem="TXh-7W-Cu2" secondAttribute="trailing" constant="8" id="Q7R-38-5b6"/>
-                            <constraint firstItem="sO8-4V-l3D" firstAttribute="leading" secondItem="V0x-tR-5tF" secondAttribute="leading" constant="8" id="gdz-r6-zUt"/>
-                            <constraint firstAttribute="trailing" secondItem="BPC-Uo-8Zf" secondAttribute="trailing" constant="8" id="ihl-rv-O4o"/>
-                            <constraint firstItem="7Sz-S0-4ZX" firstAttribute="centerX" secondItem="V0x-tR-5tF" secondAttribute="centerX" id="k9T-Ca-CQg"/>
-                            <constraint firstItem="tYE-q4-DHP" firstAttribute="top" secondItem="7Sz-S0-4ZX" secondAttribute="bottom" constant="72" id="olC-hR-Cos"/>
+                            <constraint firstItem="kuV-mT-UpX" firstAttribute="leading" secondItem="V0x-tR-5tF" secondAttribute="leading" id="QNv-IU-mYU"/>
+                            <constraint firstAttribute="trailing" secondItem="kuV-mT-UpX" secondAttribute="trailing" id="gzu-7g-gOP"/>
+                            <constraint firstItem="tYE-q4-DHP" firstAttribute="top" secondItem="kuV-mT-UpX" secondAttribute="bottom" id="hae-kK-PmN"/>
+                            <constraint firstItem="kuV-mT-UpX" firstAttribute="centerX" secondItem="V0x-tR-5tF" secondAttribute="centerX" id="j2f-FM-L6z"/>
                             <constraint firstItem="Osa-ax-t7P" firstAttribute="leading" secondItem="V0x-tR-5tF" secondAttribute="leadingMargin" constant="21" id="qQF-o3-vOe"/>
-                            <constraint firstItem="tYE-q4-DHP" firstAttribute="top" secondItem="BPC-Uo-8Zf" secondAttribute="bottom" constant="8" id="rgr-lj-9cC"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="1wT-S6-0U6" appends="YES" id="RMN-38-bqB"/>
