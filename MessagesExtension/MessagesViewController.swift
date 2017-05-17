@@ -68,9 +68,10 @@ class MessagesViewController: MSMessagesAppViewController {
         }
         
         print(gameState.determineResult())
+        updateHealthImage()
         //tell user if they won or lost last game
         if (gameState.gameResult != "incomplete") {
-            showAlertMsg(title: "Hey!", message: "You " + gameState.gameResult + " the last game! They challenged you to a new duel. Reply with another spell.")
+            showAlertMsg(title: "Hey!", message: "You " + gameState.gameResult + "! Challenge them to another duel?")
         }
         //refresh other players last move to nothing for a new game
         if (gameState.currentPlayer == "1") {
@@ -282,9 +283,8 @@ class MessagesViewController: MSMessagesAppViewController {
         // instantiate gameState
         gameState = GameState(currentTexture: currentTexture, currentPlayer: currentPlayer, p1Move: p1Move, p2Move: p2Move, gameResult: gameResult, round: round, p1Health: p1Health, p2Health: p2Health, p1Round: p1Round, p2Round: p2Round)
         currentMove = currentTexture
-        if (currentPlayer == "1" && Int(p1Health)! < 3) {
-            heart3.image = UIImage(named: "broken_heart.png")
-        }
+        
+        updateHealthImage()
         
         // FOR TESTING / DEBUGGING ONLY
         debugPrintDecode(gameState: gameState)
@@ -292,6 +292,39 @@ class MessagesViewController: MSMessagesAppViewController {
             showAlertMsg(title: "Hey!", message: "You " + gameState.gameResult + " the last game! They challenged you to a new duel. Reply with another spell.")
         }
         
+    }
+    
+    // Update Health Image
+    func updateHealthImage() {
+        if (gameState.currentPlayer == "1") {
+            switch gameState.p1Health {
+            case "3":
+                break
+            case "2":
+                heart3.image = UIImage(named: "broken_heart.png")
+            case "1":
+                heart3.image = UIImage(named: "broken_heart.png")
+                heart2.image = UIImage(named: "broken_heart.png")
+            default:
+                heart3.image = UIImage(named: "broken_heart.png")
+                heart2.image = UIImage(named: "broken_heart.png")
+                heart1.image = UIImage(named: "broken_heart.png")
+            }
+        } else {
+            switch gameState.p2Health {
+            case "3":
+                break
+            case "2":
+                heart3.image = UIImage(named: "broken_heart.png")
+            case "1":
+                heart3.image = UIImage(named: "broken_heart.png")
+                heart2.image = UIImage(named: "broken_heart.png")
+            default:
+                heart3.image = UIImage(named: "broken_heart.png")
+                heart2.image = UIImage(named: "broken_heart.png")
+                heart1.image = UIImage(named: "broken_heart.png")
+            }
+        }
     }
     
     func showAlertMsg(title: String, message: String){
