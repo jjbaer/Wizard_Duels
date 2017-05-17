@@ -70,7 +70,7 @@ class MessagesViewController: MSMessagesAppViewController {
         print(gameState.determineResult())
         //tell user if they won or lost last game
         if (gameState.gameResult != "incomplete") {
-            showAlertMsg(title: "Alert", message: "You " + gameState.gameResult + "!")
+            showAlertMsg(title: "Hey!", message: "You " + gameState.gameResult + " the last game! They challenged you to a new duel. Reply with another spell.")
         }
         //refresh other players last move to nothing for a new game
         if (gameState.currentPlayer == "1") {
