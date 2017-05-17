@@ -105,6 +105,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         objectToDraw.moving = true
         objectToDraw.updateMotion(newMotion: "sinWave")
         print("water")
+        objectToDraw.renderSpell = true
     }
     
     @IBAction func tap(_ sender: Any) {
@@ -112,6 +113,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         objectToDraw.moving = true
         objectToDraw.updateMotion(newMotion: "spin")
         print("fire")
+        objectToDraw.renderSpell = true
     }
     
     @IBAction func longPress(_ sender: Any) {
@@ -119,6 +121,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         objectToDraw.moving = true
         objectToDraw.updateMotion(newMotion: "grow")
         print("ivy")
+        objectToDraw.renderSpell = true
     }
     
     //MARK: - MetalViewControllerDelegate
@@ -131,6 +134,7 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
             print("about to submit")
             submit()
             objectToDraw.spellCast = false
+            objectToDraw.renderSpell = false
         }
     }
     

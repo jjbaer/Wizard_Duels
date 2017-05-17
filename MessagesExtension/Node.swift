@@ -43,6 +43,8 @@ class Node {
     var texture6: MTLTexture //witchcloak
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(self.device)
     
+    var renderSpell: Bool = false
+    
     init(name: String, vertices: Array<Vertex>, device: MTLDevice, texture: MTLTexture, texture2: MTLTexture, texture3: MTLTexture, texture4: MTLTexture, texture5: MTLTexture, texture6: MTLTexture) {
         //cube should start out not moving
         moving = false
@@ -135,9 +137,11 @@ class Node {
         renderEncoder.setFragmentTexture(texture5, at: 0)
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 384, vertexCount: 24)
         
-        //set up cube, 36 count for a cube
-        renderEncoder.setFragmentTexture(texture, at: 0)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 408, vertexCount: vertexCount - 408)
+        if (renderSpell) {
+            //set up cube, 36 count for a cube
+            renderEncoder.setFragmentTexture(texture, at: 0)
+            renderEncoder.drawPrimitives(type: .triangle, vertexStart: 408, vertexCount: vertexCount - 408)
+        }
         
         renderEncoder.endEncoding()
         
