@@ -42,6 +42,8 @@ class MessagesViewController: MSMessagesAppViewController {
                 print(error ?? "not an error")
             })
         }
+        
+        dismiss()
     }
     
     @IBOutlet weak var heart1: UIImageView!
