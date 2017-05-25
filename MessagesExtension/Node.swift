@@ -209,14 +209,9 @@ class Node {
             updateTexture(texture: newTexture)
             self.texture5 = newTexture //texture for witch face
         } else if (witch == "ivy") {
-            var path = Bundle.main.path(forResource: "witchFaceIvy", ofType: "png")!
-            var data = NSData(contentsOfFile: path)! as Data
-            var newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
-            updateTexture(texture: newTexture)
-            self.texture5 = newTexture //texture for witch face
-            path = Bundle.main.path(forResource: "blackFabricIvy", ofType: "jpeg")!
-            data = NSData(contentsOfFile: path)! as Data
-            newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+            let path = Bundle.main.path(forResource: "blackFabricIvy", ofType: "png")!
+            let data = NSData(contentsOfFile: path)! as Data
+            let newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
             updateTexture(texture: newTexture)
             self.texture6 = newTexture //texture for witch cloak
         } else if (witch == "water") {

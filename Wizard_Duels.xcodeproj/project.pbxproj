@@ -51,6 +51,8 @@
 		20A138381EB13AA000435430 /* blackFabric.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20A138371EB13AA000435430 /* blackFabric.jpeg */; };
 		20A138391EB13AA000435430 /* blackFabric.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20A138371EB13AA000435430 /* blackFabric.jpeg */; };
 		20CDE0BD1E47CE3200E0A9E2 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */; };
+		20E8294E1ED658F80021087D /* blackFabricIvy.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E8294D1ED658F80021087D /* blackFabricIvy.png */; };
+		20E8294F1ED658F80021087D /* blackFabricIvy.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E8294D1ED658F80021087D /* blackFabricIvy.png */; };
 		20FB80401E651B2700B3C024 /* fire.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20FB803F1E651B2700B3C024 /* fire.jpeg */; };
 		20FDC2451E4CF79500B03F34 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2441E4CF79500B03F34 /* Vertex.swift */; };
 		20FDC2471E4CF7EC00B03F34 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC2461E4CF7EC00B03F34 /* Node.swift */; };
@@ -126,6 +128,7 @@
 		20A138341EB135F000435430 /* witchFace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = witchFace.png; sourceTree = "<group>"; };
 		20A138371EB13AA000435430 /* blackFabric.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blackFabric.jpeg; sourceTree = "<group>"; };
 		20CDE0BC1E47CE3200E0A9E2 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		20E8294D1ED658F80021087D /* blackFabricIvy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackFabricIvy.png; sourceTree = "<group>"; };
 		20FB803F1E651B2700B3C024 /* fire.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fire.jpeg; sourceTree = "<group>"; };
 		20FDC2441E4CF79500B03F34 /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		20FDC2461E4CF7EC00B03F34 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -150,6 +153,7 @@
 				2027F2631ED641D6007D6FDA /* blackFabricIvy.jpeg */,
 				20A138341EB135F000435430 /* witchFace.png */,
 				20A089961E9EA6CF00CD73F6 /* questions.png */,
+				20E8294D1ED658F80021087D /* blackFabricIvy.png */,
 				2027F2661ED641DB007D6FDA /* witchFaceFire.png */,
 				20A089981E9EA6D800CD73F6 /* rock.jpeg */,
 				2027F26C1ED641E4007D6FDA /* witchFaceWater.png */,
@@ -328,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20A138381EB13AA000435430 /* blackFabric.jpeg in Resources */,
+				20E8294E1ED658F80021087D /* blackFabricIvy.png in Resources */,
 				13EB79571E2817D800FE673B /* Assets.xcassets in Resources */,
 				2027F26D1ED641E4007D6FDA /* witchFaceWater.png in Resources */,
 				20A138351EB135F000435430 /* witchFace.png in Resources */,
@@ -358,6 +363,7 @@
 				20A138391EB13AA000435430 /* blackFabric.jpeg in Resources */,
 				20540C851E6E86E400333346 /* wood.jpeg in Resources */,
 				20A089991E9EA6D800CD73F6 /* rock.jpeg in Resources */,
+				20E8294F1ED658F80021087D /* blackFabricIvy.png in Resources */,
 				20A089A11E9EA71600CD73F6 /* loser.jpeg in Resources */,
 				20540C871E6E876700333346 /* stone.jpeg in Resources */,
 				20A089971E9EA6CF00CD73F6 /* questions.png in Resources */,
