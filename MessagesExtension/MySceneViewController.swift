@@ -130,6 +130,9 @@ class MySceneViewController: MessagesViewController, MessagesViewControllerDeleg
         initializeTexture(texture: currentMove)
 
         objectToDraw.render(commandQueue, pipelineState: pipelineState, drawable: drawable, parentModelViewMatrix: worldModelMatrix, projectionMatrix: projectionMatrix, clearColor: nil)
+        if (gameState != nil) {
+            objectToDraw.changeTextureWitch(opponentMove: gameState.oponentMove, textureLoader: textureLoader)
+        }
         if (objectToDraw.spellCast) {
             print("about to submit")
             submit()

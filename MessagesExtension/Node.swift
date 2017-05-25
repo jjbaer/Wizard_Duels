@@ -11,6 +11,8 @@ import Foundation
 import Metal
 import QuartzCore
 import simd
+import UIKit
+import MetalKit
 
 class Node {
     
@@ -196,5 +198,39 @@ class Node {
     //change the texture of the cube
     func updateTexture(texture: MTLTexture) {
         self.texture = texture
+    }
+    
+    //change the texture of the witch
+    func updateTextureWitch(witch: String, textureLoader: MTKTextureLoader) {
+        if (witch == "fire") {
+            let path = Bundle.main.path(forResource: "witchFaceFire", ofType: "png")!
+            let data = NSData(contentsOfFile: path)! as Data
+            let newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+            updateTexture(texture: newTexture)
+            self.texture5 = newTexture //texture for witch face
+        } else if (witch == "ivy") {
+            var path = Bundle.main.path(forResource: "witchFaceIvy", ofType: "png")!
+            var data = NSData(contentsOfFile: path)! as Data
+            var newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+            updateTexture(texture: newTexture)
+            self.texture5 = newTexture //texture for witch face
+            path = Bundle.main.path(forResource: "blackFabricIvy", ofType: "jpeg")!
+            data = NSData(contentsOfFile: path)! as Data
+            newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+            updateTexture(texture: newTexture)
+            self.texture6 = newTexture //texture for witch cloak
+        } else if (witch == "water") {
+            let path = Bundle.main.path(forResource: "witchFaceWater", ofType: "png")!
+            let data = NSData(contentsOfFile: path)! as Data
+            let newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+            updateTexture(texture: newTexture)
+            self.texture5 = newTexture //texture for witch face
+        } else {
+            let path = Bundle.main.path(forResource: "witchFace", ofType: "png")!
+            let data = NSData(contentsOfFile: path)! as Data
+            let newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
+            updateTexture(texture: newTexture)
+            self.texture5 = newTexture //texture for witch face
+        }
     }
 }

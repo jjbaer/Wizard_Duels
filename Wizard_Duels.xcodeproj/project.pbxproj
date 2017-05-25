@@ -24,6 +24,14 @@
 		20003C291E64CC7400DE69BB /* MetalTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20003C281E64CC7400DE69BB /* MetalTexture.swift */; };
 		20003C2B1E64CCC500DE69BB /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20003C2A1E64CCC500DE69BB /* Light.swift */; };
 		20105DD11E65F0F500BE0DDB /* ivy.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20105DD01E65F0F500BE0DDB /* ivy.jpeg */; };
+		2027F2641ED641D6007D6FDA /* blackFabricIvy.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2027F2631ED641D6007D6FDA /* blackFabricIvy.jpeg */; };
+		2027F2651ED641D6007D6FDA /* blackFabricIvy.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2027F2631ED641D6007D6FDA /* blackFabricIvy.jpeg */; };
+		2027F2671ED641DB007D6FDA /* witchFaceFire.png in Resources */ = {isa = PBXBuildFile; fileRef = 2027F2661ED641DB007D6FDA /* witchFaceFire.png */; };
+		2027F2681ED641DB007D6FDA /* witchFaceFire.png in Resources */ = {isa = PBXBuildFile; fileRef = 2027F2661ED641DB007D6FDA /* witchFaceFire.png */; };
+		2027F26A1ED641DF007D6FDA /* witchFaceIvy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2027F2691ED641DF007D6FDA /* witchFaceIvy.png */; };
+		2027F26B1ED641DF007D6FDA /* witchFaceIvy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2027F2691ED641DF007D6FDA /* witchFaceIvy.png */; };
+		2027F26D1ED641E4007D6FDA /* witchFaceWater.png in Resources */ = {isa = PBXBuildFile; fileRef = 2027F26C1ED641E4007D6FDA /* witchFaceWater.png */; };
+		2027F26E1ED641E4007D6FDA /* witchFaceWater.png in Resources */ = {isa = PBXBuildFile; fileRef = 2027F26C1ED641E4007D6FDA /* witchFaceWater.png */; };
 		202AC3521EBA9C2C00BF713F /* water.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 202AC3511EBA9C2C00BF713F /* water.jpeg */; };
 		20540C851E6E86E400333346 /* wood.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20540C841E6E86E400333346 /* wood.jpeg */; };
 		20540C871E6E876700333346 /* stone.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 20540C861E6E876700333346 /* stone.jpeg */; };
@@ -95,6 +103,10 @@
 		20003C281E64CC7400DE69BB /* MetalTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalTexture.swift; sourceTree = "<group>"; };
 		20003C2A1E64CCC500DE69BB /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		20105DD01E65F0F500BE0DDB /* ivy.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ivy.jpeg; sourceTree = "<group>"; };
+		2027F2631ED641D6007D6FDA /* blackFabricIvy.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blackFabricIvy.jpeg; sourceTree = "<group>"; };
+		2027F2661ED641DB007D6FDA /* witchFaceFire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = witchFaceFire.png; sourceTree = "<group>"; };
+		2027F2691ED641DF007D6FDA /* witchFaceIvy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = witchFaceIvy.png; sourceTree = "<group>"; };
+		2027F26C1ED641E4007D6FDA /* witchFaceWater.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = witchFaceWater.png; sourceTree = "<group>"; };
 		202AC3511EBA9C2C00BF713F /* water.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpeg; sourceTree = "<group>"; };
 		20540C841E6E86E400333346 /* wood.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood.jpeg; sourceTree = "<group>"; };
 		20540C861E6E876700333346 /* stone.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stone.jpeg; sourceTree = "<group>"; };
@@ -135,9 +147,13 @@
 		13AEB1281E562CED00B92C65 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2027F2631ED641D6007D6FDA /* blackFabricIvy.jpeg */,
 				20A138341EB135F000435430 /* witchFace.png */,
 				20A089961E9EA6CF00CD73F6 /* questions.png */,
+				2027F2661ED641DB007D6FDA /* witchFaceFire.png */,
 				20A089981E9EA6D800CD73F6 /* rock.jpeg */,
+				2027F26C1ED641E4007D6FDA /* witchFaceWater.png */,
+				2027F2691ED641DF007D6FDA /* witchFaceIvy.png */,
 				1362EBB01EC3F45A004A590C /* full_heart.png */,
 				202AC3511EBA9C2C00BF713F /* water.jpeg */,
 				1362EBB21EC3F460004A590C /* broken_heart.png */,
@@ -313,7 +329,11 @@
 			files = (
 				20A138381EB13AA000435430 /* blackFabric.jpeg in Resources */,
 				13EB79571E2817D800FE673B /* Assets.xcassets in Resources */,
+				2027F26D1ED641E4007D6FDA /* witchFaceWater.png in Resources */,
 				20A138351EB135F000435430 /* witchFace.png in Resources */,
+				2027F2671ED641DB007D6FDA /* witchFaceFire.png in Resources */,
+				2027F2641ED641D6007D6FDA /* blackFabricIvy.jpeg in Resources */,
+				2027F26A1ED641DF007D6FDA /* witchFaceIvy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,10 +344,13 @@
 				20105DD11E65F0F500BE0DDB /* ivy.jpeg in Resources */,
 				13868CF11E5E22B10062B828 /* cube.png in Resources */,
 				202AC3521EBA9C2C00BF713F /* water.jpeg in Resources */,
+				2027F26B1ED641DF007D6FDA /* witchFaceIvy.png in Resources */,
 				13EB796B1E2817D800FE673B /* Assets.xcassets in Resources */,
 				13F481971E7A0FE800EF9A10 /* storm.jpeg in Resources */,
 				1362EBB31EC3F460004A590C /* broken_heart.png in Resources */,
+				2027F26E1ED641E4007D6FDA /* witchFaceWater.png in Resources */,
 				13EB79691E2817D800FE673B /* MainInterface.storyboard in Resources */,
+				2027F2651ED641D6007D6FDA /* blackFabricIvy.jpeg in Resources */,
 				1362EBB11EC3F45A004A590C /* full_heart.png in Resources */,
 				20A0899F1E9EA70800CD73F6 /* paper.jpeg in Resources */,
 				20A138361EB135F000435430 /* witchFace.png in Resources */,
@@ -338,6 +361,7 @@
 				20A089A11E9EA71600CD73F6 /* loser.jpeg in Resources */,
 				20540C871E6E876700333346 /* stone.jpeg in Resources */,
 				20A089971E9EA6CF00CD73F6 /* questions.png in Resources */,
+				2027F2681ED641DB007D6FDA /* witchFaceFire.png in Resources */,
 				20A0899D1E9EA6F600CD73F6 /* winner.jpeg in Resources */,
 				20FB80401E651B2700B3C024 /* fire.jpeg in Resources */,
 			);

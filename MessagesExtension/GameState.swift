@@ -19,6 +19,7 @@ class GameState {
     var p1Round: String
     var p2Round: String
     var round: Int
+    var oponentMove: String = ""
     
     init(currentTexture: String, currentPlayer: String, p1Move: String, p2Move: String, gameResult: String, round: Int, p1Health: String, p2Health: String, p1Round: String, p2Round: String) {
         self.currentTexture = currentTexture
@@ -34,8 +35,6 @@ class GameState {
     }
     
     func determineResult() {
-        var oponentMove: String
-        
         incrementCurrentPlayerRound()
         // if this is a new game
         if (p1Round != p2Round) {

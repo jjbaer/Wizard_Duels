@@ -156,11 +156,16 @@ class Cube: Node {
     }
     
     //this is the texture of the main cube
-    func changeTexture(resource: String, type: String, textureLoader :MTKTextureLoader) {
+    func changeTexture(resource: String, type: String, textureLoader : MTKTextureLoader) {
         let path = Bundle.main.path(forResource: resource, ofType: type)!
         let data = NSData(contentsOfFile: path)! as Data
         let newTexture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB : (false as NSNumber)])
         updateTexture(texture: newTexture)
+    }
+    
+    //this is the texture of the witch based on what the opponent cast 
+    func changeTextureWitch(opponentMove: String, textureLoader: MTKTextureLoader) {
+        updateTextureWitch(witch: opponentMove, textureLoader: textureLoader)
     }
     
     func updateMotion(newMotion: String) {
